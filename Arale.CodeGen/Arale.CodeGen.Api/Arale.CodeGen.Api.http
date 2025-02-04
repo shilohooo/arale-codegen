@@ -1,0 +1,11 @@
+POST {{baseUrl}}/ClassCodeGenerate/GenerateBySql
+Content-Type: application/json
+
+{
+    "code": "create table T_Users(id bigint primary key, username varchar(50) not null, address nvarchar(255) not null, gender char(1), enabled bit(1))",
+    "dbType": 2,
+    "targetType": 1,
+    "tableNamePrefix": "T_"
+}
+
+###

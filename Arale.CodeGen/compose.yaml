@@ -1,0 +1,6 @@
+﻿services:
+  arale.codegen.api:
+    image: arale.codegen.api
+    build:
+      context: .
+      dockerfile: Arale.CodeGen.Api/Dockerfile

@@ -1,0 +1,15 @@
+﻿package org.shiloh;
+
+import java.util.Date;
+
+/**
+ * {{ model.comment }}
+ */
+public class {{ model.entity_name }} {
+{{ for column in model.columns }}
+    /**
+     * {{ column.comment }}
+     */
+    private {{ column.field_type }} {{ column.field_name }};
+{{ end }}
+}

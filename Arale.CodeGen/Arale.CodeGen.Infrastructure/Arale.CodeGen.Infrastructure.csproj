@@ -1,0 +1,30 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <TargetFramework>net8.0</TargetFramework>
+        <ImplicitUsings>enable</ImplicitUsings>
+        <Nullable>enable</Nullable>
+    </PropertyGroup>
+
+    <ItemGroup>
+        <PackageReference Include="Pluralize.NET" Version="1.0.2"/>
+        <PackageReference Include="Scriban" Version="5.12.1"/>
+        <PackageReference Include="SqlParserCS" Version="0.6.2"/>
+    </ItemGroup>
+
+    <ItemGroup>
+        <None Update="Templates\**\*.txt">
+            <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+        </None>
+        <None Update="Templates\Java\JavaClass.txt">
+            <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+        </None>
+    </ItemGroup>
+
+    <ItemGroup>
+        <ProjectReference Include="..\Arale.CodeGen.Commons\Arale.CodeGen.Commons.csproj"/>
+        <ProjectReference Include="..\Arale.CodeGen.Extensions\Arale.CodeGen.Extensions.csproj"/>
+        <ProjectReference Include="..\Arale.CodeGen.Models\Arale.CodeGen.Models.csproj"/>
+    </ItemGroup>
+
+</Project>

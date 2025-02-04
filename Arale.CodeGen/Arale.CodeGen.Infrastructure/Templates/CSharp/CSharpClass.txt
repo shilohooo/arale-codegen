@@ -1,0 +1,12 @@
+﻿/// <summary>
+/// {{ model.comment }}
+/// </summary>
+public class {{ model.entity_name }}
+{
+{{ for column in model.columns }}
+    /// <summary>
+    /// {{ column.comment }}
+    /// </summary>
+    public {{ column.field_type }}{{ if !column.mandatory }}?{{ end }} {{ column.field_name }} { get; set; }
+{{ end }}
+}
