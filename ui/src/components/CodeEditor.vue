@@ -112,6 +112,17 @@ watch(
   },
 )
 
+watch(
+  () => props.language,
+  (newValue) => {
+    if (!editor) {
+      return
+    }
+
+    monaco.editor.setModelLanguage(editor.getModel()!, newValue)
+  },
+)
+
 // endregion
 
 // region mounted

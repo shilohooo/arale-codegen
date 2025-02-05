@@ -9,7 +9,7 @@ const dynamicRoutesMap = import.meta.glob('/src/views/**/*.vue')
 const home: RouteRecordRaw = {
   path: '/',
   component: () => import('layouts/MainLayout.vue'),
-  redirect: { path: HOME_MENU.path },
+  redirect: { path: '/sql-convert/sql-to-class' },
   children: [
     {
       path: HOME_MENU.path,

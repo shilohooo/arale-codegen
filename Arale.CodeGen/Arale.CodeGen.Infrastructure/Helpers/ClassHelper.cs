@@ -15,6 +15,7 @@ public static class ClassHelper
     /// <summary>
     ///     Parse SQL DDL to class code
     /// </summary>
+    /// <remarks>TODO: import / using dependencies when generate class code</remarks>
     /// <param name="codeGenerateBySqlReq">code generate params</param>
     /// <exception cref="ArgumentException">if sql ddl invalid</exception>
     /// <returns>Entity</returns>
@@ -26,40 +27,50 @@ public static class ClassHelper
             throw new ArgumentException($"Invalid create table statement: {codeGenerateBySqlReq.Code}");
 
         var tableElement = createTable.Element;
+        var tableInfo = CreateTableInfo(codeGenerateBySqlReq, tableElement);
+        tableInfo.Columns = CreateColumnInfos(codeGenerateBySqlReq, tableElement);
+        return tableInfo;
+    }
+
+    /// <summary>
+    ///     Create table info by SQL DDL
+    /// </summary>
+    /// <param name="codeGenerateBySqlReq">class code generate params</param>
+    /// <param name="tableElement">table element</param>
+    /// <returns>table info</returns>
+    private static TableInfo CreateTableInfo(CodeGenerateBySqlReq codeGenerateBySqlReq, CreateTable tableElement)
+    {
         var tableInfo = new TableInfo
         {
             TableName = tableElement.Name.ToString(),
             ClassName = PluralizerHelper.Singularize(tableElement.Name.ToString()
                 .Replace(codeGenerateBySqlReq.TableNamePrefix, string.Empty))
         };
-
         tableInfo.Comment = tableElement.Comment?.ToString() ?? $"{tableInfo.ClassName} class";
+        return tableInfo;
+    }
 
-        var columnDefs = tableElement.Columns.ToList();
-        List<ColumnInfo> columns = [];
-        foreach (var (columnName, dataType, _, columnDefOptions) in columnDefs)
+    /// <summary>
+    ///     Create columns by SQL DDL
+    /// </summary>
+    /// <param name="codeGenerateBySqlReq">class code generate params</param>
+    /// <param name="tableElement">table element</param>
+    /// <returns>columns</returns>
+    private static List<ColumnInfo> CreateColumnInfos(CodeGenerateBySqlReq codeGenerateBySqlReq,
+        CreateTable tableElement)
+    {
+        return tableElement.Columns.Select(columnDef =>
         {
-            Console.WriteLine($"columnName: {columnName}, dataType: {dataType}");
-            var name = columnName.ToString();
+            var name = columnDef.Name.ToString();
             var columnInfo = new ColumnInfo
             {
                 Name = name,
-                FieldName = codeGenerateBySqlReq.TargetType switch
-                {
-                    // c# property naming convention is PascalCase
-                    TargetType.CSharpClass => (char)(name[0] - 32) + name[1..],
-                    _ => name
-                },
+                FieldName = FieldHelper.GetFieldName(name, codeGenerateBySqlReq.TargetType),
                 Comment = name,
-                FieldType = codeGenerateBySqlReq.TargetType switch
-                {
-                    TargetType.CSharpClass => FieldTypeHelper.GetCSharpPropertyType(dataType),
-                    TargetType.JavaClass => FieldTypeHelper.GetJavaFieldType(dataType),
-                    _ => throw new UnsupportedTargetTypeException(codeGenerateBySqlReq.TargetType)
-                }
+                FieldType = FieldHelper.GetFieldType(columnDef.DataType, codeGenerateBySqlReq.TargetType)
             };
             // check data type is bool?
-            if (dataType.ToSql().Contains("bit"))
+            if (columnDef.DataType.ToSql().Contains("bit"))
                 columnInfo.FieldType = codeGenerateBySqlReq.TargetType switch
                 {
                     TargetType.CSharpClass => "bool",
@@ -67,9 +78,9 @@ public static class ClassHelper
                     _ => throw new UnsupportedTargetTypeException(codeGenerateBySqlReq.TargetType)
                 };
 
-            if (columnDefOptions?.Count > 0)
-                foreach (var columnDefOption in columnDefOptions)
-                    switch (columnDefOption.Option)
+            if (columnDef.Options?.Count > 0)
+                foreach (var columnOptionDef in columnDef.Options)
+                    switch (columnOptionDef.Option)
                     {
                         case ColumnOption.Comment comment:
                             columnInfo.Comment = comment.Value;
@@ -82,13 +93,9 @@ public static class ClassHelper
                             break;
                     }
 
-            var match = RegexConstant.LengthPattern().Match(dataType.ToSql());
+            var match = RegexConstant.LengthPattern().Match(columnDef.DataType.ToSql());
             columnInfo.Length = match.Groups[1].Value;
-
-            columns.Add(columnInfo);
-        }
-
-        tableInfo.Columns = columns;
-        return tableInfo;
+            return columnInfo;
+        }).ToList();
     }
 }

@@ -7,14 +7,15 @@
   <div class="row q-gutter-x-md">
     <!--region source-->
     <div class="col">
-      <div class="row items-center justify-between">
+      <div class="row items-center justify-between q-mb-md">
         <div class="col-lg-10 col-md-8 col-sm-6">
           <q-select
             v-model="dbType"
             :options="DB_TYPE_OPTIONS"
-            @change="handleSrcCodeChange"
-            label="DatabaseType"
+            @update:model-value="handleGenerateTargetCode"
+            label="Database Type"
             map-options
+            emit-value
           />
         </div>
         <div class="col text-right">
@@ -29,7 +30,6 @@
           />
         </div>
       </div>
-      <q-separator spaced />
       <code-editor v-model="srcCode" language="sql" @change="handleSrcCodeChange" />
     </div>
     <!--endregion-->
@@ -38,19 +38,29 @@
 
     <!--region target-->
     <div class="col">
-      <div class="row items-center justify-between">
-        <div class="col text-h6">{{ targetLanguage.toUpperCase() }}</div>
-        <q-btn
-          :disable="!targetCode"
-          icon="content_copy"
-          size="sm"
-          color="primary"
-          label="Copy"
-          no-caps
-          @click="handleCopyTargetCode"
-        />
+      <div class="row items-center justify-between q-mb-md">
+        <div class="col-lg-10 col-md-8 col-sm-6">
+          <q-select
+            v-model="targetType"
+            :options="TARGET_TYPE_OPTIONS"
+            @update:model-value="handleGenerateTargetCode"
+            label="Convert Target Type"
+            map-options
+            emit-value
+          />
+        </div>
+        <div class="col text-right">
+          <q-btn
+            :disable="!targetCode"
+            icon="content_copy"
+            size="sm"
+            color="primary"
+            label="Copy"
+            no-caps
+            @click="handleCopyTargetCode"
+          />
+        </div>
       </div>
-      <q-separator spaced />
       <code-editor v-model="targetCode" :language="targetLanguage" />
     </div>
     <!--endregion-->
@@ -59,19 +69,18 @@
 
 <script setup lang="ts">
 import CodeEditor from 'components/CodeEditor.vue'
-import type { EditorLanguage } from 'src/types/code-editor'
 import { debounce, useQuasar } from 'quasar'
 import { generateClassCodeBySql } from 'src/api/class-generate-api'
-import { DB_TYPE_OPTIONS } from 'src/constant'
+import { DB_TYPE_OPTIONS, TARGET_TYPE_LANGUAGE_MAPPING, TARGET_TYPE_OPTIONS } from 'src/constant'
+import { DbType, TargetType } from 'src/enums'
 
-const props = defineProps<{
-  sourceCode: string
-  targetLanguage: EditorLanguage
-}>()
+const props = defineProps<{ sourceCode: string }>()
 
-const dbType = ref(2)
 const srcCode = ref<string>(props.sourceCode)
 const targetCode = ref<string>('')
+const dbType = ref(DbType.SQLServer)
+const targetType = ref(TargetType.CSharpClass)
+const targetLanguage = computed(() => TARGET_TYPE_LANGUAGE_MAPPING[targetType.value])
 
 /**
  * Clear source code
@@ -105,7 +114,7 @@ async function handleGenerateTargetCode() {
   const res = await generateClassCodeBySql({
     code: srcCode.value,
     dbType: dbType.value,
-    targetType: 1,
+    targetType: targetType.value,
     tableNamePrefix: 'T_',
   })
   targetCode.value = res.data

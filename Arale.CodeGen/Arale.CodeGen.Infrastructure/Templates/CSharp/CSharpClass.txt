@@ -1,7 +1,7 @@
 ﻿/// <summary>
 /// {{ model.comment }}
 /// </summary>
-public class {{ model.entity_name }}
+public class {{ model.class_name }}
 {
 {{ for column in model.columns }}
     /// <summary>

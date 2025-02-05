@@ -15,5 +15,5 @@ export enum DbType {
 // generate target type
 export enum TargetType {
   CSharpClass = 1,
-  JavaClass = 2,
+  JavaClass = 4,
 }

@@ -1,11 +1,14 @@
-﻿package org.shiloh;
+﻿package io.arale.codegen;
 
-import java.util.Date;
+import lombok.*;
 
 /**
  * {{ model.comment }}
  */
-public class {{ model.entity_name }} {
+@Setter
+@Getter
+@ToString
+public class {{ model.class_name }} {
 {{ for column in model.columns }}
     /**
      * {{ column.comment }}
