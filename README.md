@@ -55,6 +55,7 @@ structure, or write the corresponding DTO code based on the structure of the JSO
 | UnpluginAutoImport | 0.18.2  | <https://github.com/unplugin/unplugin-auto-import>   |                    |
 | Monaco Editor      | 0.52.2  | <https://github.com/microsoft/monaco-editor>         | Code Editor        |
 | SQL Formatter      | 15.4.10 | <https://github.com/sql-formatter-org/sql-formatter> | Code Format        |
+| debounce           | 2.2.0   | <https://github.com/sindresorhus/debounce>           | Delay function     |
 
 ### Deployment
 
@@ -65,11 +66,13 @@ structure, or write the corresponding DTO code based on the structure of the JSO
 
 ## 📖 References
 
-- [C# SQL Server Data Type Mapping](https://learn.microsoft.com/zh-cn/sql/language-extensions/how-to/c-sharp-to-sql-data-types?view=sql-server-ver16)
-- [C# MySQL Data Type Mapping](https://zontroy.com/mysql-to-csharp-type-mapping)
-- [C# SQLite Data Type Mapping](https://learn.microsoft.com/en-us/dotnet/standard/data/sqlite/types)
-- [C# PostgreSQL Data Type Mapping](https://zontroy.com/postgresql-to-csharp-type-mapping)
-- [C# Oracle Data Type Mapping](https://zontroy.com/oracle-to-csharp-type-mapping)
+- [C# & SQL Server Data Type Mapping](https://learn.microsoft.com/zh-cn/sql/language-extensions/how-to/c-sharp-to-sql-data-types?view=sql-server-ver16)
+- [C# & MySQL Data Type Mapping](https://zontroy.com/mysql-to-csharp-type-mapping)
+- [C# & SQLite Data Type Mapping](https://learn.microsoft.com/en-us/dotnet/standard/data/sqlite/types)
+- [C# & PostgreSQL Data Type Mapping](https://zontroy.com/postgresql-to-csharp-type-mapping)
+- [Java & SQL Server Data Type Mapping](https://learn.microsoft.com/en-us/sql/language-extensions/how-to/java-to-sql-data-types?view=sql-server-ver16)
+- [Java & MySQL Data Type Mapping](https://dev.mysql.com/doc/connector-j/en/connector-j-reference-type-conversions.html)
+- [Java & PostgreSQL Data Type Mapping](https://zontroy.com/postgresql-to-java-type-mapping)
 
 ## 💪 Contributors
 
