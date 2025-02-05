@@ -8,7 +8,7 @@ import axios from 'axios'
 
 const api = axios.create({
   // TODO config baseURL by env (dev / production?), current for dev
-  baseURL: '/api',
+  baseURL: '/arale-codegen-api',
   withCredentials: true,
   headers: { 'Content-Type': 'application/json' },
 })
