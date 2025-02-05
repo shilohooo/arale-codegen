@@ -1,6 +1,11 @@
 ﻿services:
-  arale.codegen.api:
-    image: arale.codegen.api
-    build:
-      context: .
-      dockerfile: Arale.CodeGen.Api/Dockerfile
+    arale.codegen.api:
+        image: arale.codegen.api
+        build:
+            context: .
+            dockerfile: Arale.CodeGen.Api/Dockerfile
+        ports:
+            - "18080:8080"
+            - "18081:8081"
+        environment:
+            - ASPNETCORE_ENVIRONMENT=Production
