@@ -13,11 +13,14 @@
 
       <menu-search-box />
 
-      <q-avatar>
-        <a href="https://github.com/shilohooo/quasar-layout-example" target="_blank">
-          <q-icon name="ion-logo-github" color="white" />
+      <div class="row q-ml-md q-gutter-x-sm">
+        <a href="https://github.com/shilohooo/arale-codegen" target="_blank">
+          <q-icon name="ion-logo-github" color="white" size="1.5rem" />
         </a>
-      </q-avatar>
+        <a href="https://github.com/shilohooo/arale-codegen/issues" target="_blank">
+          <q-icon name="bug_report" color="white" size="1.5rem" />
+        </a>
+      </div>
     </q-toolbar>
   </q-header>
 </template>
