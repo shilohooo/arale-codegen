@@ -14,7 +14,20 @@ import type { EditorLanguage } from 'src/types/code-editor'
 
 defineOptions({ name: 'CodeEditor' })
 const emits = defineEmits(['update:modelValue', 'change'])
-const props = defineProps<{ modelValue: string; language: EditorLanguage }>()
+const props = withDefaults(
+  defineProps<{
+    modelValue: string
+    language: EditorLanguage
+    width?: string | number
+    height?: string | number
+  }>(),
+  {
+    modelValue: 'interface User {}',
+    language: 'typescript',
+    width: '100%',
+    height: '100vh',
+  },
+)
 
 /**
  * Call format document action
@@ -64,15 +77,15 @@ async function initEditor() {
   editor = monaco.editor.create(codeEditBox.value!, {
     value: props.modelValue,
     language: props.language,
-    theme: 'vs-dark',
+    theme: 'vs',
     minimap: { enabled: false },
     automaticLayout: true,
     readOnly: false,
+    fontSize: 16,
   })
 
   // model content change callback
   editor.onDidChangeModelContent(() => {
-    formatCode()
     const code = editor.getValue()
     emits('update:modelValue', code)
     emits('change', code)
@@ -81,19 +94,31 @@ async function initEditor() {
 
 // endregion
 
+// region watch
+
+watch(
+  () => props.modelValue,
+  (newValue) => {
+    if (!editor) {
+      return
+    }
+
+    const oldValue = editor.getValue()
+    if (newValue === oldValue) {
+      return
+    }
+
+    editor.setValue(newValue)
+  },
+)
+
+// endregion
+
 // region mounted
 
 onMounted(async () => {
   await initEditor()
   formatCode()
-  // const res = await api.post('/CodeGenerate/GenerateBySql', {
-  //   code: 'create table T_Users(id bigint primary key, username varchar(50) not null, address nvarchar(255) not null, gender char(1), enabled bit(1))',
-  //   dbType: 2,
-  //   targetType: 1,
-  //   tableNamePrefix: 'T_',
-  // })
-  // console.log('res', res)
-  // editor.setValue(res.data)
 })
 
 // endregion
@@ -109,7 +134,7 @@ onBeforeUnmount(() => {
 
 <style scoped>
 .code-edit-box {
-  width: 100vw;
-  height: 100vh;
+  width: v-bind(width);
+  height: v-bind(height);
 }
 </style>

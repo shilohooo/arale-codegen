@@ -45,7 +45,7 @@ export const menuList: Menu[] = [
     children: [
       {
         icon: 'code',
-        label: 'Sql to Class',
+        label: 'SQL to Class',
         path: '/sql-convert/sql-to-class',
         type: MenuType.PAGE,
         level: 1,
