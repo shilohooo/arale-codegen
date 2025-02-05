@@ -44,16 +44,17 @@ structure, or write the corresponding DTO code based on the structure of the JSO
 
 ### Frontend
 
-| Name               | Version | Documentation                                      | Remark             |
-|--------------------|---------|----------------------------------------------------|--------------------|
-| NodeJS             | 20.11.1 | <https://nodejs.org>                               |                    |
-| PNPM               | 8.5.13  | <https://pnpm.io/>                                 | Package Manager    |
-| TypeScript         | 5.4     | <https://www.typescriptlang.org/docs/>             |                    |
-| Vue                | 3.4.27  | <https://vuejs.org/>                               |                    |
-| Quasar             | 2.16.0  | <https://quasar.dev/docs>                          | UI Framework       |
-| JsonToTs           | 2.1.0   | <https://github.com/MariusAlch/json-to-ts>         | JSON to TypeScript |
-| UnpluginAutoImport | 0.18.2  | <https://github.com/unplugin/unplugin-auto-import> |                    |
-| Monaco Editor      | 0.52.2  | <https://github.com/microsoft/monaco-editor>       | Code Editor        |
+| Name               | Version | Documentation                                        | Remark             |
+|--------------------|---------|------------------------------------------------------|--------------------|
+| NodeJS             | 20.11.1 | <https://nodejs.org>                                 |                    |
+| PNPM               | 8.5.13  | <https://pnpm.io/>                                   | Package Manager    |
+| TypeScript         | 5.4     | <https://www.typescriptlang.org/docs/>               |                    |
+| Vue                | 3.4.27  | <https://vuejs.org/>                                 |                    |
+| Quasar             | 2.16.0  | <https://quasar.dev/docs>                            | UI Framework       |
+| JsonToTs           | 2.1.0   | <https://github.com/MariusAlch/json-to-ts>           | JSON to TypeScript |
+| UnpluginAutoImport | 0.18.2  | <https://github.com/unplugin/unplugin-auto-import>   |                    |
+| Monaco Editor      | 0.52.2  | <https://github.com/microsoft/monaco-editor>         | Code Editor        |
+| SQL Formatter      | 15.4.10 | <https://github.com/sql-formatter-org/sql-formatter> | Code Format        |
 
 ### Deployment
 
