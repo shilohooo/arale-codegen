@@ -9,3 +9,5 @@
             - "18081:8081"
         environment:
             - ASPNETCORE_ENVIRONMENT=Production
+        volumes:
+            - /home/shiloh/projects/arale-codegen/be:/app
