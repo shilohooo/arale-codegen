@@ -4,7 +4,7 @@
  * @date 2025/2/5 10:30
  */
 import type { ClassCodeGenerateReq } from 'src/api/models/class-generate-models'
-import { api } from 'boot/axios'
+import httpClient from 'src/utils/http'
 
 // api base path
 export const BASE_PATH = '/ClassCodeGenerate'
@@ -22,5 +22,5 @@ export const CLASS_CODE_GENERATE_API = {
  * @date 2025/2/5 10:33
  */
 export const generateClassCodeBySql = (data: ClassCodeGenerateReq) => {
-  return api.post<string>(CLASS_CODE_GENERATE_API.generateBySql, data)
+  return httpClient.post<string>({ data, url: CLASS_CODE_GENERATE_API.generateBySql })
 }

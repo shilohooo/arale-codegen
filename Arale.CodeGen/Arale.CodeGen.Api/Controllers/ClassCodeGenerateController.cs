@@ -1,5 +1,6 @@
 ﻿using System.Net.Mime;
 using System.Text;
+using Arale.CodeGen.Models;
 using Arale.CodeGen.Models.Dto;
 using Arale.CodeGen.Services;
 using Microsoft.AspNetCore.Mvc;
@@ -19,9 +20,9 @@ public class ClassCodeGenerateController(IClassCodeGenerateService classCodeGene
     /// <param name="codeGenerateBySqlReq">request params</param>
     /// <returns>generated code</returns>
     [HttpPost]
-    public async Task<IActionResult> GenerateBySql([FromBody] CodeGenerateBySqlReq codeGenerateBySqlReq)
+    public async Task<ApiResult<string>> GenerateBySql([FromBody] CodeGenerateBySqlReq codeGenerateBySqlReq)
     {
         var classCode = await classCodeGenerateService.GenerateBySql(codeGenerateBySqlReq);
-        return Content(classCode, MediaTypeNames.Text.Plain, Encoding.UTF8);
+        return ApiResult<string>.Success(classCode);
     }
 }

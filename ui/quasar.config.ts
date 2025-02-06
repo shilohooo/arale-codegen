@@ -82,11 +82,11 @@ export default defineConfig((/* ctx */) => {
       // https: true,
       open: false, // opens browser window automatically
       proxy: {
-        '^/arale-codegen-api': {
+        '^/api': {
           target: 'http://localhost:8082',
           changeOrigin: true,
           ws: false,
-          rewrite: (path) => path.replace(/^\/arale-codegen-api/, ''),
+          rewrite: (path) => path.replace(/^\/api/, ''),
         },
       },
     },

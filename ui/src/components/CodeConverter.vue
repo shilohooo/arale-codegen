@@ -117,7 +117,7 @@ async function handleGenerateTargetCode() {
     targetType: targetType.value,
     tableNamePrefix: 'T_',
   })
-  targetCode.value = res.data
+  targetCode.value = res.replace(/\\n/g, '\n').trim()
 }
 
 // region copy
@@ -137,14 +137,6 @@ function handleCopyTargetCode() {
     position: 'top',
   })
 }
-
-// endregion
-
-// region mounted
-
-onMounted(async () => {
-  await handleGenerateTargetCode()
-})
 
 // endregion
 </script>

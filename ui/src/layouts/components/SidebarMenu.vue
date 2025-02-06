@@ -35,7 +35,7 @@
       <q-avatar class="q-mb-sm" color="white">
         <img src="~assets/logo.svg" alt="App Logo" />
       </q-avatar>
-      <span class="text-weight-bold">Your System Name</span>
+      <span class="text-weight-bold">{{ appName }}</span>
     </div>
     <div class="text-center">
       <div style="font-size: 12px">Copyright © 2024-present Shiloh. All Rights Reserved.</div>
@@ -63,6 +63,8 @@ const sidebarStore = useSidebarStore()
 const route = useRoute()
 
 const tabStore = useTabStore()
+
+const appName = ref<string>(import.meta.env.VITE_APP_NAME)
 </script>
 
 <style scoped></style>

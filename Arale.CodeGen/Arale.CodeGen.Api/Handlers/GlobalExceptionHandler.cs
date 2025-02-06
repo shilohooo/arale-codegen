@@ -12,6 +12,7 @@ public class GlobalExceptionHandler(ILogger<GlobalExceptionHandler> logger) : IE
         CancellationToken cancellationToken)
     {
         logger.LogError(exception, "An unhandled exception has occurred: {Message}", exception.Message);
+        httpContext.Response.StatusCode = StatusCodes.Status200OK;
         await httpContext.Response.WriteAsJsonAsync(ApiResult<string>.Fail(exception.Message), cancellationToken);
         return true;
     }
