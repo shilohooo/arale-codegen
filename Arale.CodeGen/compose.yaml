@@ -9,6 +9,7 @@
             - "18081:8081"
         environment:
             - ASPNETCORE_ENVIRONMENT=Production
+            - APP_UID=1000
         volumes:
             - /home/shiloh/projects/arale-codegen/be:/app/publish
         user: 1000:1000
