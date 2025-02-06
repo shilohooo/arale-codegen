@@ -11,5 +11,5 @@
             - ASPNETCORE_ENVIRONMENT=Production
             - APP_UID=1000
         volumes:
-            - /home/shiloh/projects/arale-codegen/be:/app/publish
+            - /home/shiloh/projects/arale-codegen/be:/app
         user: 1000:1000
