@@ -1,5 +1,7 @@
 ﻿using System.Text.Json;
 using Arale.CodeGen.Infrastructure.Constants;
+using Arale.CodeGen.Models.Entity;
+using SqlParser;
 using SqlParser.Ast;
 
 namespace Arale.CodeGen.Infrastructure.Helpers;
@@ -13,8 +15,8 @@ public static class FieldTypeHelper
     ///     Get C# property type
     /// </summary>
     /// <param name="columnType">table column type</param>
-    /// <returns>name of c# property type</returns>
-    public static string GetCSharpPropertyType(DataType columnType)
+    /// <returns>field type</returns>
+    public static FieldType GetCSharpPropertyType(DataType columnType)
     {
         try
         {
@@ -23,7 +25,8 @@ public static class FieldTypeHelper
         catch (KeyNotFoundException)
         {
             // unknown / unsupported type?
-            return "object";
+            Console.WriteLine($"Unknown / unsupported type: {columnType} - {columnType.ToSql()}");
+            return FieldType.Of("object");
         }
     }
 
@@ -31,8 +34,8 @@ public static class FieldTypeHelper
     ///     Get C# property type
     /// </summary>
     /// <param name="jsonValueKind">json property value kind</param>
-    /// <returns>name of c# property type</returns>
-    public static string GetCSharpPropertyType(JsonValueKind jsonValueKind)
+    /// <returns>field type</returns>
+    public static FieldType GetCSharpPropertyType(JsonValueKind jsonValueKind)
     {
         return CSharPropertyTypeMapping.JsonPropertyTypeMapping[jsonValueKind];
     }
@@ -41,8 +44,8 @@ public static class FieldTypeHelper
     ///     Get Java field type
     /// </summary>
     /// <param name="columnType">table column type</param>
-    /// <returns>name of java field</returns>
-    public static string GetJavaFieldType(DataType columnType)
+    /// <returns>field type</returns>
+    public static FieldType GetJavaFieldType(DataType columnType)
     {
         try
         {
@@ -51,7 +54,7 @@ public static class FieldTypeHelper
         catch (KeyNotFoundException)
         {
             // unknown / unsupported type?
-            return "Object";
+            return FieldType.Of("Object");
         }
     }
 }

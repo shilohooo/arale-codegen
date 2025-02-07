@@ -1,5 +1,6 @@
 ﻿using Arale.CodeGen.Commons.Constants;
 using Arale.CodeGen.Commons.Exceptions;
+using Arale.CodeGen.Models.Entity;
 using SqlParser.Ast;
 
 namespace Arale.CodeGen.Infrastructure.Helpers;
@@ -40,7 +41,7 @@ public static class FieldHelper
     /// <param name="targetType">generate target type</param>
     /// <returns>field / property type</returns>
     /// <exception cref="UnsupportedTargetTypeException">if target type is not supported</exception>
-    public static string GetFieldType(DataType dataType, TargetType targetType)
+    public static FieldType GetFieldType(DataType dataType, TargetType targetType)
     {
         return targetType switch
         {

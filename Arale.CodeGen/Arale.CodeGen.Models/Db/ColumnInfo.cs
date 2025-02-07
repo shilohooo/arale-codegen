@@ -1,4 +1,6 @@
-﻿namespace Arale.CodeGen.Models.Db;
+﻿using Arale.CodeGen.Models.Entity;
+
+namespace Arale.CodeGen.Models.Db;
 
 /// <summary>
 ///     Table column info
@@ -18,7 +20,7 @@ public class ColumnInfo
     /// <summary>
     ///     field /property type
     /// </summary>
-    public string? FieldType { get; set; }
+    public FieldType? FieldType { get; set; }
 
     /// <summary>
     ///     Column length

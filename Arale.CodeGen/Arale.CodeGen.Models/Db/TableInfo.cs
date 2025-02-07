@@ -27,6 +27,11 @@ public class TableInfo
     /// </summary>
     public List<ColumnInfo> Columns { get; set; } = [];
 
+    /// <summary>
+    ///     import / using statements
+    /// </summary>
+    public HashSet<string> ImportStatements { get; set; } = [];
+
     /// <inheritdoc />
     public override string ToString()
     {

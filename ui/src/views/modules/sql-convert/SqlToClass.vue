@@ -9,13 +9,9 @@
 
 <script setup lang="ts">
 import CodeConverter from 'components/CodeConverter.vue'
+import { SQL_SERVER_TEST_DDL } from 'src/constant/data/sql-ddl-examples'
 
-// const code = ref<string>(
-//   'create table T_Users(Id bigint primary key, Username varchar(50) not null, Address nvarchar(255) not null, Gender char(1), Enabled bit(1))',
-// )
-const code = ref<string>(
-  'create table T_Users(Id bigint primary key, Username varchar(50) not null, Address nvarchar(255) not null, Gender char(1), Enabled bit(1))',
-)
+const code = ref<string>(SQL_SERVER_TEST_DDL)
 </script>
 
 <style scoped></style>

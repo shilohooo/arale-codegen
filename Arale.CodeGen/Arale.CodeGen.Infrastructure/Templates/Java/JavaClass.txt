@@ -1,5 +1,8 @@
 ﻿package io.arale.codegen;
 
+{{ for import_statement in model.import_statements }}
+{{ import_statement }}
+{{ end }}
 import lombok.*;
 
 /**
@@ -13,6 +16,6 @@ public class {{ model.class_name }} {
     /**
      * {{ column.comment }}
      */
-    private {{ column.field_type }} {{ column.field_name }};
+    private {{ column.field_type.type_name }} {{ column.field_name }};
 {{ end }}
 }

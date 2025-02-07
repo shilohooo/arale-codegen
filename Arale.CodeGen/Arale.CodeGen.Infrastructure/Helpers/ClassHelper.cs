@@ -2,6 +2,7 @@
 using Arale.CodeGen.Commons.Exceptions;
 using Arale.CodeGen.Models.Db;
 using Arale.CodeGen.Models.Dto;
+using Arale.CodeGen.Models.Entity;
 using SqlParser;
 using SqlParser.Ast;
 
@@ -15,7 +16,6 @@ public static class ClassHelper
     /// <summary>
     ///     Parse SQL DDL to class code
     /// </summary>
-    /// <remarks>TODO: import / using dependencies when generate class code</remarks>
     /// <param name="codeGenerateBySqlReq">code generate params</param>
     /// <exception cref="ArgumentException">if sql ddl invalid</exception>
     /// <returns>Entity</returns>
@@ -29,6 +29,10 @@ public static class ClassHelper
         var tableElement = createTable.Element;
         var tableInfo = CreateTableInfo(codeGenerateBySqlReq, tableElement);
         tableInfo.Columns = CreateColumnInfos(codeGenerateBySqlReq, tableElement);
+        tableInfo.ImportStatements = tableInfo.Columns
+            .Where(c => c.FieldType is not null && !string.IsNullOrWhiteSpace(c.FieldType?.ImportStatement))
+            .Select(c => c.FieldType!.ImportStatement!)
+            .ToHashSet();
         return tableInfo;
     }
 
@@ -72,11 +76,11 @@ public static class ClassHelper
                 FieldType = FieldHelper.GetFieldType(columnDef.DataType, codeGenerateBySqlReq.TargetType)
             };
             // check data type is bool?
-            if (columnDef.DataType.ToSql().Contains("bit"))
+            if (columnDef.DataType.ToSql().Contains("bit", StringComparison.CurrentCultureIgnoreCase))
                 columnInfo.FieldType = codeGenerateBySqlReq.TargetType switch
                 {
-                    TargetType.CSharpClass => "bool",
-                    TargetType.JavaClass => "Boolean",
+                    TargetType.CSharpClass => FieldType.Of("bool"),
+                    TargetType.JavaClass => FieldType.Of("Boolean"),
                     _ => throw new UnsupportedTargetTypeException(codeGenerateBySqlReq.TargetType)
                 };
 

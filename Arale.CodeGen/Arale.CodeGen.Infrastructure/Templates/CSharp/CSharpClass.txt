@@ -7,6 +7,6 @@ public class {{ model.class_name }}
     /// <summary>
     /// {{ column.comment }}
     /// </summary>
-    public {{ column.field_type }}{{ if !column.mandatory }}?{{ end }} {{ column.field_name }} { get; set; }
+    public {{ column.field_type.type_name }}{{ if !column.mandatory }}?{{ end }} {{ column.field_name }} { get; set; }
 {{ end }}
 }
