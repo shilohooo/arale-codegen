@@ -31,7 +31,7 @@ public class CodeGenerateBySqlReq
     /// <summary>
     ///     Table name prefix
     /// </summary>
-    public string TableNamePrefix { get; init; } = string.Empty;
+    public string? TableNamePrefix { get; init; } = string.Empty;
 
     /// <inheritdoc />
     public override string ToString()

@@ -40,11 +40,13 @@ public static class ClassHelper
     /// <returns>table info</returns>
     private static TableInfo CreateTableInfo(CodeGenerateBySqlReq codeGenerateBySqlReq, CreateTable tableElement)
     {
+        var tableName = tableElement.Name.ToString();
         var tableInfo = new TableInfo
         {
-            TableName = tableElement.Name.ToString(),
-            ClassName = PluralizerHelper.Singularize(tableElement.Name.ToString()
-                .Replace(codeGenerateBySqlReq.TableNamePrefix, string.Empty))
+            TableName = tableName,
+            ClassName = string.IsNullOrWhiteSpace(codeGenerateBySqlReq.TableNamePrefix)
+                ? tableName
+                : tableName.Replace(codeGenerateBySqlReq.TableNamePrefix, string.Empty)
         };
         tableInfo.Comment = tableElement.Comment?.ToString() ?? $"{tableInfo.ClassName} class";
         return tableInfo;

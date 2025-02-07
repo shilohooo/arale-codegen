@@ -7,20 +7,28 @@
   <div class="row q-gutter-x-md">
     <!--region source-->
     <div class="col">
-      <div class="row items-center justify-between q-mb-md">
-        <div class="col-lg-10 col-md-8 col-sm-6">
+      <div class="row items-center q-gutter-x-md justify-between q-mb-md">
+        <div class="col">
           <q-select
-            v-model="dbType"
+            v-model="reqData.dbType"
             :options="DB_TYPE_OPTIONS"
             @update:model-value="handleGenerateTargetCode"
-            label="Database Type"
+            label="Database type"
             map-options
             emit-value
           />
         </div>
+        <div class="col">
+          <q-input
+            v-model.trim="reqData.tableNamePrefix"
+            placeholder="Input the table name prefix..."
+            label="Table name prefix"
+            @update:model-value="handleSrcCodeChange"
+          />
+        </div>
         <div class="col text-right">
           <q-btn
-            :disable="!srcCode"
+            :disable="!reqData.code"
             icon="delete"
             size="sm"
             color="negative"
@@ -30,7 +38,7 @@
           />
         </div>
       </div>
-      <code-editor v-model="srcCode" language="sql" @change="handleSrcCodeChange" />
+      <code-editor v-model="reqData.code" language="sql" @change="handleSrcCodeChange" />
     </div>
     <!--endregion-->
 
@@ -41,10 +49,10 @@
       <div class="row items-center justify-between q-mb-md">
         <div class="col-lg-10 col-md-8 col-sm-6">
           <q-select
-            v-model="targetType"
+            v-model="reqData.targetType"
             :options="TARGET_TYPE_OPTIONS"
             @update:model-value="handleGenerateTargetCode"
-            label="Convert Target Type"
+            label="Convert target type"
             map-options
             emit-value
           />
@@ -73,14 +81,18 @@ import { debounce, useQuasar } from 'quasar'
 import { generateClassCodeBySql } from 'src/api/class-generate-api'
 import { DB_TYPE_OPTIONS, TARGET_TYPE_LANGUAGE_MAPPING, TARGET_TYPE_OPTIONS } from 'src/constant'
 import { DbType, TargetType } from 'src/enums'
+import type { ClassCodeGenerateReq } from 'src/api/models/class-generate-models'
 
 const props = defineProps<{ sourceCode: string }>()
 
-const srcCode = ref<string>(props.sourceCode)
 const targetCode = ref<string>('')
-const dbType = ref(DbType.SQLServer)
-const targetType = ref(TargetType.CSharpClass)
-const targetLanguage = computed(() => TARGET_TYPE_LANGUAGE_MAPPING[targetType.value])
+const reqData = ref<ClassCodeGenerateReq>({
+  code: props.sourceCode,
+  dbType: DbType.SQLServer,
+  targetType: TargetType.CSharpClass,
+  tableNamePrefix: 'T_',
+})
+const targetLanguage = computed(() => TARGET_TYPE_LANGUAGE_MAPPING[reqData.value.targetType])
 
 /**
  * Clear source code
@@ -88,7 +100,7 @@ const targetLanguage = computed(() => TARGET_TYPE_LANGUAGE_MAPPING[targetType.va
  * @date 2025/2/5 11:13
  */
 function handleClearSrcCode() {
-  srcCode.value = ''
+  reqData.value.code = ''
   targetCode.value = ''
 }
 
@@ -107,16 +119,11 @@ const handleSrcCodeChange = debounce(async () => {
  * @date 2025/2/5 10:37
  */
 async function handleGenerateTargetCode() {
-  if (!srcCode.value) {
+  if (!reqData.value.code) {
     return
   }
 
-  const res = await generateClassCodeBySql({
-    code: srcCode.value,
-    dbType: dbType.value,
-    targetType: targetType.value,
-    tableNamePrefix: 'T_',
-  })
+  const res = await generateClassCodeBySql(reqData.value)
   targetCode.value = res.replace(/\\n/g, '\n').trim()
 }
 
