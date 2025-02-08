@@ -2,9 +2,17 @@
 
 ## SQL Convert
 
-- [ ] SQL DDL to ORM entity
-- [ ] SQL DDL to java class
 - [ ] SQL DDL to c# class
+  - [x] SQL Server
+  - [ ] MySQL
+  - [ ] PostgreSQL
+  - [ ] SQLite
+- [ ] SQL DDL to java class
+  - [x] SQL Server
+  - [ ] MySQL
+  - [ ] PostgreSQL
+  - [ ] SQLite
+- [ ] SQL DDL to ORM entity
 - [ ] SQL DDL to java record
 - [ ] SQL DDL to c# record
 - [ ] SQL DDL to c# struct
