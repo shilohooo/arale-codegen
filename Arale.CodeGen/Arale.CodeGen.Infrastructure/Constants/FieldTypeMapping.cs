@@ -38,6 +38,19 @@ public static class CSharPropertyTypeMapping
         .Add(typeof(DataType.Decimal), FieldType.Of(nameof(Decimal).ToLower()))
         .Add(typeof(DataType.Datetime), FieldType.Of(nameof(DateTime)));
 
+    /// <summary>
+    ///     Custom column property type mapping
+    /// </summary>
+    public static readonly ImmutableDictionary<string, FieldType> CustomColumnPropertyTypeMapping = ImmutableDictionary
+        .Create<string, FieldType>()
+        .Add("bit", FieldType.Of("bool"))
+        .Add("nchar", FieldType.Of(nameof(String).ToLower()))
+        .Add("uniqueidentifier", FieldType.Of(nameof(Guid)))
+        .Add("money", FieldType.Of(nameof(Decimal).ToLower()))
+        .Add("smallmoney", FieldType.Of(nameof(Decimal).ToLower()))
+        .Add("smalldatetime", FieldType.Of(nameof(DateTime)))
+        .Add("datetime2", FieldType.Of(nameof(DateTime)));
+
 
     /// <summary>
     ///     Json property type & csharp property type mapping
@@ -54,6 +67,11 @@ public static class CSharPropertyTypeMapping
 /// </summary>
 public static class JavaFieldTypeMapping
 {
+    private const string JavaDateClassName = "Date";
+    private const string JavaDateClassImportStatement = "import java.util.Date;";
+    private const string JavaBigDecimalClassName = "BigDecimal";
+    private const string JavaBigDecimalClassImportStatement = "import java.math.BigDecimal;";
+
     /// <summary>
     ///     Table column type & java field type mapping
     /// </summary>
@@ -70,9 +88,22 @@ public static class JavaFieldTypeMapping
         .Add(typeof(DataType.Varbinary), FieldType.Of("Byte[]"))
         .Add(typeof(DataType.Char), FieldType.Of("String"))
         .Add(typeof(DataType.Varchar), FieldType.Of("String"))
-        .Add(typeof(DataType.Date), FieldType.Of("Date", "import java.util.Date;"))
-        .Add(typeof(DataType.Time), FieldType.Of("Date", "import java.util.Date;"))
-        .Add(typeof(DataType.Numeric), FieldType.Of("BigDecimal", "import java.math.BigDecimal;"))
-        .Add(typeof(DataType.Decimal), FieldType.Of("BigDecimal", "import java.math.BigDecimal;"))
-        .Add(typeof(DataType.Datetime), FieldType.Of("Date", "import java.util.Date;"));
+        .Add(typeof(DataType.Date), FieldType.Of(JavaDateClassName, JavaDateClassImportStatement))
+        .Add(typeof(DataType.Time), FieldType.Of(JavaDateClassName, JavaDateClassImportStatement))
+        .Add(typeof(DataType.Numeric), FieldType.Of(JavaBigDecimalClassName, JavaBigDecimalClassImportStatement))
+        .Add(typeof(DataType.Decimal), FieldType.Of(JavaBigDecimalClassName, JavaBigDecimalClassImportStatement))
+        .Add(typeof(DataType.Datetime), FieldType.Of(JavaDateClassName, JavaDateClassImportStatement));
+
+    /// <summary>
+    ///     Custom column property type mapping
+    /// </summary>
+    public static readonly ImmutableDictionary<string, FieldType> CustomColumnPropertyTypeMapping = ImmutableDictionary
+        .Create<string, FieldType>()
+        .Add("bit", FieldType.Of("Boolean"))
+        .Add("nchar", FieldType.Of(nameof(String)))
+        .Add("uniqueidentifier", FieldType.Of("UUID", "import java.util.UUID;"))
+        .Add("money", FieldType.Of(JavaBigDecimalClassName, JavaBigDecimalClassImportStatement))
+        .Add("smallmoney", FieldType.Of(JavaBigDecimalClassName, JavaBigDecimalClassImportStatement))
+        .Add("smalldatetime", FieldType.Of(JavaDateClassName, JavaDateClassImportStatement))
+        .Add("datetime2", FieldType.Of(JavaDateClassName, JavaDateClassImportStatement));
 }

@@ -20,6 +20,13 @@ public static class FieldTypeHelper
     {
         try
         {
+            // handle custom column type
+            if (columnType is DataType.Custom)
+                return CSharPropertyTypeMapping.CustomColumnPropertyTypeMapping.Where(a =>
+                        columnType.ToSql().Contains(a.Key, StringComparison.CurrentCultureIgnoreCase))
+                    .Select(a => a.Value)
+                    .FirstOrDefault() ?? FieldType.Of("object");
+
             return CSharPropertyTypeMapping.ColumnPropertyTypeMapping[columnType.GetType()];
         }
         catch (KeyNotFoundException)
@@ -49,6 +56,13 @@ public static class FieldTypeHelper
     {
         try
         {
+            // handle custom column type
+            if (columnType is DataType.Custom)
+                return JavaFieldTypeMapping.CustomColumnPropertyTypeMapping.Where(a =>
+                        columnType.ToSql().Contains(a.Key, StringComparison.CurrentCultureIgnoreCase))
+                    .Select(a => a.Value)
+                    .FirstOrDefault() ?? FieldType.Of("Object");
+
             return JavaFieldTypeMapping.ColumnFieldTypeMapping[columnType.GetType()];
         }
         catch (KeyNotFoundException)

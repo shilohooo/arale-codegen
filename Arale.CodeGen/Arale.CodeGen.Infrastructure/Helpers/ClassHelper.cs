@@ -1,8 +1,6 @@
 ﻿using Arale.CodeGen.Commons.Constants;
-using Arale.CodeGen.Commons.Exceptions;
 using Arale.CodeGen.Models.Db;
 using Arale.CodeGen.Models.Dto;
-using Arale.CodeGen.Models.Entity;
 using SqlParser;
 using SqlParser.Ast;
 
@@ -75,15 +73,6 @@ public static class ClassHelper
                 Comment = name,
                 FieldType = FieldHelper.GetFieldType(columnDef.DataType, codeGenerateBySqlReq.TargetType)
             };
-            // check data type is bool?
-            if (columnDef.DataType.ToSql().Contains("bit", StringComparison.CurrentCultureIgnoreCase))
-                columnInfo.FieldType = codeGenerateBySqlReq.TargetType switch
-                {
-                    TargetType.CSharpClass => FieldType.Of("bool"),
-                    TargetType.JavaClass => FieldType.Of("Boolean"),
-                    _ => throw new UnsupportedTargetTypeException(codeGenerateBySqlReq.TargetType)
-                };
-
             if (columnDef.Options?.Count > 0)
                 foreach (var columnOptionDef in columnDef.Options)
                     switch (columnOptionDef.Option)
