@@ -1,8 +1,8 @@
 ﻿package io.arale.codegen;
 
-{{ for import_statement in model.import_statements }}
+{{~ for import_statement in model.import_statements ~}}
 {{ import_statement }}
-{{ end }}
+{{~ end ~}}
 import lombok.*;
 
 /**
