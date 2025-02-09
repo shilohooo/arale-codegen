@@ -33,14 +33,15 @@ structure, or write the corresponding DTO code based on the structure of the JSO
 
 ### Backend
 
-| Name                   | Version  | Documentation                                                        | Remark          |
-|------------------------|----------|----------------------------------------------------------------------|-----------------|
-| C#                     | 12       | <https://learn.microsoft.com/en-us/dotnet/csharp/>                   | Language        |
-| SqlParser-cs           | 0.6.2    | <https://github.com/TylerBrinks/SqlParser-cs>                        | SQL Parser      |
-| Scriban                | 5.12.1   | <https://github.com/scriban/scriban>                                 | Template Engine |
-| Pluralize.NET          | 1.0.2    | <https://github.com/sarathkcm/Pluralize.NET>                         |                 |
-| ASP.NET Core (Web API) | .NET 8.0 | <https://learn.microsoft.com/en-us/aspnet/core/?view=aspnetcore-8.0> | Web Framework   |
-| xUnit.net              | 2.5.3    | <https://xunit.net/>                                                 | Unit Tests      |
+| Name                   | Version       | Documentation                                                        | Remark              |
+|------------------------|---------------|----------------------------------------------------------------------|---------------------|
+| C#                     | 12            | <https://learn.microsoft.com/en-us/dotnet/csharp/>                   | Language            |
+| SqlParser-cs           | 0.6.2         | <https://github.com/TylerBrinks/SqlParser-cs>                        | SQL Parser          |
+| Scriban                | 5.12.1        | <https://github.com/scriban/scriban>                                 | Template Engine     |
+| Pluralize.NET          | 1.0.2         | <https://github.com/sarathkcm/Pluralize.NET>                         |                     |
+| ASP.NET Core (Web API) | .NET 8.0      | <https://learn.microsoft.com/en-us/aspnet/core/?view=aspnetcore-8.0> | Web Framework       |
+| Humanizr               | 3.0.0-beta.54 | <https://github.com/Humanizr/Humanizer>                              | Change naming style |
+| xUnit.net              | 2.5.3         | <https://xunit.net/>                                                 | Unit Tests          |
 
 ### Frontend
 
