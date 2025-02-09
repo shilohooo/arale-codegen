@@ -4,12 +4,12 @@
 
 - [ ] SQL DDL to c# class
   - [x] SQL Server
-  - [ ] MySQL
+  - [x] MySQL
   - [ ] PostgreSQL
   - [ ] SQLite
 - [ ] SQL DDL to java class
   - [x] SQL Server
-  - [ ] MySQL
+  - [x] MySQL
   - [ ] PostgreSQL
   - [ ] SQLite
 - [ ] SQL DDL to ORM entity

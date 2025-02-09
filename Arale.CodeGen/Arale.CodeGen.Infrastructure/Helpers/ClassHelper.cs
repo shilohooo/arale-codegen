@@ -1,6 +1,7 @@
 ﻿using Arale.CodeGen.Commons.Constants;
 using Arale.CodeGen.Models.Db;
 using Arale.CodeGen.Models.Dto;
+using Humanizer;
 using SqlParser;
 using SqlParser.Ast;
 
@@ -46,9 +47,7 @@ public static class ClassHelper
         var tableInfo = new TableInfo
         {
             TableName = tableName,
-            ClassName = string.IsNullOrWhiteSpace(codeGenerateBySqlReq.TableNamePrefix)
-                ? tableName
-                : tableName.Replace(codeGenerateBySqlReq.TableNamePrefix, string.Empty)
+            ClassName = GetClassName(codeGenerateBySqlReq, tableName)
         };
         tableInfo.Comment = tableElement.Comment?.ToString() ?? $"{tableInfo.ClassName} class";
         return tableInfo;
@@ -92,5 +91,19 @@ public static class ClassHelper
             columnInfo.Length = match.Groups[1].Value;
             return columnInfo;
         }).ToList();
+    }
+
+    /// <summary>
+    ///     Get class name
+    /// </summary>
+    /// <param name="codeGenerateBySqlReq">class code generate params</param>
+    /// <param name="tableName">table name</param>
+    /// <returns>class name</returns>
+    private static string GetClassName(CodeGenerateBySqlReq codeGenerateBySqlReq, string tableName)
+    {
+        var className = string.IsNullOrWhiteSpace(codeGenerateBySqlReq.TableNamePrefix)
+            ? tableName
+            : tableName.Replace(codeGenerateBySqlReq.TableNamePrefix, string.Empty);
+        return className.Pascalize();
     }
 }

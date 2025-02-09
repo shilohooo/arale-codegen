@@ -1,6 +1,7 @@
 ﻿using Arale.CodeGen.Commons.Constants;
 using Arale.CodeGen.Commons.Exceptions;
 using Arale.CodeGen.Models.Entity;
+using Humanizer;
 using SqlParser.Ast;
 
 namespace Arale.CodeGen.Infrastructure.Helpers;
@@ -18,18 +19,12 @@ public static class FieldHelper
     /// <returns>field / property name</returns>
     public static string GetFieldName(string columnName, TargetType targetType)
     {
-        var firstLetterOfName = columnName[0];
-        var firstLetterIsUpperCase = char.IsUpper(firstLetterOfName);
         return targetType switch
         {
             // c# property naming convention is PascalCase
-            TargetType.CSharpClass => firstLetterIsUpperCase
-                ? columnName
-                : (char)(firstLetterOfName - 32) + columnName[1..],
+            TargetType.CSharpClass => columnName.Pascalize(),
             // java field naming convention is camelCase
-            TargetType.JavaClass => firstLetterIsUpperCase
-                ? (char)(firstLetterOfName + 32) + columnName[1..]
-                : columnName,
+            TargetType.JavaClass => columnName.Camelize(),
             _ => columnName
         };
     }
