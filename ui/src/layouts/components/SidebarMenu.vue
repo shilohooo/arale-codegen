@@ -32,7 +32,7 @@
       class="absolute-top q-pa-sm flex items-center justify-center"
       style="height: 70px; gap: 10px"
     >
-      <q-avatar class="q-mb-sm" color="white">
+      <q-avatar class="q-mb-sm" square>
         <img src="~assets/logo.svg" alt="App Logo" />
       </q-avatar>
       <span class="text-weight-bold">{{ appName }}</span>
