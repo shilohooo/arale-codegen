@@ -24,8 +24,14 @@ public class {{ model.class_name }} extends BaseEntity {
     /**
      * {{ column.comment }}
      */
-    {{ if column.is_primary_key }}@TableId("{{ column.name }}"){{ else }}@TableField("{{ column.name }}"){{ end }}
-    {{ if column.is_big_int_type }}@JsonSerialize(using = ToStringSerializer.class){{ else }}{{ end }}
+    {{~ if column.is_primary_key ~}}
+    @TableId("{{ column.name }}")
+    {{~ else ~}}
+    @TableField("{{ column.name }}")
+    {{~ end ~}}
+    {{~ if column.is_big_int_type ~}}
+    @JsonSerialize(using = ToStringSerializer.class)
+    {{~ end ~}}
     private {{ column.field_type.type_name }} {{ column.field_name }};
 {{ end }}
 }
