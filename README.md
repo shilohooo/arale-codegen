@@ -1,6 +1,8 @@
-# 🛠️ Arale CodeGen
+# Arale CodeGen
 
-## 🎤 Introduction
+<div align="center">
+  <img src="./project-logo.png" alt="project-logo" />
+</div>
 
 > [!IMPORTANT]
 > 🚧 The project is currently under active development and features are subject to change at any time.
@@ -28,6 +30,10 @@ structure, or write the corresponding DTO code based on the structure of the JSO
 - [MySQL](https://www.mysql.com/)
 - [PostgreSQL](https://www.postgresql.org/)
 - [SQLite](https://www.sqlite.org/)
+
+## 🪄 Credits
+
+The logo has been designed by [Free Logo Design](https://www.freelogodesign.org/).
 
 ## 💻 Stack
 
