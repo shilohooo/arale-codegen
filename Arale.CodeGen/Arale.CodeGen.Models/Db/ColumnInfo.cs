@@ -42,6 +42,11 @@ public class ColumnInfo
     /// </summary>
     public string? Comment { get; set; }
 
+    /// <summary>
+    ///     column type is bigint?
+    /// </summary>
+    public bool IsBigIntType => "long".Equals(FieldType?.TypeName, StringComparison.CurrentCultureIgnoreCase);
+
     /// <inheritdoc />
     public override string ToString()
     {

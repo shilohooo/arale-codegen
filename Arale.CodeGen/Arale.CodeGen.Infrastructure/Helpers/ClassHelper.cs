@@ -49,7 +49,7 @@ public static class ClassHelper
             TableName = tableName,
             ClassName = GetClassName(codeGenerateBySqlReq, tableName)
         };
-        tableInfo.Comment = tableElement.Comment?.ToString() ?? $"{tableInfo.ClassName} class";
+        tableInfo.Comment = tableElement.Comment?.ToString() ?? $"{tableInfo.ClassName}";
         return tableInfo;
     }
 

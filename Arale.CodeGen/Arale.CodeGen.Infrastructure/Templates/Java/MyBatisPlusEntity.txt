@@ -1,0 +1,31 @@
+﻿package io.arale.codegen;
+
+{{~ for import_statement in model.import_statements ~}}
+{{ import_statement }}
+{{~ end ~}}
+{{~ if model.has_primary_key ~}}import com.baomidou.mybatisplus.annotation.TableId;{{ end }}
+import com.baomidou.mybatisplus.annotation.TableName;
+import com.baomidou.mybatisplus.annotation.TableField;
+{{~ if model.has_big_int_column ~}}
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import com.fasterxml.jackson.databind.ser.std.ToStringSerializer;
+{{~ end ~}}
+import lombok.*;
+
+/**
+ * {{ model.comment }} Entity
+ */
+@Setter
+@Getter
+@ToString
+@TableName("{{ model.table_name }}")
+public class {{ model.class_name }} extends BaseEntity {
+{{ for column in model.columns }}
+    /**
+     * {{ column.comment }}
+     */
+    {{ if column.is_primary_key }}@TableId("{{ column.name }}"){{ else }}@TableField("{{ column.name }}"){{ end }}
+    {{ if column.is_big_int_type }}@JsonSerialize(using = ToStringSerializer.class){{ else }}{{ end }}
+    private {{ column.field_type.type_name }} {{ column.field_name }};
+{{ end }}
+}

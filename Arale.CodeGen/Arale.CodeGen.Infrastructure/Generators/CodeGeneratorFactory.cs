@@ -18,7 +18,9 @@ public static class CodeGeneratorFactory
         return targetType switch
         {
             TargetType.CSharpClass => new CSharpClassCodeGenerator(),
+            TargetType.SqlSugarEntity => new SqlSugarEntityCodeGenerator(),
             TargetType.JavaClass => new JavaClassCodeGenerator(),
+            TargetType.MyBatisPlusEntity => new MyBatisPlusEntityCodeGenerator(),
             _ => throw new ArgumentException($"Unsupported target type: {targetType}", nameof(targetType))
         };
     }

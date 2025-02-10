@@ -6,7 +6,7 @@
 import lombok.*;
 
 /**
- * {{ model.comment }}
+ * {{ model.comment }} Class
  */
 @Setter
 @Getter

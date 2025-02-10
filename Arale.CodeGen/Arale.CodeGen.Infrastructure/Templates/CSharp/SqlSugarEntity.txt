@@ -1,0 +1,14 @@
+﻿/// <summary>
+/// {{ model.comment }} Entity
+/// </summary>
+[SugarTable("{{ model.table_name }}", "{{ model.comment }}")]
+public class {{ model.class_name }}
+{
+{{ for column in model.columns }}
+    /// <summary>
+    /// {{ column.comment }}
+    /// </summary>
+    [SugarColumn(ColumnName = "{{ column.name }}", {{ if column.is_primary_key }}IsPrimaryKey = true, {{ end }}{{ if column.mandatory }}IsNullable = false, {{ end }}ColumnDescription = "{{ column.comment }}")]
+    public {{ column.field_type.type_name }}{{ if !column.mandatory }}?{{ end }} {{ column.field_name }} { get; set; }
+{{ end }}
+}

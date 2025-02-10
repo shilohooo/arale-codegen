@@ -81,11 +81,16 @@ import type { QSelectOption } from 'quasar'
 import { debounce, useQuasar } from 'quasar'
 import { generateClassCodeBySql } from 'src/api/class-generate-api'
 import { DB_TYPE_OPTIONS, TARGET_TYPE_LANGUAGE_MAPPING } from 'src/constant'
-import { DbType, TargetType } from 'src/enums'
+import type { TargetType } from 'src/enums'
+import { DbType } from 'src/enums'
 import type { ClassCodeGenerateReq } from 'src/api/models/class-generate-models'
 
 const props = withDefaults(
-  defineProps<{ sourceCode: string; targetTypeOptions: QSelectOption<TargetType>[] }>(),
+  defineProps<{
+    sourceCode: string
+    targetTypeOptions: QSelectOption<TargetType>[]
+    defaultSelectedTargetType: TargetType
+  }>(),
   {
     sourceCode: () => '',
     targetTypeOptions: () => [],
@@ -96,7 +101,7 @@ const targetCode = ref<string>('')
 const reqData = ref<ClassCodeGenerateReq>({
   code: props.sourceCode,
   dbType: DbType.SQLServer,
-  targetType: TargetType.CSharpClass,
+  targetType: props.defaultSelectedTargetType,
   tableNamePrefix: 'T_',
 })
 const targetLanguage = computed(() => TARGET_TYPE_LANGUAGE_MAPPING[reqData.value.targetType])

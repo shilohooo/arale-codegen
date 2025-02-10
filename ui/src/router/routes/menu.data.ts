@@ -51,6 +51,14 @@ export const menuList: Menu[] = [
         level: 1,
         component: 'modules/sql-convert/SqlToClass',
       },
+      {
+        icon: 'code',
+        label: 'SQL to Entity',
+        path: '/sql-convert/sql-to-entity',
+        type: MenuType.PAGE,
+        level: 1,
+        component: 'modules/sql-convert/SqlToEntity',
+      },
     ],
   },
 ]

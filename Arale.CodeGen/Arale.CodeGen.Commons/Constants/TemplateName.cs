@@ -13,7 +13,18 @@ public enum TemplateName
     [Description("CSharp/CSharpClass")] CSharpClass,
 
     /// <summary>
+    ///     SqlSugar entity template
+    /// </summary>
+    [Description("CSharp/SqlSugarEntity")] SqlSugarEntity,
+
+    /// <summary>
     ///     Java class template
     /// </summary>
-    [Description("Java/JavaClass")] JavaClass
+    [Description("Java/JavaClass")] JavaClass,
+
+    /// <summary>
+    ///     MyBatisPlus entity template
+    /// </summary>
+    [Description("Java/MyBatisPlusEntity")]
+    MyBatisPlusEntity
 }

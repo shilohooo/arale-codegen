@@ -13,6 +13,16 @@
   - [ ] PostgreSQL
   - [ ] SQLite
 - [ ] SQL DDL to ORM entity
+  - [ ] SQL DDL to SqlSugar Entity
+    - [x] SQL Server
+    - [ ] MySQL
+    - [ ] PostgreSQL
+    - [ ] SQLite
+  - [ ] SQL DDL to MyBatisPlus Entity
+    - [x] SQL Server
+    - [ ] MySQL
+    - [ ] PostgreSQL
+    - [ ] SQLite
 - [ ] SQL DDL to java record
 - [ ] SQL DDL to c# record
 - [ ] SQL DDL to c# struct

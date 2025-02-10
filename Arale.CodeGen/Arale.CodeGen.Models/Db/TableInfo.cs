@@ -28,6 +28,16 @@ public class TableInfo
     public List<ColumnInfo> Columns { get; set; } = [];
 
     /// <summary>
+    ///     Whether the table has a primary key defined
+    /// </summary>
+    public bool HasPrimaryKey => Columns.Any(x => x.IsPrimaryKey);
+
+    /// <summary>
+    ///     Whether the table has a bigint column defined
+    /// </summary>
+    public bool HasBigIntColumn => Columns.Any(x => x.IsBigIntType);
+
+    /// <summary>
     ///     import / using statements
     /// </summary>
     public HashSet<string> ImportStatements { get; set; } = [];

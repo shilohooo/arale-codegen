@@ -11,5 +11,7 @@ public enum TargetType
 
     // [Description("C# Record")] CSharpRecord = 2,
     // [Description("C# Struct")] CSharpStruct = 3,
-    [Description("Java Class")] JavaClass = 4
+    [Description("SqlSugar Entity")] SqlSugarEntity = 4,
+    [Description("Java Class")] JavaClass = 5,
+    [Description("MyBatisPlus Entity")] MyBatisPlusEntity = 6
 }

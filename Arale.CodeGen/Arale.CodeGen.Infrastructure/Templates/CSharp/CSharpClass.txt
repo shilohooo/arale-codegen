@@ -1,5 +1,5 @@
 ﻿/// <summary>
-/// {{ model.comment }}
+/// {{ model.comment }} Class
 /// </summary>
 public class {{ model.class_name }}
 {
