@@ -80,6 +80,7 @@ The logo has been designed by [Free Logo Design](https://www.freelogodesign.org/
 - [Java & SQL Server Data Type Mapping](https://learn.microsoft.com/en-us/sql/language-extensions/how-to/java-to-sql-data-types?view=sql-server-ver16)
 - [Java & MySQL Data Type Mapping](https://dev.mysql.com/doc/connector-j/en/connector-j-reference-type-conversions.html)
 - [Java & PostgreSQL Data Type Mapping](https://zontroy.com/postgresql-to-java-type-mapping)
+- [A polyglot web converter](https://github.com/ritz078/transform)
 
 ## 💪 Contributors
 
