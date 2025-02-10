@@ -1,5 +1,5 @@
 <!--
-  * Code convert component
+  * SQL DDL Code convert component
   * @author shiloh
   * @date 2025/2/5 9:01
 -->
@@ -50,7 +50,7 @@
         <div class="col-lg-10 col-md-8 col-sm-6">
           <q-select
             v-model="reqData.targetType"
-            :options="TARGET_TYPE_OPTIONS"
+            :options="targetTypeOptions"
             @update:model-value="handleGenerateTargetCode"
             label="Convert target type"
             map-options
@@ -77,13 +77,20 @@
 
 <script setup lang="ts">
 import CodeEditor from 'components/CodeEditor.vue'
+import type { QSelectOption } from 'quasar'
 import { debounce, useQuasar } from 'quasar'
 import { generateClassCodeBySql } from 'src/api/class-generate-api'
-import { DB_TYPE_OPTIONS, TARGET_TYPE_LANGUAGE_MAPPING, TARGET_TYPE_OPTIONS } from 'src/constant'
+import { DB_TYPE_OPTIONS, TARGET_TYPE_LANGUAGE_MAPPING } from 'src/constant'
 import { DbType, TargetType } from 'src/enums'
 import type { ClassCodeGenerateReq } from 'src/api/models/class-generate-models'
 
-const props = defineProps<{ sourceCode: string }>()
+const props = withDefaults(
+  defineProps<{ sourceCode: string; targetTypeOptions: QSelectOption<TargetType>[] }>(),
+  {
+    sourceCode: () => '',
+    targetTypeOptions: () => [],
+  },
+)
 
 const targetCode = ref<string>('')
 const reqData = ref<ClassCodeGenerateReq>({

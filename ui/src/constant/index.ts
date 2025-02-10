@@ -15,8 +15,8 @@ export const DB_TYPE_OPTIONS: QSelectOption<DbType>[] = [
   { label: DbType[DbType.SQLite], value: DbType.SQLite },
 ]
 
-// supported target type options
-export const TARGET_TYPE_OPTIONS: QSelectOption<TargetType>[] = [
+// supported target type options for generate class code
+export const CLASS_CODE_TARGET_TYPE_OPTIONS: QSelectOption<TargetType>[] = [
   { label: TargetType[TargetType.CSharpClass], value: TargetType.CSharpClass },
   { label: TargetType[TargetType.JavaClass], value: TargetType.JavaClass },
 ]
