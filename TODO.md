@@ -15,12 +15,12 @@
 - [ ] SQL DDL to ORM entity
   - [ ] SQL DDL to SqlSugar Entity
     - [x] SQL Server
-    - [ ] MySQL
+    - [x] MySQL
     - [ ] PostgreSQL
     - [ ] SQLite
   - [ ] SQL DDL to MyBatisPlus Entity
     - [x] SQL Server
-    - [ ] MySQL
+    - [x] MySQL
     - [ ] PostgreSQL
     - [ ] SQLite
 - [ ] SQL DDL to java record
