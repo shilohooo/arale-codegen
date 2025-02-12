@@ -42,6 +42,7 @@ export const menuList: Menu[] = [
     icon: 'mdi-database-search',
     label: 'SQL Convert',
     type: MenuType.CATALOG,
+    path: '/sql-convert',
     children: [
       {
         icon: 'code',
@@ -61,6 +62,30 @@ export const menuList: Menu[] = [
       },
     ],
   },
+  // {
+  //   icon: 'mdi-database-search',
+  //   label: 'JSON Convert',
+  //   type: MenuType.CATALOG,
+  //   path: '/json-convert',
+  //   children: [
+  //     {
+  //       icon: 'code',
+  //       label: 'JSON to Class',
+  //       path: '/json-convert/json-to-class',
+  //       type: MenuType.PAGE,
+  //       level: 1,
+  //       component: 'modules/json-convert/JsonToClass',
+  //     },
+  //     {
+  //       icon: 'code',
+  //       label: 'JSON to Entity',
+  //       path: '/json-convert/json-to-entity',
+  //       type: MenuType.PAGE,
+  //       level: 1,
+  //       component: 'modules/json-convert/JsonToEntity',
+  //     },
+  //   ],
+  // },
 ]
 
 /**

@@ -25,9 +25,11 @@
   </q-item>
   <div v-else>
     <q-expansion-item
+      v-model="expanded"
       :icon="menu.icon"
       :label="menu.label"
       class="q-ma-sm"
+      group="expansion-unique-group"
       :content-inset-level="0.2"
       :header-class="
         menu.children.findIndex((item) => route.path === item.path) > -1
@@ -48,9 +50,36 @@ const route = useRoute()
 
 defineOptions({ name: 'SidebarMenuItem' })
 
-defineProps<{ menu: Menu }>()
+const props = defineProps<{ menu: Menu }>()
 
 const tabStore = useTabStore()
+
+const expanded = ref(false)
+
+function findRouteByPath(menus: Menu[], routePath: string): boolean {
+  // 递归查找 path === routePath 的菜单
+  for (const menu of menus) {
+    if (menu.children) {
+      return findRouteByPath(menu.children, routePath)
+    }
+
+    if (menu.path === routePath) {
+      return true
+    }
+  }
+
+  return false
+}
+
+function handleOpen(routePath: string) {
+  if (!props.menu.children) {
+    return
+  }
+
+  expanded.value = findRouteByPath(props.menu.children, routePath)
+}
+
+defineExpose({ handleOpen })
 </script>
 
 <style scoped></style>

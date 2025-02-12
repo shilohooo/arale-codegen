@@ -23,7 +23,12 @@
         </q-item>
 
         <template v-for="menuItem in menuList" :key="menuItem.label">
-          <sidebar-menu-item :menu="menuItem" />
+          <sidebar-menu-item
+            :menu="menuItem"
+            :ref="
+              (el) => setSidebarMenuItemRef(menuItem.path!, el as unknown as SidebarMenuItemType)
+            "
+          />
         </template>
       </q-list>
     </q-scroll-area>
@@ -65,6 +70,36 @@ const route = useRoute()
 const tabStore = useTabStore()
 
 const appName = ref<string>(import.meta.env.VITE_APP_NAME)
+
+type SidebarMenuItemType = typeof SidebarMenuItem
+const sidebarMenuItemRefs = ref<Record<string, SidebarMenuItemType>>({})
+
+function setSidebarMenuItemRef(path: string, el: SidebarMenuItemType) {
+  if (!el) {
+    return
+  }
+
+  sidebarMenuItemRefs.value[path] = el
+}
+
+function handleOpenMenu(routePath: string) {
+  const key = Object.keys(sidebarMenuItemRefs.value).find((key) => routePath.includes(key))
+  if (!key) {
+    return
+  }
+  sidebarMenuItemRefs.value[key]?.handleOpen(routePath)
+}
+
+watch(
+  () => route.path,
+  (newValue) => {
+    handleOpenMenu(newValue)
+  },
+)
+
+onMounted(() => {
+  handleOpenMenu(route.path)
+})
 </script>
 
 <style scoped></style>
