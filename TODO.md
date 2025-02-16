@@ -36,8 +36,8 @@
 - [ ] JSON to java record
 - [ ] JSON to c# record
 - [ ] JSON to c# struct
-- [ ] JSON to ts type
-- [ ] JSON to ts interface
+- [x] JSON to ts type
+- [x] JSON to ts interface
 - [ ] JSON to js object
 
 ## JSON naming style
