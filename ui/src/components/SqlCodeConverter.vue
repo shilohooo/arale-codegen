@@ -65,7 +65,7 @@
             color="primary"
             label="Copy"
             no-caps
-            @click="handleCopyTargetCode"
+            @click="copy(targetCode)"
           />
         </div>
       </div>
@@ -78,12 +78,13 @@
 <script setup lang="ts">
 import CodeEditor from 'components/CodeEditor.vue'
 import type { QSelectOption } from 'quasar'
-import { debounce, useQuasar } from 'quasar'
+import { debounce } from 'quasar'
 import { generateClassCodeBySql } from 'src/api/class-generate-api'
 import { DB_TYPE_OPTIONS, TARGET_TYPE_LANGUAGE_MAPPING } from 'src/constant'
 import type { TargetType } from 'src/enums'
 import { DbType } from 'src/enums'
 import type { ClassCodeGenerateReq } from 'src/api/models/class-generate-models'
+import { useClipboard } from 'src/hooks/useClipboard'
 
 const props = withDefaults(
   defineProps<{
@@ -141,21 +142,7 @@ async function handleGenerateTargetCode() {
 
 // region copy
 
-const $q = useQuasar()
-
-/**
- * Copy target code
- * @author shiloh
- * @date 2025/2/5 10:11
- */
-function handleCopyTargetCode() {
-  navigator.clipboard.writeText(targetCode.value)
-  $q.notify({
-    message: 'Copied:)',
-    color: 'positive',
-    position: 'top',
-  })
-}
+const { copy } = useClipboard()
 
 // endregion
 </script>

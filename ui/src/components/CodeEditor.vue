@@ -11,6 +11,7 @@
 import * as monaco from 'monaco-editor'
 import { format as sqlFormat } from 'sql-formatter'
 import type { EditorLanguage } from 'src/types/code-editor'
+import { EDITOR_TAB_SIZE } from 'src/constant'
 
 defineOptions({ name: 'CodeEditor' })
 const emits = defineEmits(['update:modelValue', 'change'])
@@ -82,6 +83,7 @@ async function initEditor() {
     automaticLayout: true,
     readOnly: false,
     fontSize: 16,
+    tabSize: EDITOR_TAB_SIZE[props.language] ?? 4,
   })
 
   // model content change callback

@@ -34,3 +34,13 @@ export const TARGET_TYPE_LANGUAGE_MAPPING: Record<TargetType, EditorLanguage> = 
   [TargetType.JavaClass]: 'java',
   [TargetType.MyBatisPlusEntity]: 'java',
 }
+
+// editor tab size
+export const EDITOR_TAB_SIZE: Record<EditorLanguage, number> = {
+  csharp: 4,
+  java: 4,
+  json: 2,
+  sql: 2,
+  typescript: 2,
+  javascript: 2,
+}

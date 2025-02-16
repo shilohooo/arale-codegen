@@ -45,7 +45,7 @@ export const menuList: Menu[] = [
     path: '/sql-convert',
     children: [
       {
-        icon: 'code',
+        icon: 'mdi-language-csharp',
         label: 'SQL to Class',
         path: '/sql-convert/sql-to-class',
         type: MenuType.PAGE,
@@ -53,7 +53,7 @@ export const menuList: Menu[] = [
         component: 'modules/sql-convert/SqlToClass',
       },
       {
-        icon: 'code',
+        icon: 'mdi-language-java',
         label: 'SQL to Entity',
         path: '/sql-convert/sql-to-entity',
         type: MenuType.PAGE,
@@ -62,30 +62,22 @@ export const menuList: Menu[] = [
       },
     ],
   },
-  // {
-  //   icon: 'mdi-database-search',
-  //   label: 'JSON Convert',
-  //   type: MenuType.CATALOG,
-  //   path: '/json-convert',
-  //   children: [
-  //     {
-  //       icon: 'code',
-  //       label: 'JSON to Class',
-  //       path: '/json-convert/json-to-class',
-  //       type: MenuType.PAGE,
-  //       level: 1,
-  //       component: 'modules/json-convert/JsonToClass',
-  //     },
-  //     {
-  //       icon: 'code',
-  //       label: 'JSON to Entity',
-  //       path: '/json-convert/json-to-entity',
-  //       type: MenuType.PAGE,
-  //       level: 1,
-  //       component: 'modules/json-convert/JsonToEntity',
-  //     },
-  //   ],
-  // },
+  {
+    icon: 'mdi-code-json',
+    label: 'JSON Convert',
+    type: MenuType.CATALOG,
+    path: '/json-convert',
+    children: [
+      {
+        icon: 'mdi-language-typescript',
+        label: 'JSON to TS',
+        path: '/json-convert/json-to-ts',
+        type: MenuType.PAGE,
+        level: 1,
+        component: 'modules/json-convert/JsonToTs',
+      },
+    ],
+  },
 ]
 
 /**
