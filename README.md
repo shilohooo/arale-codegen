@@ -14,12 +14,12 @@ structure, or write the corresponding DTO code based on the structure of the JSO
 
 ## 🚀 Features
 
-- Read the SQL DDL / JSON to generate entity of ORM / persistence framework, such
+- [Read the SQL DDL](https://shiloh595.top/arale-codegen-ui/#/sql-convert/sql-to-entity) / JSON to generate entity of ORM / persistence framework, such
   as [Hibernate](https://hibernate.org/orm/), [Entity Framework Core](https://docs.microsoft.com/ef/),
   [SqlSugar](https://www.donet5.com/home/doc), [MyBatisPlus](https://baomidou.com/)
-- Read the SQL DDL / JSON to generate class, record, struct
+- [Read the SQL DDL](https://shiloh595.top/arale-codegen-ui/#/sql-convert/sql-to-class) / JSON to generate class, record, struct
   for [Java](https://openjdk.org/), [C#](https://learn.microsoft.com/en-us/dotnet/csharp/).
-- Read the SQL DDL / JSON to generate type / interface for [TypeScript](https://www.typescriptlang.org/).
+- Read the SQL DDL / [JSON](https://shiloh595.top/arale-codegen-ui/#/json-convert/json-to-ts) to generate type / interface for [TypeScript](https://www.typescriptlang.org/).
 - Read the SQL DDL / JSON to generate object for [JavaScript](https://developer.mozilla.org/en-US/docs/Web/JavaScript).
 - JSON object field naming style conversion (camelCase, snake_case, PascalCase, kebab-case).
 
