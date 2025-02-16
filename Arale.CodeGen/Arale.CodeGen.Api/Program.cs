@@ -40,7 +40,6 @@ app.UseCors(configurePolicy =>
     configurePolicy.AllowCredentials();
     configurePolicy.AllowAnyHeader();
     configurePolicy.AllowAnyMethod();
-    // TODO config by env (dev / production?), current for dev
     configurePolicy.WithOrigins("http://localhost:9000", "http://127.0.0.1:9000");
 });
 app.MapControllers();
