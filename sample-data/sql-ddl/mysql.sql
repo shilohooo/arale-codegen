@@ -1,4 +1,4 @@
-create table T_mysql_generate_test
+create table t_mysql_generate_test
 (
     id             bigint auto_increment primary key comment 'pk',
     tinyint_col    tinyint,
