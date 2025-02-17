@@ -16,6 +16,7 @@ export enum DbType {
 export enum TargetType {
   CSharpClass = 1,
   SqlSugarEntity = 4,
-  JavaClass = 5,
-  MyBatisPlusEntity = 6,
+  EFCoreEntity = 5,
+  JavaClass = 6,
+  MyBatisPlusEntity = 7,
 }

@@ -19,6 +19,7 @@ public static class CodeGeneratorFactory
         {
             TargetType.CSharpClass => new CSharpClassCodeGenerator(),
             TargetType.SqlSugarEntity => new SqlSugarEntityCodeGenerator(),
+            TargetType.EFCoreEntity => new EFCoreEntityCodeGenerator(),
             TargetType.JavaClass => new JavaClassCodeGenerator(),
             TargetType.MyBatisPlusEntity => new MyBatisPlusEntityCodeGenerator(),
             _ => throw new ArgumentException($"Unsupported target type: {targetType}", nameof(targetType))

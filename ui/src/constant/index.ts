@@ -24,6 +24,7 @@ export const CLASS_CODE_TARGET_TYPE_OPTIONS: QSelectOption<TargetType>[] = [
 // supported target type options for generate ORM entity
 export const ENTITY_CODE_TARGET_TYPE_OPTIONS: QSelectOption<TargetType>[] = [
   { label: TargetType[TargetType.SqlSugarEntity], value: TargetType.SqlSugarEntity },
+  { label: TargetType[TargetType.EFCoreEntity], value: TargetType.EFCoreEntity },
   { label: TargetType[TargetType.MyBatisPlusEntity], value: TargetType.MyBatisPlusEntity },
 ]
 
@@ -31,6 +32,7 @@ export const ENTITY_CODE_TARGET_TYPE_OPTIONS: QSelectOption<TargetType>[] = [
 export const TARGET_TYPE_LANGUAGE_MAPPING: Record<TargetType, EditorLanguage> = {
   [TargetType.CSharpClass]: 'csharp',
   [TargetType.SqlSugarEntity]: 'csharp',
+  [TargetType.EFCoreEntity]: 'csharp',
   [TargetType.JavaClass]: 'java',
   [TargetType.MyBatisPlusEntity]: 'java',
 }

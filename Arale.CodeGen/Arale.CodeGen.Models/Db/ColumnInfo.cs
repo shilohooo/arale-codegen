@@ -13,6 +13,11 @@ public class ColumnInfo
     public string? Name { get; set; }
 
     /// <summary>
+    ///     Column type
+    /// </summary>
+    public string ColType { get; set; }
+
+    /// <summary>
     ///     field / property name
     /// </summary>
     public string? FieldName { get; set; }
@@ -51,6 +56,6 @@ public class ColumnInfo
     public override string ToString()
     {
         return
-            $"{nameof(Name)}: {Name}, {nameof(FieldType)}: {FieldType}, {nameof(Length)}: {Length}, {nameof(IsPrimaryKey)}: {IsPrimaryKey}, {nameof(Mandatory)}: {Mandatory}, {nameof(Comment)}: {Comment}";
+            $"{nameof(Name)}: {Name}, {nameof(ColType)}: {ColType}, {nameof(FieldType)}: {FieldType}, {nameof(Length)}: {Length}, {nameof(IsPrimaryKey)}: {IsPrimaryKey}, {nameof(Mandatory)}: {Mandatory}, {nameof(Comment)}: {Comment}";
     }
 }

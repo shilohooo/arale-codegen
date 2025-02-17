@@ -18,6 +18,11 @@ public enum TemplateName
     [Description("CSharp/SqlSugarEntity")] SqlSugarEntity,
 
     /// <summary>
+    ///     EF Core entity template
+    /// </summary>
+    [Description("CSharp/EFCoreEntity")] EFCoreEntity,
+
+    /// <summary>
     ///     Java class template
     /// </summary>
     [Description("Java/JavaClass")] JavaClass,

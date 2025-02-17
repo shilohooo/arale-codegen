@@ -1,0 +1,23 @@
+﻿using Microsoft.EntityFrameworkCore;
+
+namespace Arale.CodeGen;
+
+/// <summary>
+/// {{ model.comment }} Entity
+/// </summary>
+[Table("{{ model.table_name }}")]
+[Comment("{{ model.comment }}")]
+public class {{ model.class_name }}
+{
+{{ for column in model.columns }}
+    /// <summary>
+    /// {{ column.comment }}
+    /// </summary>
+    {{~ if column.is_primary_key ~}}
+    [Key]
+    {{~ end ~}}
+    [Column("{{ column.name }}", TypeName = "{{ column.col_type }}")]
+    [Comment("{{ column.comment }}")]
+    public {{ column.field_type.type_name }}{{ if !column.mandatory }}?{{ end }} {{ column.field_name }} { get; set; }
+{{ end }}
+}

@@ -40,7 +40,8 @@ public static class FieldHelper
     {
         return targetType switch
         {
-            TargetType.CSharpClass or TargetType.SqlSugarEntity => FieldTypeHelper.GetCSharpPropertyType(dataType),
+            TargetType.CSharpClass or TargetType.SqlSugarEntity or TargetType.EFCoreEntity => FieldTypeHelper
+                .GetCSharpPropertyType(dataType),
             TargetType.JavaClass or TargetType.MyBatisPlusEntity => FieldTypeHelper.GetJavaFieldType(dataType),
             _ => throw new UnsupportedTargetTypeException(targetType)
         };

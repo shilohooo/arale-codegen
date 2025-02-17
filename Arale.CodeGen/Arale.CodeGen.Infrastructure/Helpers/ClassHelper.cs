@@ -68,6 +68,7 @@ public static class ClassHelper
             var columnInfo = new ColumnInfo
             {
                 Name = name,
+                ColType = columnDef.DataType.ToSql(),
                 FieldName = FieldHelper.GetFieldName(name, codeGenerateBySqlReq.TargetType),
                 Comment = name,
                 FieldType = FieldHelper.GetFieldType(columnDef.DataType, codeGenerateBySqlReq.TargetType)
