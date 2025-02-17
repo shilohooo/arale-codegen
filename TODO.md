@@ -18,6 +18,11 @@
     - [x] MySQL
     - [ ] PostgreSQL
     - [ ] SQLite
+  - [ ] SQL DDL to EF Core Entity
+    - [x] SQL Server
+    - [x] MySQL
+    - [ ] PostgreSQL
+    - [ ] SQLite
   - [ ] SQL DDL to MyBatisPlus Entity
     - [x] SQL Server
     - [x] MySQL
