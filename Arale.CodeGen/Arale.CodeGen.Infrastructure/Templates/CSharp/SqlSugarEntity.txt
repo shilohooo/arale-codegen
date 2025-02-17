@@ -1,4 +1,6 @@
-﻿/// <summary>
+﻿namespace Arale.CodeGen;
+
+/// <summary>
 /// {{ model.comment }} Entity
 /// </summary>
 [SugarTable("{{ model.table_name }}", "{{ model.comment }}")]

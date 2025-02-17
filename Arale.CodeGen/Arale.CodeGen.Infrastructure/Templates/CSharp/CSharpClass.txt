@@ -1,4 +1,6 @@
-﻿/// <summary>
+﻿namespace Arale.CodeGen;
+
+/// <summary>
 /// {{ model.comment }} Class
 /// </summary>
 public class {{ model.class_name }}
