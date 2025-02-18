@@ -28,6 +28,11 @@
     - [x] MySQL
     - [ ] PostgreSQL
     - [ ] SQLite
+  - [ ] SQL DDL to Hibernate (Jakarta JPA) Entity
+    - [x] SQL Server
+    - [x] MySQL
+    - [ ] PostgreSQL
+    - [ ] SQLite
 - [ ] SQL DDL to java record
 - [ ] SQL DDL to c# record
 - [ ] SQL DDL to c# struct
