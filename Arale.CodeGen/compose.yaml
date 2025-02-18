@@ -1,5 +1,6 @@
 ﻿services:
     arale.codegen.api:
+        user: "1000:1000"
         image: arale.codegen.api
         build:
             context: .
@@ -9,3 +10,9 @@
             - "18081:8081"
         environment:
             - ASPNETCORE_ENVIRONMENT=Production
+            - APP_UID=1000
+        volumes:
+            - arale_codegen:/app
+
+volumes:
+    arale_codegen:
