@@ -26,6 +26,7 @@ export const ENTITY_CODE_TARGET_TYPE_OPTIONS: QSelectOption<TargetType>[] = [
   { label: TargetType[TargetType.SqlSugarEntity], value: TargetType.SqlSugarEntity },
   { label: TargetType[TargetType.EFCoreEntity], value: TargetType.EFCoreEntity },
   { label: TargetType[TargetType.MyBatisPlusEntity], value: TargetType.MyBatisPlusEntity },
+  { label: TargetType[TargetType.HibernateEntity], value: TargetType.HibernateEntity },
 ]
 
 // target type & editor language mapping
@@ -35,6 +36,7 @@ export const TARGET_TYPE_LANGUAGE_MAPPING: Record<TargetType, EditorLanguage> = 
   [TargetType.EFCoreEntity]: 'csharp',
   [TargetType.JavaClass]: 'java',
   [TargetType.MyBatisPlusEntity]: 'java',
+  [TargetType.HibernateEntity]: 'java',
 }
 
 // editor tab size

@@ -3,13 +3,12 @@
 {{~ for import_statement in model.import_statements ~}}
 {{ import_statement }}
 {{~ end ~}}
-{{~ if model.has_primary_key ~}}import com.baomidou.mybatisplus.annotation.TableId;{{ end }}
-import com.baomidou.mybatisplus.annotation.TableName;
-import com.baomidou.mybatisplus.annotation.TableField;
 {{~ if model.has_big_int_column ~}}
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.fasterxml.jackson.databind.ser.std.ToStringSerializer;
 {{~ end ~}}
+import jakarta.persistence.*;
+import org.hibernate.annotations.Comment;
 import lombok.*;
 
 /**
@@ -17,18 +16,20 @@ import lombok.*;
  */
 @Setter
 @Getter
+@Entity
+@Table(name = "{{ model.table_name }}")
+@Comment("{{ model.comment }}")
 @ToString(callSuper = true)
-@TableName("{{ model.table_name }}")
 public class {{ model.class_name }} extends BaseEntity {
 {{ for column in model.columns }}
     /**
      * {{ column.comment }}
      */
     {{~ if column.is_primary_key ~}}
-    @TableId("{{ column.name }}")
-    {{~ else ~}}
-    @TableField("{{ column.name }}")
+    @Id
     {{~ end ~}}
+    @Column(name = "{{ column.name }}", columnDefinition = "{{ column.col_type }}{{~ if column.mandatory }} not null{{~ end ~}}")
+    @Comment("{{ column.comment }}")
     {{~ if column.is_big_int_type ~}}
     @JsonSerialize(using = ToStringSerializer.class)
     {{~ end ~}}

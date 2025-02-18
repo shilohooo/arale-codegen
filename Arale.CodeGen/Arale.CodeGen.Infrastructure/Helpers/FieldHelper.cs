@@ -22,9 +22,9 @@ public static class FieldHelper
         return targetType switch
         {
             // c# property naming convention is PascalCase
-            TargetType.CSharpClass or TargetType.SqlSugarEntity => columnName.Pascalize(),
+            TargetType.CSharpClass or TargetType.SqlSugarEntity or TargetType.EFCoreEntity => columnName.Pascalize(),
             // java field naming convention is camelCase
-            TargetType.JavaClass or TargetType.MyBatisPlusEntity => columnName.Camelize(),
+            TargetType.JavaClass or TargetType.MyBatisPlusEntity or TargetType.HibernateEntity => columnName.Camelize(),
             _ => columnName
         };
     }
@@ -42,7 +42,8 @@ public static class FieldHelper
         {
             TargetType.CSharpClass or TargetType.SqlSugarEntity or TargetType.EFCoreEntity => FieldTypeHelper
                 .GetCSharpPropertyType(dataType),
-            TargetType.JavaClass or TargetType.MyBatisPlusEntity => FieldTypeHelper.GetJavaFieldType(dataType),
+            TargetType.JavaClass or TargetType.MyBatisPlusEntity or TargetType.HibernateEntity => FieldTypeHelper
+                .GetJavaFieldType(dataType),
             _ => throw new UnsupportedTargetTypeException(targetType)
         };
     }

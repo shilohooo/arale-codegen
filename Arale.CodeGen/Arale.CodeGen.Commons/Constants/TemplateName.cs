@@ -31,5 +31,10 @@ public enum TemplateName
     ///     MyBatisPlus entity template
     /// </summary>
     [Description("Java/MyBatisPlusEntity")]
-    MyBatisPlusEntity
+    MyBatisPlusEntity,
+
+    /// <summary>
+    ///     Hibernate (JPA) entity template
+    /// </summary>
+    [Description("Java/HibernateEntity")] HibernateEntity
 }

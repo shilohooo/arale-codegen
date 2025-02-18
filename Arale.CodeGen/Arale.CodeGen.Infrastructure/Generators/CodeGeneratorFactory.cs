@@ -22,6 +22,7 @@ public static class CodeGeneratorFactory
             TargetType.EFCoreEntity => new EFCoreEntityCodeGenerator(),
             TargetType.JavaClass => new JavaClassCodeGenerator(),
             TargetType.MyBatisPlusEntity => new MyBatisPlusEntityCodeGenerator(),
+            TargetType.HibernateEntity => new HibernateEntityCodeGenerator(),
             _ => throw new ArgumentException($"Unsupported target type: {targetType}", nameof(targetType))
         };
     }
