@@ -2,6 +2,7 @@ using System.Reflection;
 using Arale.CodeGen.Api.Filters;
 using Arale.CodeGen.Api.Handlers;
 using Arale.CodeGen.Extensions;
+using Microsoft.AspNetCore.HttpLogging;
 using Microsoft.AspNetCore.Mvc;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -23,7 +24,11 @@ builder.Services.AddControllers(opt => { opt.Filters.Add<RequestParamValidationF
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
+builder.Services.AddHttpLogging(o => { o.LoggingFields = HttpLoggingFields.All; });
+
 var app = builder.Build();
+
+app.UseHttpLogging();
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
