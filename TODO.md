@@ -36,8 +36,6 @@
 - [ ] SQL DDL to java record
 - [ ] SQL DDL to c# record
 - [ ] SQL DDL to c# struct
-- [ ] SQL DDL to ts type
-- [ ] SQL DDL to ts interface
 
 ## JSON Convert
 
