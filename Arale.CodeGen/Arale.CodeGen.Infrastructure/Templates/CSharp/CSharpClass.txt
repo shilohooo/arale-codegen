@@ -1,4 +1,8 @@
-﻿namespace Arale.CodeGen;
+﻿{{~ for import_statement in model.import_statements ~}}
+{{ import_statement }}
+{{~ end ~}}
+
+namespace Arale.CodeGen;
 
 /// <summary>
 /// {{ model.comment }} Class

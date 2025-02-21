@@ -14,12 +14,15 @@ structure, or write the corresponding DTO code based on the structure of the JSO
 
 ## 🚀 Features
 
-- [Read the SQL DDL](https://shiloh595.top/arale-codegen-ui/#/sql-convert/sql-to-entity) / JSON to generate entity of ORM / persistence framework, such
+- [Read the SQL DDL](https://shiloh595.top/arale-codegen-ui/#/sql-convert/sql-to-entity) / JSON to generate entity of
+  ORM / persistence framework, such
   as [Hibernate](https://hibernate.org/orm/), [Entity Framework Core](https://docs.microsoft.com/ef/),
   [SqlSugar](https://www.donet5.com/home/doc), [MyBatisPlus](https://baomidou.com/)
-- [Read the SQL DDL](https://shiloh595.top/arale-codegen-ui/#/sql-convert/sql-to-class) / JSON to generate class, record, struct
+- [Read the SQL DDL](https://shiloh595.top/arale-codegen-ui/#/sql-convert/sql-to-class) / JSON to generate class,
+  record, struct
   for [Java](https://openjdk.org/), [C#](https://learn.microsoft.com/en-us/dotnet/csharp/).
-- Read the SQL DDL / [JSON](https://shiloh595.top/arale-codegen-ui/#/json-convert/json-to-ts) to generate type / interface for [TypeScript](https://www.typescriptlang.org/).
+- Read the SQL DDL / [JSON](https://shiloh595.top/arale-codegen-ui/#/json-convert/json-to-ts) to generate type /
+  interface for [TypeScript](https://www.typescriptlang.org/).
 - Read the SQL DDL / JSON to generate object for [JavaScript](https://developer.mozilla.org/en-US/docs/Web/JavaScript).
 - JSON object field naming style conversion (camelCase, snake_case, PascalCase, kebab-case).
 
@@ -39,15 +42,16 @@ The logo has been designed by [Free Logo Design](https://www.freelogodesign.org/
 
 ### Backend
 
-| Name                   | Version       | Documentation                                                        | Remark              |
-|------------------------|---------------|----------------------------------------------------------------------|---------------------|
-| C#                     | 12            | <https://learn.microsoft.com/en-us/dotnet/csharp/>                   | Language            |
-| SqlParser-cs           | 0.6.2         | <https://github.com/TylerBrinks/SqlParser-cs>                        | SQL Parser          |
-| Scriban                | 5.12.1        | <https://github.com/scriban/scriban>                                 | Template Engine     |
-| Pluralize.NET          | 1.0.2         | <https://github.com/sarathkcm/Pluralize.NET>                         |                     |
-| ASP.NET Core (Web API) | .NET 8.0      | <https://learn.microsoft.com/en-us/aspnet/core/?view=aspnetcore-8.0> | Web Framework       |
-| Humanizr               | 3.0.0-beta.54 | <https://github.com/Humanizr/Humanizer>                              | Change naming style |
-| xUnit.net              | 2.5.3         | <https://xunit.net/>                                                 | Unit Tests          |
+| Name                   | Version       | Documentation                                                        | Remark                   |
+|------------------------|---------------|----------------------------------------------------------------------|--------------------------|
+| C#                     | 12            | <https://learn.microsoft.com/en-us/dotnet/csharp/>                   | Language                 |
+| SqlParser-cs           | 0.6.2         | <https://github.com/TylerBrinks/SqlParser-cs>                        | SQL Parser               |
+| Scriban                | 5.12.1        | <https://github.com/scriban/scriban>                                 | Template Engine          |
+| Pluralize.NET          | 1.0.2         | <https://github.com/sarathkcm/Pluralize.NET>                         |                          |
+| ASP.NET Core (Web API) | .NET 8.0      | <https://learn.microsoft.com/en-us/aspnet/core/?view=aspnetcore-8.0> | Web Framework            |
+| Npgsql                 | 9.0.2         | <https://www.npgsql.org/>                                            | PostgreSQL Data Provider |
+| Humanizr               | 3.0.0-beta.54 | <https://github.com/Humanizr/Humanizer>                              | Change naming style      |
+| xUnit.net              | 2.5.3         | <https://xunit.net/>                                                 | Unit Tests               |
 
 ### Frontend
 

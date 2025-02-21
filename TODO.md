@@ -5,33 +5,33 @@
 - [ ] SQL DDL to c# class
   - [x] SQL Server
   - [x] MySQL
-  - [ ] PostgreSQL
+  - [x] PostgreSQL
   - [ ] SQLite
 - [ ] SQL DDL to java class
   - [x] SQL Server
   - [x] MySQL
-  - [ ] PostgreSQL
+  - [x] PostgreSQL
   - [ ] SQLite
 - [ ] SQL DDL to ORM entity
   - [ ] SQL DDL to SqlSugar Entity
     - [x] SQL Server
     - [x] MySQL
-    - [ ] PostgreSQL
+    - [x] PostgreSQL
     - [ ] SQLite
   - [ ] SQL DDL to EF Core Entity
     - [x] SQL Server
     - [x] MySQL
-    - [ ] PostgreSQL
+    - [x] PostgreSQL
     - [ ] SQLite
   - [ ] SQL DDL to MyBatisPlus Entity
     - [x] SQL Server
     - [x] MySQL
-    - [ ] PostgreSQL
+    - [x] PostgreSQL
     - [ ] SQLite
   - [ ] SQL DDL to Hibernate (Jakarta JPA) Entity
     - [x] SQL Server
     - [x] MySQL
-    - [ ] PostgreSQL
+    - [x] PostgreSQL
     - [ ] SQLite
 - [ ] SQL DDL to java record
 - [ ] SQL DDL to c# record

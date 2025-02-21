@@ -1,4 +1,7 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿{{~ for import_statement in model.import_statements ~}}
+{{ import_statement }}
+{{~ end ~}}
+using Microsoft.EntityFrameworkCore;
 
 namespace Arale.CodeGen;
 

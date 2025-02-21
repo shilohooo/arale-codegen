@@ -18,27 +18,22 @@ public static class FieldTypeHelper
     /// <returns>field type</returns>
     public static FieldType GetCSharpPropertyType(DataType columnType)
     {
-        try
+        if (columnType is not DataType.Custom &&
+            CSharPropertyTypeMapping.ColumnPropertyTypeMapping.TryGetValue(columnType.GetType(),
+                out var mappedFiledType))
         {
-            if (columnType is not DataType.Custom)
-                return CSharPropertyTypeMapping.ColumnPropertyTypeMapping[columnType.GetType()];
-
-            // handle custom column type
-            var fieldType = CSharPropertyTypeMapping.CustomColumnPropertyTypeMapping.Where(a =>
-                    columnType.ToSql().Contains(a.Key, StringComparison.CurrentCultureIgnoreCase))
-                .Select(a => a.Value)
-                .FirstOrDefault();
-            if (fieldType is not null) return fieldType;
-
-            Console.WriteLine($"Custom column type: {columnType} - {columnType.ToSql()}");
-            return FieldType.Of("object");
+            return mappedFiledType;
         }
-        catch (KeyNotFoundException)
+
+        // handle custom column type
+        if (CSharPropertyTypeMapping.CustomColumnPropertyTypeMapping.TryGetValue(columnType.ToSql().ToLower(),
+                out var fieldType))
         {
-            // unknown / unsupported type?
-            Console.WriteLine($"Unknown / unsupported type: {columnType} - {columnType.ToSql()}");
-            return FieldType.Of("object");
+            return fieldType;
         }
+
+        Console.WriteLine($"Not Custom column type or not mapped column type: {columnType} - {columnType.ToSql()}");
+        return FieldType.Of("object");
     }
 
     /// <summary>
@@ -58,26 +53,19 @@ public static class FieldTypeHelper
     /// <returns>field type</returns>
     public static FieldType GetJavaFieldType(DataType columnType)
     {
-        try
+        if (columnType is not DataType.Custom &&
+            JavaFieldTypeMapping.ColumnFieldTypeMapping.TryGetValue(columnType.GetType(), out var mappedFieldType))
         {
-            if (columnType is not DataType.Custom)
-                return JavaFieldTypeMapping.ColumnFieldTypeMapping[columnType.GetType()];
-
-            // handle custom column type
-            var fieldType = JavaFieldTypeMapping.CustomColumnPropertyTypeMapping.Where(a =>
-                    columnType.ToSql().Contains(a.Key, StringComparison.CurrentCultureIgnoreCase))
-                .Select(a => a.Value)
-                .FirstOrDefault();
-            if (fieldType is not null) return fieldType;
-
-            Console.WriteLine($"Custom column type: {columnType} - {columnType.ToSql()}");
-            return FieldType.Of("Object");
+            return mappedFieldType;
         }
-        catch (KeyNotFoundException)
+
+        // handle custom column type
+        if (JavaFieldTypeMapping.CustomColumnPropertyTypeMapping.TryGetValue(columnType.ToSql().ToLower(), out var fieldType))
         {
-            // unknown / unsupported type?
-            Console.WriteLine($"Unknown / unsupported type: {columnType} - {columnType.ToSql()}");
-            return FieldType.Of("Object");
+            return fieldType;
         }
+
+        Console.WriteLine($"Not Custom column type or not mapped column type: {columnType} - {columnType.ToSql()}");
+        return FieldType.Of("Object");
     }
 }
