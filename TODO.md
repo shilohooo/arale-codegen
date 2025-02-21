@@ -2,37 +2,37 @@
 
 ## SQL Convert
 
-- [ ] SQL DDL to c# class
+- [x] SQL DDL to c# class
   - [x] SQL Server
   - [x] MySQL
   - [x] PostgreSQL
-  - [ ] SQLite
-- [ ] SQL DDL to java class
+  - [x] SQLite
+- [x] SQL DDL to java class
   - [x] SQL Server
   - [x] MySQL
   - [x] PostgreSQL
-  - [ ] SQLite
-- [ ] SQL DDL to ORM entity
-  - [ ] SQL DDL to SqlSugar Entity
+  - [x] SQLite
+- [x] SQL DDL to ORM entity
+  - [x] SQL DDL to SqlSugar Entity
     - [x] SQL Server
     - [x] MySQL
     - [x] PostgreSQL
-    - [ ] SQLite
-  - [ ] SQL DDL to EF Core Entity
+    - [x] SQLite
+  - [x] SQL DDL to EF Core Entity
     - [x] SQL Server
     - [x] MySQL
     - [x] PostgreSQL
-    - [ ] SQLite
-  - [ ] SQL DDL to MyBatisPlus Entity
+    - [x] SQLite
+  - [x] SQL DDL to MyBatisPlus Entity
     - [x] SQL Server
     - [x] MySQL
     - [x] PostgreSQL
-    - [ ] SQLite
-  - [ ] SQL DDL to Hibernate (Jakarta JPA) Entity
+    - [x] SQLite
+  - [x] SQL DDL to Hibernate (Jakarta JPA) Entity
     - [x] SQL Server
     - [x] MySQL
     - [x] PostgreSQL
-    - [ ] SQLite
+    - [x] SQLite
 - [ ] SQL DDL to java record
 - [ ] SQL DDL to c# record
 - [ ] SQL DDL to c# struct
