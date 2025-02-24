@@ -1,4 +1,6 @@
-﻿package io.arale.codegen;
+﻿{{~ if model.namespace ~}}
+package {{ model.namespace }};
+{{~ end ~}}
 
 {{~ for import_statement in model.import_statements ~}}
 {{ import_statement }}
@@ -17,22 +19,22 @@ import lombok.*;
 @Setter
 @Getter
 @Entity
-@Table(name = "{{ model.table_name }}")
+@Table(name = "{{ model.name }}")
 @Comment("{{ model.comment }}")
 @ToString(callSuper = true)
 public class {{ model.class_name }} extends BaseEntity {
-{{ for column in model.columns }}
+{{ for property in model.properties }}
     /**
-     * {{ column.comment }}
+     * {{ property.comment }}
      */
-    {{~ if column.is_primary_key ~}}
+    {{~ if property.is_primary_key ~}}
     @Id
     {{~ end ~}}
-    @Column(name = "{{ column.name }}", columnDefinition = "{{ column.col_type }}{{~ if column.mandatory }} not null{{~ end ~}}")
-    @Comment("{{ column.comment }}")
-    {{~ if column.is_big_int_type ~}}
+    @Column(name = "{{ property.name }}", columnDefinition = "{{ property.col_type }}{{~ if property.mandatory }} not null{{~ end ~}}")
+    @Comment("{{ property.comment }}")
+    {{~ if property.is_big_int_type ~}}
     @JsonSerialize(using = ToStringSerializer.class)
     {{~ end ~}}
-    private {{ column.field_type.type_name }} {{ column.field_name }};
+    private {{ property.field_type.type_name }} {{ property.field_name }};
 {{ end }}
 }

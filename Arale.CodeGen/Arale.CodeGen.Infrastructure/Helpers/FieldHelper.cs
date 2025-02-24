@@ -1,4 +1,5 @@
-﻿using Arale.CodeGen.Commons.Constants;
+﻿using System.Text.Json.Nodes;
+using Arale.CodeGen.Commons.Constants;
 using Arale.CodeGen.Commons.Exceptions;
 using Arale.CodeGen.Models.Entity;
 using Humanizer;
@@ -44,6 +45,25 @@ public static class FieldHelper
                 .GetCSharpPropertyType(dataType),
             TargetType.JavaClass or TargetType.MyBatisPlusEntity or TargetType.HibernateEntity => FieldTypeHelper
                 .GetJavaFieldType(dataType),
+            _ => throw new UnsupportedTargetTypeException(targetType)
+        };
+    }
+
+    /// <summary>
+    ///     Get field / property type
+    /// </summary>
+    /// <param name="jsonKv">json key value pari</param>
+    /// <param name="targetType">generate target type</param>
+    /// <returns>field / property type</returns>
+    /// <exception cref="UnsupportedTargetTypeException">if target type is not supported</exception>
+    public static FieldType GetFieldType(KeyValuePair<string, JsonNode?> jsonKv, TargetType targetType)
+    {
+        return targetType switch
+        {
+            TargetType.CSharpClass or TargetType.SqlSugarEntity or TargetType.EFCoreEntity => FieldTypeHelper
+                .GetCSharpPropertyType(jsonKv),
+            TargetType.JavaClass or TargetType.MyBatisPlusEntity or TargetType.HibernateEntity => FieldTypeHelper
+                .GetJavaFieldType(jsonKv),
             _ => throw new UnsupportedTargetTypeException(targetType)
         };
     }

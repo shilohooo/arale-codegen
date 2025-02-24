@@ -1,20 +1,21 @@
 ﻿{{~ for import_statement in model.import_statements ~}}
 {{ import_statement }}
 {{~ end ~}}
-
-namespace Arale.CodeGen;
+{{~ if model.namespace ~}}
+namespace {{ model.namespace }};
+{{~ end ~}}
 
 /// <summary>
 /// {{ model.comment }} Entity
 /// </summary>
-[SugarTable("{{ model.table_name }}", "{{ model.comment }}")]
+[SugarTable("{{ model.name }}", "{{ model.comment }}")]
 public class {{ model.class_name }}
 {
-{{ for column in model.columns }}
+{{ for property in model.properties }}
     /// <summary>
-    /// {{ column.comment }}
+    /// {{ property.comment }}
     /// </summary>
-    [SugarColumn(ColumnName = "{{ column.name }}", {{ if column.is_primary_key }}IsPrimaryKey = true, {{ end }}{{ if column.mandatory }}IsNullable = false, {{ end }}ColumnDescription = "{{ column.comment }}")]
-    public {{ column.field_type.type_name }}{{ if !column.mandatory }}?{{ end }} {{ column.field_name }} { get; set; }
+    [SugarColumn(ColumnName = "{{ property.name }}", {{ if property.is_primary_key }}IsPrimaryKey = true, {{ end }}{{ if property.mandatory }}IsNullable = false, {{ end }}ColumnDescription = "{{ property.comment }}")]
+    public {{ property.field_type.type_name }}{{ if !property.mandatory }}?{{ end }} {{ property.field_name }} { get; set; }
 {{ end }}
 }

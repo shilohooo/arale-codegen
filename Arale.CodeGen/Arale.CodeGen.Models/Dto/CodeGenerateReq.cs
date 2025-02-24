@@ -7,7 +7,7 @@ namespace Arale.CodeGen.Models.Dto;
 /// <summary>
 ///     Code generate request params
 /// </summary>
-public class CodeGenerateBySqlReq
+public class CodeGenerateReq
 {
     /// <summary>
     ///     SQL / JSON code to convert
@@ -19,13 +19,13 @@ public class CodeGenerateBySqlReq
     /// <summary>
     ///     Database type
     /// </summary>
-    [EnumCheck(typeof(DbType), ErrorMessage = "Unsupported dbType")]
+    [EnumCheck(typeof(DbType), false, ErrorMessage = "Unsupported dbType")]
     public DbType DbType { get; set; }
 
     /// <summary>
     ///     Generate target type
     /// </summary>
-    [EnumCheck(typeof(TargetType), ErrorMessage = "Unsupported targetType")]
+    [EnumCheck(typeof(TargetType), false, ErrorMessage = "Unsupported targetType")]
     public TargetType TargetType { get; set; }
 
     /// <summary>

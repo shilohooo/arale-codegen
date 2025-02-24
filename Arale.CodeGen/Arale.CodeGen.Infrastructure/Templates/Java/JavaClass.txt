@@ -1,4 +1,6 @@
-﻿package io.arale.codegen;
+﻿{{~ if model.namespace ~}}
+package {{ model.namespace }};
+{{~ end ~}}
 
 {{~ for import_statement in model.import_statements ~}}
 {{ import_statement }}
@@ -12,10 +14,10 @@ import lombok.*;
 @Getter
 @ToString
 public class {{ model.class_name }} {
-{{ for column in model.columns }}
+{{ for property in model.properties }}
     /**
-     * {{ column.comment }}
+     * {{ property.comment }}
      */
-    private {{ column.field_type.type_name }} {{ column.field_name }};
+    private {{ property.field_type.type_name }} {{ property.field_name }};
 {{ end }}
 }

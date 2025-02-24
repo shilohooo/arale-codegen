@@ -27,4 +27,4 @@ export const JSON_OBJECT_TEST_STR = `
     }
   ]
 }
-`
+`.trim()

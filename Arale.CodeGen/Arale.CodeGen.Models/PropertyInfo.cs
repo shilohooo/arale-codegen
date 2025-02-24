@@ -1,31 +1,34 @@
 ﻿using Arale.CodeGen.Models.Entity;
 
-namespace Arale.CodeGen.Models.Db;
+namespace Arale.CodeGen.Models;
 
 /// <summary>
-///     Table column info
+///     Property info
+///     <remarks>
+///         representation of a property / field / column...
+///     </remarks>
 /// </summary>
-public class ColumnInfo
+public class PropertyInfo
 {
     /// <summary>
-    ///     Column name
+    ///     Name
     /// </summary>
     public string? Name { get; set; }
 
     /// <summary>
-    ///     Column type
-    /// </summary>
-    public string ColType { get; set; }
-
-    /// <summary>
-    ///     field / property name
+    ///     Field (Java) / property (C#) name
     /// </summary>
     public string? FieldName { get; set; }
 
     /// <summary>
-    ///     field /property type
+    ///     Field (Java) / property (C#) name
     /// </summary>
     public FieldType? FieldType { get; set; }
+
+    /// <summary>
+    ///     Type
+    /// </summary>
+    public string? ColType { get; set; }
 
     /// <summary>
     ///     Column length
@@ -38,7 +41,7 @@ public class ColumnInfo
     public bool IsPrimaryKey { get; set; }
 
     /// <summary>
-    ///     Column mandatory flag for c# nullable type
+    ///     Mandatory flag for c# nullable type
     /// </summary>
     public bool Mandatory { get; set; }
 
@@ -48,7 +51,7 @@ public class ColumnInfo
     public string? Comment { get; set; }
 
     /// <summary>
-    ///     column type is bigint?
+    ///     Column type is bigint?
     /// </summary>
     public bool IsBigIntType => "long".Equals(FieldType?.TypeName, StringComparison.CurrentCultureIgnoreCase);
 
@@ -56,6 +59,6 @@ public class ColumnInfo
     public override string ToString()
     {
         return
-            $"{nameof(Name)}: {Name}, {nameof(ColType)}: {ColType}, {nameof(FieldType)}: {FieldType}, {nameof(Length)}: {Length}, {nameof(IsPrimaryKey)}: {IsPrimaryKey}, {nameof(Mandatory)}: {Mandatory}, {nameof(Comment)}: {Comment}";
+            $"{nameof(Name)}: {Name}, {nameof(ColType)}: {ColType}, {nameof(FieldType)}: {FieldType?.TypeName}, {nameof(Length)}: {Length}, {nameof(IsPrimaryKey)}: {IsPrimaryKey}, {nameof(Mandatory)}: {Mandatory}, {nameof(Comment)}: {Comment}";
     }
 }

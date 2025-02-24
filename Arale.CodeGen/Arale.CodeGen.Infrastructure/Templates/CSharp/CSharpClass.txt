@@ -1,18 +1,19 @@
 ﻿{{~ for import_statement in model.import_statements ~}}
 {{ import_statement }}
 {{~ end ~}}
-
-namespace Arale.CodeGen;
+{{~ if model.namespace ~}}
+namespace {{ model.namespace }};
+{{~ end ~}}
 
 /// <summary>
 /// {{ model.comment }} Class
 /// </summary>
 public class {{ model.class_name }}
 {
-{{ for column in model.columns }}
+{{ for property in model.properties }}
     /// <summary>
-    /// {{ column.comment }}
+    /// {{ property.comment }}
     /// </summary>
-    public {{ column.field_type.type_name }}{{ if !column.mandatory }}?{{ end }} {{ column.field_name }} { get; set; }
+    public {{ property.field_type.type_name }}{{ if !property.mandatory }}?{{ end }} {{ property.field_name }} { get; set; }
 {{ end }}
 }

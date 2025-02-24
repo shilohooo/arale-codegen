@@ -1,31 +1,14 @@
 <!--
-  * SQL DDL Code convert component
+  * Convert JSON to Class
   * @author shiloh
-  * @date 2025/2/5 9:01
+  * @date 2025/2/24 22:57
 -->
 <template>
   <div class="row q-gutter-x-md">
     <!--region source-->
     <div class="col">
       <div class="row items-center q-gutter-x-md justify-between q-mb-md">
-        <div class="col">
-          <q-select
-            v-model="reqData.dbType"
-            :options="DB_TYPE_OPTIONS"
-            @update:model-value="handleGenerateTargetCode"
-            label="Database type"
-            map-options
-            emit-value
-          />
-        </div>
-        <div class="col">
-          <q-input
-            v-model.trim="reqData.tableNamePrefix"
-            placeholder="Input the table name prefix..."
-            label="Table name prefix"
-            @update:model-value="handleSrcCodeChange"
-          />
-        </div>
+        <div class="col">JSON</div>
         <div class="col text-right">
           <q-btn
             :disable="!reqData.code"
@@ -38,7 +21,7 @@
           />
         </div>
       </div>
-      <code-editor v-model="reqData.code" language="sql" @change="handleSrcCodeChange" />
+      <code-editor v-model="reqData.code" language="json" @change="handleSrcCodeChange" />
     </div>
     <!--endregion-->
 
@@ -50,7 +33,7 @@
         <div class="col-lg-10 col-md-8 col-sm-6">
           <q-select
             v-model="reqData.targetType"
-            :options="targetTypeOptions"
+            :options="CLASS_CODE_TARGET_TYPE_OPTIONS"
             @update:model-value="handleGenerateTargetCode"
             label="Convert target type"
             map-options
@@ -77,32 +60,19 @@
 
 <script setup lang="ts">
 import CodeEditor from 'components/CodeEditor.vue'
-import type { QSelectOption } from 'quasar'
-import { debounce } from 'quasar'
-import { generateCodeBySql } from 'src/api/code-generate-api'
-import { DB_TYPE_OPTIONS, TARGET_TYPE_LANGUAGE_MAPPING } from 'src/constant'
-import type { TargetType } from 'src/enums'
-import { DbType } from 'src/enums'
-import type { CodeGenerateReq } from 'src/api/models/code-generate-models'
+import { debounce, useQuasar } from 'quasar'
 import { useClipboard } from 'src/hooks/useClipboard'
-
-const props = withDefaults(
-  defineProps<{
-    sourceCode: string
-    targetTypeOptions: QSelectOption<TargetType>[]
-    defaultSelectedTargetType: TargetType
-  }>(),
-  {
-    sourceCode: () => '',
-    targetTypeOptions: () => [],
-  },
-)
+import { JSON_OBJECT_TEST_STR } from 'src/constant/data/json-examples'
+import { DbType, TargetType } from 'src/enums'
+import type { CodeGenerateReq } from 'src/api/models/code-generate-models'
+import { CLASS_CODE_TARGET_TYPE_OPTIONS, TARGET_TYPE_LANGUAGE_MAPPING } from 'src/constant'
+import { generateCodeByJson } from 'src/api/code-generate-api'
 
 const targetCode = ref<string>('')
 const reqData = ref<CodeGenerateReq>({
-  code: props.sourceCode,
+  code: '',
   dbType: DbType.SQLServer,
-  targetType: props.defaultSelectedTargetType,
+  targetType: TargetType.CSharpClass,
   tableNamePrefix: 'T_',
 })
 const targetLanguage = computed(() => TARGET_TYPE_LANGUAGE_MAPPING[reqData.value.targetType])
@@ -110,7 +80,7 @@ const targetLanguage = computed(() => TARGET_TYPE_LANGUAGE_MAPPING[reqData.value
 /**
  * Clear source code
  * @author shiloh
- * @date 2025/2/5 11:13
+ * @date 2025/2/24 23:00
  */
 function handleClearSrcCode() {
   reqData.value.code = ''
@@ -120,29 +90,48 @@ function handleClearSrcCode() {
 /**
  * Source code changed callback - regenerate target code after 1s
  * @author shiloh
- * @date 2025/2/5 10:37
+ * @date 2025/2/24 23:00
  */
 const handleSrcCodeChange = debounce(async () => {
   await handleGenerateTargetCode()
 }, 500)
 
+const $q = useQuasar()
+
 /**
  * Generate target code
  * @author shiloh
- * @date 2025/2/5 10:37
+ * @date 2025/2/24 23:00
  */
 async function handleGenerateTargetCode() {
   if (!reqData.value.code) {
     return
   }
 
-  const res = await generateCodeBySql(reqData.value)
-  targetCode.value = res.replace(/\\n/g, '\n').trim()
+  try {
+    targetCode.value = await generateCodeByJson(reqData.value)
+  } catch (e) {
+    $q.notify({
+      color: 'negative',
+      position: 'top',
+      icon: 'error',
+      message: (e as Error).message,
+    })
+    console.error(e)
+  }
 }
 
 // region copy
 
 const { copy } = useClipboard()
+
+// endregion
+
+// region mounted
+
+onMounted(() => {
+  reqData.value.code = JSON_OBJECT_TEST_STR
+})
 
 // endregion
 </script>

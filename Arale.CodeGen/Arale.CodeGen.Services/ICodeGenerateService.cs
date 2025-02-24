@@ -1,23 +1,23 @@
 ﻿using Arale.CodeGen.Models.Dto;
 
-namespace Arale.CodeGen.Infrastructure.Generators;
+namespace Arale.CodeGen.Services;
 
 /// <summary>
-///     Generator
+///     Code generate service
 /// </summary>
-public interface ICodeGenerator
+public interface ICodeGenerateService
 {
     /// <summary>
     ///     Generate code by SQL DDL
     /// </summary>
     /// <param name="codeGenerateReq">request params</param>
-    /// <returns>code string</returns>
+    /// <returns>target code</returns>
     Task<string> GenerateBySql(CodeGenerateReq codeGenerateReq);
 
     /// <summary>
     ///     Generate code by JSON object or array
     /// </summary>
-    /// <param name="codeGenerateReq">request params</param>
-    /// <returns>code string</returns>
-    Task<string> GenerateByJson(CodeGenerateReq codeGenerateReq);
+    /// <param name="generateReq">request params</param>
+    /// <returns>target code</returns>
+    Task<string> GenerateByJson(CodeGenerateReq generateReq);
 }

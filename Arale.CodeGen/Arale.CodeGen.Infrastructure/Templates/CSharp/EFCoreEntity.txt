@@ -3,24 +3,26 @@
 {{~ end ~}}
 using Microsoft.EntityFrameworkCore;
 
-namespace Arale.CodeGen;
+{{~ if model.namespace ~}}
+namespace {{ model.namespace }};
+{{~ end ~}}
 
 /// <summary>
 /// {{ model.comment }} Entity
 /// </summary>
-[Table("{{ model.table_name }}")]
+[Table("{{ model.name }}")]
 [Comment("{{ model.comment }}")]
 public class {{ model.class_name }}
 {
-{{ for column in model.columns }}
+{{ for property in model.properties }}
     /// <summary>
-    /// {{ column.comment }}
+    /// {{ property.comment }}
     /// </summary>
-    {{~ if column.is_primary_key ~}}
+    {{~ if property.is_primary_key ~}}
     [Key]
     {{~ end ~}}
-    [Column("{{ column.name }}", TypeName = "{{ column.col_type }}")]
-    [Comment("{{ column.comment }}")]
-    public {{ column.field_type.type_name }}{{ if !column.mandatory }}?{{ end }} {{ column.field_name }} { get; set; }
+    [Column("{{ property.name }}", TypeName = "{{ property.col_type }}")]
+    [Comment("{{ property.comment }}")]
+    public {{ property.field_type.type_name }}{{ if !property.mandatory }}?{{ end }} {{ property.field_name }} { get; set; }
 {{ end }}
 }

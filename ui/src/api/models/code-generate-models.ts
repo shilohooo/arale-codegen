@@ -3,11 +3,11 @@
  * @author shiloh
  * @date 2025/2/5 10:16
  */
-import type { TargetType } from 'src/enums';
+import type { TargetType } from 'src/enums'
 import { type DbType } from 'src/enums'
 
-// class code generate request params
-export interface ClassCodeGenerateReq {
+// code generate request params
+export interface CodeGenerateReq {
   code: string
   dbType: DbType
   targetType: TargetType

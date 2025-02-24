@@ -121,7 +121,8 @@ public static class CSharPropertyTypeMapping
         .Create<JsonValueKind, FieldType>()
         .Add(JsonValueKind.String, FieldType.Of(nameof(String).ToLower()))
         .Add(JsonValueKind.True, FieldType.Of(CSharpBooleanPrimitiveName))
-        .Add(JsonValueKind.False, FieldType.Of(CSharpBooleanPrimitiveName));
+        .Add(JsonValueKind.False, FieldType.Of(CSharpBooleanPrimitiveName))
+        .Add(JsonValueKind.Null, FieldType.Of("object?"));
 }
 
 /// <summary>
@@ -129,12 +130,14 @@ public static class CSharPropertyTypeMapping
 /// </summary>
 public static class JavaFieldTypeMapping
 {
+    public const string JavaDateClassName = "Date";
+    public const string JavaDateClassImportStatement = "import java.util.Date;";
+
+    private const string JavaBooleanClassName = "Boolean";
     private const string JavaByteArrayClassName = "Byte[]";
     private const string JavaShortClassName = "Short";
     private const string JavaIntegerClassName = "Integer";
     private const string JavaDoubleClassName = "Double";
-    private const string JavaDateClassName = "Date";
-    private const string JavaDateClassImportStatement = "import java.util.Date;";
     private const string JavaBigDecimalClassName = "BigDecimal";
     private const string JavaBigDecimalClassImportStatement = "import java.math.BigDecimal;";
 
@@ -175,7 +178,7 @@ public static class JavaFieldTypeMapping
     /// </summary>
     public static readonly ImmutableDictionary<string, FieldType> CustomColumnPropertyTypeMapping = ImmutableDictionary
         .Create<string, FieldType>()
-        .Add("bit(1)", FieldType.Of("Boolean"))
+        .Add("bit(1)", FieldType.Of(JavaBooleanClassName))
         .Add("bit(8)", FieldType.Of("Byte"))
 
         #region Custom column type of MySQL
@@ -224,4 +227,14 @@ public static class JavaFieldTypeMapping
         .Add("text[]", FieldType.Of($"{nameof(String)}[]"));
 
     #endregion
+
+    /// <summary>
+    ///     Json property type & java field type mapping
+    /// </summary>
+    public static readonly ImmutableDictionary<JsonValueKind, FieldType> JsonPropertyTypeMapping = ImmutableDictionary
+        .Create<JsonValueKind, FieldType>()
+        .Add(JsonValueKind.String, FieldType.Of(nameof(String)))
+        .Add(JsonValueKind.True, FieldType.Of(JavaBooleanClassName))
+        .Add(JsonValueKind.False, FieldType.Of(JavaBooleanClassName))
+        .Add(JsonValueKind.Null, FieldType.Of("Object"));
 }
