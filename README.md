@@ -18,7 +18,7 @@ structure, or write the corresponding DTO code based on the structure of the JSO
   ORM / persistence framework, such
   as [Hibernate](https://hibernate.org/orm/), [Entity Framework Core](https://docs.microsoft.com/ef/),
   [SqlSugar](https://www.donet5.com/home/doc), [MyBatisPlus](https://baomidou.com/)
-- [Read the SQL DDL](https://shiloh595.top/arale-codegen-ui/#/sql-convert/sql-to-class) / JSON to generate class,
+- [Read the SQL DDL](https://shiloh595.top/arale-codegen-ui/#/sql-convert/sql-to-class) / [JSON](https://shiloh595.top/arale-codegen-ui/#/json-convert/json-to-class) to generate class,
   record, struct
   for [Java](https://openjdk.org/), [C#](https://learn.microsoft.com/en-us/dotnet/csharp/).
 - Read the [JSON](https://shiloh595.top/arale-codegen-ui/#/json-convert/json-to-ts) to generate type /
