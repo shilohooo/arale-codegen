@@ -39,8 +39,8 @@
 
 ## JSON Convert
 
-- [ ] JSON to java class
-- [ ] JSON to c# class
+- [x] JSON to java class
+- [x] JSON to c# class
 - [ ] JSON to java record
 - [ ] JSON to c# record
 - [ ] JSON to c# struct
