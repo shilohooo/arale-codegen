@@ -1,9 +1,8 @@
 ﻿{{~ for import_statement in model.import_statements ~}}
 {{ import_statement }}
 {{~ end ~}}
-{{~ if model.namespace ~}}
-namespace {{ model.namespace }};
-{{~ end ~}}
+
+namespace Arale.CodeGen;
 
 /// <summary>
 /// {{ model.comment }} Class
@@ -17,3 +16,18 @@ public class {{ model.class_name }}
     public {{ property.field_type.type_name }}{{ if !property.mandatory }}?{{ end }} {{ property.field_name }} { get; set; }
 {{ end }}
 }
+
+{{ for nested_model in model.nested_models }}
+/// <summary>
+/// {{ nested_model.comment }} Class
+/// </summary>
+public class {{ nested_model.class_name }}
+{
+{{ for property in nested_model.properties }}
+    /// <summary>
+    /// {{ property.comment }}
+    /// </summary>
+    public {{ property.field_type.type_name }}{{ if !property.mandatory }}?{{ end }} {{ property.field_name }} { get; set; }
+{{ end }}
+}
+{{ end }}

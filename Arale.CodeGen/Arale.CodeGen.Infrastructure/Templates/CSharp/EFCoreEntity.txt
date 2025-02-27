@@ -3,9 +3,7 @@
 {{~ end ~}}
 using Microsoft.EntityFrameworkCore;
 
-{{~ if model.namespace ~}}
-namespace {{ model.namespace }};
-{{~ end ~}}
+namespace Arale.CodeGen;
 
 /// <summary>
 /// {{ model.comment }} Entity

@@ -1,9 +1,8 @@
 ﻿{{~ for import_statement in model.import_statements ~}}
 {{ import_statement }}
 {{~ end ~}}
-{{~ if model.namespace ~}}
-namespace {{ model.namespace }};
-{{~ end ~}}
+
+namespace Arale.CodeGen;
 
 /// <summary>
 /// {{ model.comment }} Entity

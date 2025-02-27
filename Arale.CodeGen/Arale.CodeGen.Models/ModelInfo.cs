@@ -10,8 +10,7 @@ public class ModelInfo
 {
     public const string DefaultPackageName = "io.arale.codegen";
     public const string DefaultNamespace = "Arale.CodeGen";
-
-    private const string DefaultClassName = "Root";
+    public const string DefaultClassName = "RootClass";
 
     /// <summary>
     ///     Package (Java) name or namespace (C#)
@@ -53,6 +52,30 @@ public class ModelInfo
     ///     Import (Java) / using (C#) statements
     /// </summary>
     public HashSet<string> ImportStatements { get; set; } = [];
+
+    /// <summary>
+    ///     Nested models
+    /// </summary>
+    public List<ModelInfo> NestedModels { get; set; } = [];
+
+    /// <summary>
+    ///     Create import statements
+    /// </summary>
+    public void CreateImportStatements()
+    {
+        ImportStatements = Properties.Where(c =>
+                c.FieldType is not null && !string.IsNullOrWhiteSpace(c.FieldType?.ImportStatement))
+            .Select(c => c.FieldType!.ImportStatement!)
+            .ToHashSet();
+
+        NestedModels.ForEach(nestedModel =>
+        {
+            nestedModel.ImportStatements = nestedModel.Properties.Where(c =>
+                    c.FieldType is not null && !string.IsNullOrWhiteSpace(c.FieldType?.ImportStatement))
+                .Select(c => c.FieldType!.ImportStatement!)
+                .ToHashSet();
+        });
+    }
 
     /// <inheritdoc />
     public override string ToString()

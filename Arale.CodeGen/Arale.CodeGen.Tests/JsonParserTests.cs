@@ -1,8 +1,8 @@
 ﻿using System.Text.Json.Nodes;
 using Arale.CodeGen.Commons.Constants;
 using Arale.CodeGen.Infrastructure.Parsers;
+using Arale.CodeGen.Models;
 using Arale.CodeGen.Models.Dto;
-using Xunit.Abstractions;
 
 namespace Arale.CodeGen.Tests;
 
@@ -11,13 +11,6 @@ namespace Arale.CodeGen.Tests;
 /// </summary>
 public class JsonParserTests
 {
-    private readonly ITestOutputHelper _testOutputHelper;
-
-    public JsonParserTests(ITestOutputHelper testOutputHelper)
-    {
-        _testOutputHelper = testOutputHelper;
-    }
-
     [Fact]
     public void TestParse()
     {
@@ -94,31 +87,26 @@ public class JsonParserTests
                                  }
                                ]
                                """;
-        var jsonParser = new JsonParser(new CodeGenerateReq { Code = jsonStr, TargetType = TargetType.CSharpClass });
+        var jsonParser = new JsonParser(new CodeGenerateReq { Code = jsonStr, TargetType = TargetType.CSharpClass })
+        {
+            RootModel = new ModelInfo
+            {
+                Name = ModelInfo.DefaultClassName,
+                ClassName = ModelInfo.DefaultClassName,
+                Comment = ModelInfo.DefaultClassName
+            }
+        };
         var jsonObj = JsonNode.Parse(jsonStr) switch
         {
             JsonObject jsonObject => jsonObject,
             JsonArray jsonArray => jsonArray[0]!.AsObject(),
             _ => throw new ArgumentException("Invalid json string")
         };
-        jsonParser.Parse(jsonObj);
-        Assert.NotEmpty(jsonParser.Models);
-        foreach (var tableInfo in jsonParser.Models)
-        {
-            Assert.NotEmpty(tableInfo.Properties);
-
-            _testOutputHelper.WriteLine(tableInfo.ToString());
-
-            _testOutputHelper.WriteLine("====================== Columns start ======================");
-            foreach (var columnInfo in tableInfo.Properties) _testOutputHelper.WriteLine(columnInfo.ToString());
-            _testOutputHelper.WriteLine("====================== Columns end ======================");
-
-            if (tableInfo.ImportStatements.Count <= 0) continue;
-
-            _testOutputHelper.WriteLine("====================== ImportStatements start ======================");
-            foreach (var importStatement in tableInfo.ImportStatements)
-                _testOutputHelper.WriteLine(importStatement);
-            _testOutputHelper.WriteLine("====================== ImportStatements end ======================");
-        }
+        jsonParser.Parse(jsonObj, jsonParser.RootModel);
+        Assert.NotNull(jsonParser.RootModel);
+        Assert.NotEmpty(jsonParser.RootModel.Properties);
+        jsonParser.RootModel.CreateImportStatements();
+        Assert.NotEmpty(jsonParser.RootModel.NestedModels);
+        foreach (var nestedModel in jsonParser.RootModel.NestedModels) Assert.NotEmpty(nestedModel.Properties);
     }
 }

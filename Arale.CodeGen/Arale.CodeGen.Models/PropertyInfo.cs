@@ -59,6 +59,6 @@ public class PropertyInfo
     public override string ToString()
     {
         return
-            $"{nameof(Name)}: {Name}, {nameof(ColType)}: {ColType}, {nameof(FieldType)}: {FieldType?.TypeName}, {nameof(Length)}: {Length}, {nameof(IsPrimaryKey)}: {IsPrimaryKey}, {nameof(Mandatory)}: {Mandatory}, {nameof(Comment)}: {Comment}";
+            $"{nameof(Name)}: {Name}, {nameof(ColType)}: {ColType}, {nameof(FieldName)}: {FieldName}, {nameof(FieldType)}: {FieldType?.TypeName}, {nameof(Length)}: {Length}, {nameof(IsPrimaryKey)}: {IsPrimaryKey}, {nameof(Mandatory)}: {Mandatory}, {nameof(Comment)}: {Comment}";
     }
 }

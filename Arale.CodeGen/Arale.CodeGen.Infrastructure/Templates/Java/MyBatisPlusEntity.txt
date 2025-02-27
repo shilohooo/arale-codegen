@@ -1,6 +1,4 @@
-﻿{{~ if model.namespace ~}}
-package {{ model.namespace }};
-{{~ end ~}}
+﻿package io.arale.codegen;
 
 {{~ for import_statement in model.import_statements ~}}
 {{ import_statement }}

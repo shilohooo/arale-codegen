@@ -13,28 +13,25 @@ namespace Arale.CodeGen.Infrastructure.Parsers;
 /// </summary>
 public class JsonParser(CodeGenerateReq codeGenerateReq)
 {
-    private const string DefaultRootObjectName = "RootObject";
-
     /// <summary>
-    ///     table info list
+    ///     Root model
     /// </summary>
-    public List<ModelInfo> Models { get; set; } = [];
+    public ModelInfo RootModel { get; set; }
 
     /// <summary>
-    ///     Parse JSON object or array to table info
+    ///     Parse JSON object or array to model info
     /// </summary>
     /// <param name="jsonObject">json object</param>
-    /// <param name="className">class name</param>
-    public void Parse(JsonObject jsonObject, string className = DefaultRootObjectName)
+    /// <param name="modelInfo">model info</param>
+    public void Parse(JsonObject jsonObject, ModelInfo modelInfo)
     {
-        var model = new ModelInfo { ClassName = PluralizerHelper.Singularize(className), Comment = className };
-        Models.Add(model);
         foreach (var keyValuePair in jsonObject.AsEnumerable())
         {
             var fieldName = FieldHelper.GetFieldName(keyValuePair.Key, codeGenerateReq.TargetType);
             var fieldType = FieldHelper.GetFieldType(keyValuePair, codeGenerateReq.TargetType);
-            model.Properties.Add(new PropertyInfo
+            modelInfo.Properties.Add(new PropertyInfo
             {
+                Name = keyValuePair.Key,
                 FieldName = fieldName,
                 Comment = fieldName,
                 Mandatory = keyValuePair.Value is not null,
@@ -44,15 +41,33 @@ public class JsonParser(CodeGenerateReq codeGenerateReq)
             {
                 // nested object
                 case JsonObject:
-                    Parse(keyValuePair.Value.AsObject(), keyValuePair.Key.Pascalize());
+                {
+                    var nestedModel = new ModelInfo
+                    {
+                        Name = keyValuePair.Key,
+                        ClassName = keyValuePair.Key.Pascalize(),
+                        Comment = PluralizerHelper.Singularize(keyValuePair.Key.Pascalize())
+                    };
+                    RootModel.NestedModels.Add(nestedModel);
+                    Parse(keyValuePair.Value.AsObject(), nestedModel);
                     continue;
+                }
                 // nested array
                 case JsonArray:
                 {
                     // use first element to determine the type
                     var firstElement = keyValuePair.Value[0];
                     if (firstElement?.GetValueKind() is JsonValueKind.Object)
-                        Parse(firstElement.AsObject(), keyValuePair.Key.Pascalize());
+                    {
+                        var nestedModel = new ModelInfo
+                        {
+                            Name = keyValuePair.Key,
+                            ClassName = PluralizerHelper.Singularize(keyValuePair.Key.Pascalize()),
+                            Comment = PluralizerHelper.Singularize(keyValuePair.Key.Pascalize())
+                        };
+                        RootModel.NestedModels.Add(nestedModel);
+                        Parse(firstElement.AsObject(), nestedModel);
+                    }
 
                     continue;
                 }

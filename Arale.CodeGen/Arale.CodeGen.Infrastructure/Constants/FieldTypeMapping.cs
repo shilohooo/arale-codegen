@@ -1,7 +1,6 @@
 ﻿using System.Collections.Immutable;
 using System.Net;
 using System.Net.NetworkInformation;
-using System.Text.Json;
 using Arale.CodeGen.Models.Entity;
 using NpgsqlTypes;
 using SqlParser.Ast;
@@ -112,17 +111,6 @@ public static class CSharPropertyTypeMapping
         .Add("text[]", FieldType.Of($"{nameof(String).ToLower()}[]"));
 
     #endregion
-
-
-    /// <summary>
-    ///     Json property type & csharp property type mapping
-    /// </summary>
-    public static readonly ImmutableDictionary<JsonValueKind, FieldType> JsonPropertyTypeMapping = ImmutableDictionary
-        .Create<JsonValueKind, FieldType>()
-        .Add(JsonValueKind.String, FieldType.Of(nameof(String).ToLower()))
-        .Add(JsonValueKind.True, FieldType.Of(CSharpBooleanPrimitiveName))
-        .Add(JsonValueKind.False, FieldType.Of(CSharpBooleanPrimitiveName))
-        .Add(JsonValueKind.Null, FieldType.Of("object?"));
 }
 
 /// <summary>
@@ -130,14 +118,16 @@ public static class CSharPropertyTypeMapping
 /// </summary>
 public static class JavaFieldTypeMapping
 {
+    public const string JavObjectClassName = "Object";
+    public const string JavaBooleanClassName = "Boolean";
+    public const string JavaIntegerClassName = "Integer";
+    public const string JavaDoubleClassName = "Double";
     public const string JavaDateClassName = "Date";
     public const string JavaDateClassImportStatement = "import java.util.Date;";
+    public const string JavaListClassImportStatement = "import java.util.List;";
 
-    private const string JavaBooleanClassName = "Boolean";
     private const string JavaByteArrayClassName = "Byte[]";
     private const string JavaShortClassName = "Short";
-    private const string JavaIntegerClassName = "Integer";
-    private const string JavaDoubleClassName = "Double";
     private const string JavaBigDecimalClassName = "BigDecimal";
     private const string JavaBigDecimalClassImportStatement = "import java.math.BigDecimal;";
 
@@ -227,14 +217,4 @@ public static class JavaFieldTypeMapping
         .Add("text[]", FieldType.Of($"{nameof(String)}[]"));
 
     #endregion
-
-    /// <summary>
-    ///     Json property type & java field type mapping
-    /// </summary>
-    public static readonly ImmutableDictionary<JsonValueKind, FieldType> JsonPropertyTypeMapping = ImmutableDictionary
-        .Create<JsonValueKind, FieldType>()
-        .Add(JsonValueKind.String, FieldType.Of(nameof(String)))
-        .Add(JsonValueKind.True, FieldType.Of(JavaBooleanClassName))
-        .Add(JsonValueKind.False, FieldType.Of(JavaBooleanClassName))
-        .Add(JsonValueKind.Null, FieldType.Of("Object"));
 }

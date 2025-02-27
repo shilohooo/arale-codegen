@@ -49,15 +49,7 @@ public static class SqlParseHelper
         var model = new ModelInfo
         {
             Name = modelName,
-            ClassName = GetClassName(codeGenerateReq, modelName),
-            Namespace = codeGenerateReq.TargetType switch
-            {
-                TargetType.CSharpClass or TargetType.SqlSugarEntity or TargetType.EFCoreEntity =>
-                    ModelInfo.DefaultNamespace,
-                TargetType.JavaClass or TargetType.MyBatisPlusEntity or TargetType.HibernateEntity => ModelInfo
-                    .DefaultPackageName,
-                _ => null
-            }
+            ClassName = GetClassName(codeGenerateReq, modelName)
         };
         model.Comment = tableElement.Comment?.ToString() ?? $"{model.ClassName}";
         return model;
