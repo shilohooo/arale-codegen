@@ -18,6 +18,11 @@ public enum TemplateName
     [Description("CSharp/CSharpRecord")] CSharpRecord,
 
     /// <summary>
+    ///     C# struct template
+    /// </summary>
+    [Description("CSharp/CSharpStruct")] CSharpStruct,
+
+    /// <summary>
     ///     SqlSugar entity template
     /// </summary>
     [Description("CSharp/SqlSugarEntity")] SqlSugarEntity,

@@ -19,6 +19,7 @@ export const DB_TYPE_OPTIONS: QSelectOption<DbType>[] = [
 export const CLASS_CODE_TARGET_TYPE_OPTIONS: QSelectOption<TargetType>[] = [
   { label: TargetType[TargetType.CSharpClass], value: TargetType.CSharpClass },
   { label: TargetType[TargetType.CSharpRecord], value: TargetType.CSharpRecord },
+  { label: TargetType[TargetType.CSharpStruct], value: TargetType.CSharpStruct },
   { label: TargetType[TargetType.JavaClass], value: TargetType.JavaClass },
   { label: TargetType[TargetType.JavaRecord], value: TargetType.JavaRecord },
 ]
@@ -35,6 +36,7 @@ export const ENTITY_CODE_TARGET_TYPE_OPTIONS: QSelectOption<TargetType>[] = [
 export const TARGET_TYPE_LANGUAGE_MAPPING: Record<TargetType, EditorLanguage> = {
   [TargetType.CSharpClass]: 'csharp',
   [TargetType.CSharpRecord]: 'csharp',
+  [TargetType.CSharpStruct]: 'csharp',
   [TargetType.SqlSugarEntity]: 'csharp',
   [TargetType.EFCoreEntity]: 'csharp',
   [TargetType.JavaClass]: 'java',

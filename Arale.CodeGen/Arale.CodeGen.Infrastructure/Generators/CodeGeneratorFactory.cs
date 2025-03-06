@@ -19,6 +19,7 @@ public static class CodeGeneratorFactory
         {
             TargetType.CSharpClass => new CSharpClassCodeGenerator(),
             TargetType.CSharpRecord => new CSharpRecordCodeGenerator(),
+            TargetType.CSharpStruct => new CSharpStructCodeGenerator(),
             TargetType.SqlSugarEntity => new SqlSugarEntityCodeGenerator(),
             TargetType.EFCoreEntity => new EFCoreEntityCodeGenerator(),
             TargetType.JavaClass => new JavaClassCodeGenerator(),

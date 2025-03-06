@@ -35,7 +35,7 @@
     - [x] SQLite
 - [x] SQL DDL to java record
 - [x] SQL DDL to c# record
-- [ ] SQL DDL to c# struct
+- [x] SQL DDL to c# struct
 
 ## JSON Convert
 

@@ -8,10 +8,8 @@ namespace Arale.CodeGen.Commons.Constants;
 public enum TargetType
 {
     [Description("C# Class")] CSharpClass = 1,
-
     [Description("C# Record")] CSharpRecord = 2,
-
-    // [Description("C# Struct")] CSharpStruct = 3,
+    [Description("C# Struct")] CSharpStruct = 3,
     [Description("SqlSugar Entity")] SqlSugarEntity = 4,
     [Description("EF Core Entity")] EFCoreEntity = 5,
     [Description("Java Class")] JavaClass = 6,

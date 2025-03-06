@@ -23,8 +23,8 @@ public static class FieldHelper
         return targetType switch
         {
             // c# property naming convention is PascalCase
-            TargetType.CSharpClass or TargetType.CSharpRecord or TargetType.SqlSugarEntity or TargetType.EFCoreEntity =>
-                columnName.Pascalize(),
+            TargetType.CSharpClass or TargetType.CSharpRecord or TargetType.CSharpStruct or TargetType.SqlSugarEntity
+                or TargetType.EFCoreEntity => columnName.Pascalize(),
             // java field naming convention is camelCase
             TargetType.JavaClass or TargetType.JavaRecord or TargetType.MyBatisPlusEntity or TargetType.HibernateEntity
                 => columnName.Camelize(),
@@ -43,8 +43,8 @@ public static class FieldHelper
     {
         return targetType switch
         {
-            TargetType.CSharpClass or TargetType.CSharpRecord or TargetType.SqlSugarEntity or TargetType.EFCoreEntity =>
-                FieldTypeHelper.GetCSharpPropertyType(dataType),
+            TargetType.CSharpClass or TargetType.CSharpRecord or TargetType.CSharpStruct or TargetType.SqlSugarEntity
+                or TargetType.EFCoreEntity => FieldTypeHelper.GetCSharpPropertyType(dataType),
             TargetType.JavaClass or TargetType.JavaRecord or TargetType.MyBatisPlusEntity or TargetType.HibernateEntity
                 => FieldTypeHelper.GetJavaFieldType(dataType),
             _ => throw new UnsupportedTargetTypeException(targetType)
@@ -62,8 +62,8 @@ public static class FieldHelper
     {
         return targetType switch
         {
-            TargetType.CSharpClass or TargetType.CSharpRecord or TargetType.SqlSugarEntity or TargetType.EFCoreEntity =>
-                FieldTypeHelper.GetCSharpPropertyType(jsonKv),
+            TargetType.CSharpClass or TargetType.CSharpRecord or TargetType.CSharpStruct or TargetType.SqlSugarEntity
+                or TargetType.EFCoreEntity => FieldTypeHelper.GetCSharpPropertyType(jsonKv),
             TargetType.JavaClass or TargetType.JavaRecord or TargetType.MyBatisPlusEntity or TargetType.HibernateEntity
                 => FieldTypeHelper.GetJavaFieldType(jsonKv),
             _ => throw new UnsupportedTargetTypeException(targetType)
