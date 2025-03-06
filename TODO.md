@@ -46,7 +46,7 @@
 - [ ] JSON to c# struct
 - [x] JSON to ts type
 - [x] JSON to ts interface
-- [ ] JSON to js object
+- [x] JSON to js object literal
 
 ## JSON naming style
 

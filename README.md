@@ -18,7 +18,8 @@ structure, or write the corresponding DTO code based on the structure of the JSO
   ORM / persistence framework, such
   as [Hibernate](https://hibernate.org/orm/), [Entity Framework Core](https://docs.microsoft.com/ef/),
   [SqlSugar](https://www.donet5.com/home/doc), [MyBatisPlus](https://baomidou.com/)
-- [Read the SQL DDL](https://shiloh595.top/arale-codegen-ui/#/sql-convert/sql-to-class) / [JSON](https://shiloh595.top/arale-codegen-ui/#/json-convert/json-to-class) to generate class,
+- [Read the SQL DDL](https://shiloh595.top/arale-codegen-ui/#/sql-convert/sql-to-class) / [JSON](https://shiloh595.top/arale-codegen-ui/#/json-convert/json-to-class)
+  to generate class,
   record, struct
   for [Java](https://openjdk.org/), [C#](https://learn.microsoft.com/en-us/dotnet/csharp/).
 - Read the [JSON](https://shiloh595.top/arale-codegen-ui/#/json-convert/json-to-ts) to generate type /
@@ -55,18 +56,19 @@ The logo has been designed by [Free Logo Design](https://www.freelogodesign.org/
 
 ### Frontend
 
-| Name               | Version | Documentation                                        | Remark             |
-|--------------------|---------|------------------------------------------------------|--------------------|
-| NodeJS             | 20.11.1 | <https://nodejs.org>                                 |                    |
-| PNPM               | 8.5.13  | <https://pnpm.io/>                                   | Package Manager    |
-| TypeScript         | 5.4     | <https://www.typescriptlang.org/docs/>               |                    |
-| Vue                | 3.4.27  | <https://vuejs.org/>                                 |                    |
-| Quasar             | 2.16.0  | <https://quasar.dev/docs>                            | UI Framework       |
-| JsonToTs           | 2.1.0   | <https://github.com/MariusAlch/json-to-ts>           | JSON to TypeScript |
-| UnpluginAutoImport | 0.18.2  | <https://github.com/unplugin/unplugin-auto-import>   |                    |
-| Monaco Editor      | 0.52.2  | <https://github.com/microsoft/monaco-editor>         | Code Editor        |
-| SQL Formatter      | 15.4.10 | <https://github.com/sql-formatter-org/sql-formatter> | Code Format        |
-| debounce           | 2.2.0   | <https://github.com/sindresorhus/debounce>           | Delay function     |
+| Name                 | Version | Documentation                                         | Remark                    |
+|----------------------|---------|-------------------------------------------------------|---------------------------|
+| NodeJS               | 20.11.1 | <https://nodejs.org>                                  |                           |
+| PNPM                 | 8.5.13  | <https://pnpm.io/>                                    | Package Manager           |
+| TypeScript           | 5.4     | <https://www.typescriptlang.org/docs/>                |                           |
+| Vue                  | 3.4.27  | <https://vuejs.org/>                                  |                           |
+| Quasar               | 2.16.0  | <https://quasar.dev/docs>                             | UI Framework              |
+| JsonToTs             | 2.1.0   | <https://github.com/MariusAlch/json-to-ts>            | JSON to TypeScript        |
+| UnpluginAutoImport   | 0.18.2  | <https://github.com/unplugin/unplugin-auto-import>    |                           |
+| Monaco Editor        | 0.52.2  | <https://github.com/microsoft/monaco-editor>          | Code Editor               |
+| SQL Formatter        | 15.4.10 | <https://github.com/sql-formatter-org/sql-formatter>  | Code Format               |
+| debounce             | 2.2.0   | <https://github.com/sindresorhus/debounce>            | Delay function            |
+| javascript-stringify | 2.1.0   | <https://github.com/blakeembrey/javascript-stringify> | JSON to JS object literal |
 
 ### Deployment
 

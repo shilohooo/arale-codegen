@@ -84,6 +84,14 @@ export const menuList: Menu[] = [
         level: 1,
         component: 'modules/json-convert/JsonToClass',
       },
+      {
+        icon: 'mdi-language-javascript',
+        label: 'JSON to JS',
+        path: '/json-convert/json-to-js',
+        type: MenuType.PAGE,
+        level: 1,
+        component: 'modules/json-convert/JsonToJs',
+      },
     ],
   },
 ]
