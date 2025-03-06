@@ -18,6 +18,7 @@ public static class CodeGeneratorFactory
         return targetType switch
         {
             TargetType.CSharpClass => new CSharpClassCodeGenerator(),
+            TargetType.CSharpRecord => new CSharpRecordCodeGenerator(),
             TargetType.SqlSugarEntity => new SqlSugarEntityCodeGenerator(),
             TargetType.EFCoreEntity => new EFCoreEntityCodeGenerator(),
             TargetType.JavaClass => new JavaClassCodeGenerator(),

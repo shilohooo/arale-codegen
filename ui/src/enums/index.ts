@@ -15,6 +15,8 @@ export enum DbType {
 // generate target type
 export enum TargetType {
   CSharpClass = 1,
+  CSharpRecord = 2,
+  // CSharpStruct = 3,
   SqlSugarEntity = 4,
   EFCoreEntity = 5,
   JavaClass = 6,

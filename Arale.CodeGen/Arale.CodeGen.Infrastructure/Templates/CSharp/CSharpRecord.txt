@@ -1,0 +1,15 @@
+﻿{{~ for import_statement in model.import_statements ~}}
+{{ import_statement }}
+{{~ end ~}}
+
+namespace Arale.CodeGen;
+
+/// <summary>
+/// {{ model.comment }} Record
+/// </summary>
+public record {{ model.class_name }} (
+{{~ for property in model.properties ~}}
+    // {{ property.comment }}
+    {{ property.field_type.type_name }}{{ if !property.mandatory }}?{{ end }} {{ property.field_name }}{{ if !for.last }},{{ end }}
+{{~ end ~}}
+);

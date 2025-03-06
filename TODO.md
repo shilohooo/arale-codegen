@@ -34,7 +34,7 @@
     - [x] PostgreSQL
     - [x] SQLite
 - [x] SQL DDL to java record
-- [ ] SQL DDL to c# record
+- [x] SQL DDL to c# record
 - [ ] SQL DDL to c# struct
 
 ## JSON Convert
