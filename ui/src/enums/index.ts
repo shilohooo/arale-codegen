@@ -18,6 +18,7 @@ export enum TargetType {
   SqlSugarEntity = 4,
   EFCoreEntity = 5,
   JavaClass = 6,
-  MyBatisPlusEntity = 7,
-  HibernateEntity = 8,
+  JavaRecord = 7,
+  MyBatisPlusEntity = 8,
+  HibernateEntity = 9,
 }

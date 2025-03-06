@@ -19,6 +19,7 @@ export const DB_TYPE_OPTIONS: QSelectOption<DbType>[] = [
 export const CLASS_CODE_TARGET_TYPE_OPTIONS: QSelectOption<TargetType>[] = [
   { label: TargetType[TargetType.CSharpClass], value: TargetType.CSharpClass },
   { label: TargetType[TargetType.JavaClass], value: TargetType.JavaClass },
+  { label: TargetType[TargetType.JavaRecord], value: TargetType.JavaRecord },
 ]
 
 // supported target type options for generate ORM entity
@@ -35,6 +36,7 @@ export const TARGET_TYPE_LANGUAGE_MAPPING: Record<TargetType, EditorLanguage> = 
   [TargetType.SqlSugarEntity]: 'csharp',
   [TargetType.EFCoreEntity]: 'csharp',
   [TargetType.JavaClass]: 'java',
+  [TargetType.JavaRecord]: 'java',
   [TargetType.MyBatisPlusEntity]: 'java',
   [TargetType.HibernateEntity]: 'java',
 }

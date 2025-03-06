@@ -14,8 +14,9 @@ public enum TargetType
     [Description("SqlSugar Entity")] SqlSugarEntity = 4,
     [Description("EF Core Entity")] EFCoreEntity = 5,
     [Description("Java Class")] JavaClass = 6,
-    [Description("MyBatisPlus Entity")] MyBatisPlusEntity = 7,
+    [Description("Java Record")] JavaRecord = 7,
+    [Description("MyBatisPlus Entity")] MyBatisPlusEntity = 8,
 
     [Description("Hibernate (JPA) Entity")]
-    HibernateEntity = 8
+    HibernateEntity = 9
 }

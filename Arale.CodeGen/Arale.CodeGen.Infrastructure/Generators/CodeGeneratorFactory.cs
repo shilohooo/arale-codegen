@@ -21,6 +21,7 @@ public static class CodeGeneratorFactory
             TargetType.SqlSugarEntity => new SqlSugarEntityCodeGenerator(),
             TargetType.EFCoreEntity => new EFCoreEntityCodeGenerator(),
             TargetType.JavaClass => new JavaClassCodeGenerator(),
+            TargetType.JavaRecord => new JavaRecordCodeGenerator(),
             TargetType.MyBatisPlusEntity => new MyBatisPlusEntityCodeGenerator(),
             TargetType.HibernateEntity => new HibernateEntityCodeGenerator(),
             _ => throw new ArgumentException($"Unsupported target type: {targetType}", nameof(targetType))

@@ -28,6 +28,11 @@ public enum TemplateName
     [Description("Java/JavaClass")] JavaClass,
 
     /// <summary>
+    ///     Java record template
+    /// </summary>
+    [Description("Java/JavaRecord")] JavaRecord,
+
+    /// <summary>
     ///     MyBatisPlus entity template
     /// </summary>
     [Description("Java/MyBatisPlusEntity")]

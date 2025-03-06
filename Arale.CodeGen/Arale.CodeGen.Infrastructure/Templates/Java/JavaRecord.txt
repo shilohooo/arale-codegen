@@ -1,0 +1,16 @@
+﻿package io.arale.codegen;
+
+{{~ for import_statement in model.import_statements ~}}
+{{ import_statement }}
+{{~ end ~}}
+
+/**
+ * {{ model.comment }} Record
+ */
+public record {{ model.class_name }} (
+{{~ for property in model.properties ~}}
+    // {{ property.comment }}
+    {{ property.field_type.type_name }} {{ property.field_name }}{{ if !for.last }},{{ end }}
+{{~ end ~}}
+) {
+}

@@ -25,7 +25,8 @@ public static class FieldHelper
             // c# property naming convention is PascalCase
             TargetType.CSharpClass or TargetType.SqlSugarEntity or TargetType.EFCoreEntity => columnName.Pascalize(),
             // java field naming convention is camelCase
-            TargetType.JavaClass or TargetType.MyBatisPlusEntity or TargetType.HibernateEntity => columnName.Camelize(),
+            TargetType.JavaClass or TargetType.JavaRecord or TargetType.MyBatisPlusEntity or TargetType.HibernateEntity
+                => columnName.Camelize(),
             _ => columnName
         };
     }
@@ -43,8 +44,8 @@ public static class FieldHelper
         {
             TargetType.CSharpClass or TargetType.SqlSugarEntity or TargetType.EFCoreEntity => FieldTypeHelper
                 .GetCSharpPropertyType(dataType),
-            TargetType.JavaClass or TargetType.MyBatisPlusEntity or TargetType.HibernateEntity => FieldTypeHelper
-                .GetJavaFieldType(dataType),
+            TargetType.JavaClass or TargetType.JavaRecord or TargetType.MyBatisPlusEntity or TargetType.HibernateEntity
+                => FieldTypeHelper.GetJavaFieldType(dataType),
             _ => throw new UnsupportedTargetTypeException(targetType)
         };
     }
@@ -62,8 +63,8 @@ public static class FieldHelper
         {
             TargetType.CSharpClass or TargetType.SqlSugarEntity or TargetType.EFCoreEntity => FieldTypeHelper
                 .GetCSharpPropertyType(jsonKv),
-            TargetType.JavaClass or TargetType.MyBatisPlusEntity or TargetType.HibernateEntity => FieldTypeHelper
-                .GetJavaFieldType(jsonKv),
+            TargetType.JavaClass or TargetType.JavaRecord or TargetType.MyBatisPlusEntity or TargetType.HibernateEntity
+                => FieldTypeHelper.GetJavaFieldType(jsonKv),
             _ => throw new UnsupportedTargetTypeException(targetType)
         };
     }

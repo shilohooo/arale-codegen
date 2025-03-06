@@ -33,7 +33,7 @@
     - [x] MySQL
     - [x] PostgreSQL
     - [x] SQLite
-- [ ] SQL DDL to java record
+- [x] SQL DDL to java record
 - [ ] SQL DDL to c# record
 - [ ] SQL DDL to c# struct
 
