@@ -7,7 +7,7 @@
 > [!IMPORTANT]
 > 🚧 The project is currently under active development and features are subject to change at any time.
 
-Arale CodeGen is a code generation tool that can read SQL DDL or JSON Object/Array to generate the specified code.
+[Arale CodeGen](https://shiloh595.top/arale-codegen-ui/) is a code generation tool that can read SQL DDL or JSON Object/Array to generate the specified code.
 
 The goal of this project is to reduce duplication of work in CRUD, such as writing entity code based on the table
 structure, or write the corresponding DTO code based on the structure of the JSON object.
