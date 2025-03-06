@@ -27,8 +27,6 @@ public static class ServiceExtensions
             var implType = implTypes.FirstOrDefault(impl => serviceInterface.IsAssignableFrom(impl));
             if (implType is null) continue;
 
-            Console.WriteLine(
-                $"{nameof(ServiceExtensions)} - Added {serviceInterface.Name}:{implType.Name} to IOC container");
             services.AddSingleton(serviceInterface, implType);
         }
 
