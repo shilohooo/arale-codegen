@@ -7,7 +7,7 @@
   <q-item
     v-if="!menu.children?.length"
     clickable
-    :active="menu.path === route.path"
+    :active="menu.path === currentRoute.path"
     v-ripple
     class="q-ma-sm"
     active-class="bg-blue-1 rounded-borders"
@@ -25,17 +25,14 @@
   </q-item>
   <div v-else>
     <q-expansion-item
-      v-model="expanded"
+      :ref="(el) => sidebarStore.addCatalogRef(menu, el as unknown as QExpansionItem)"
+      :default-opened="currentRoute.path.startsWith(menu.path!)"
       :icon="menu.icon"
       :label="menu.label"
       class="q-ma-sm"
-      group="expansion-unique-group"
+      :group="`expansion-group-${menu.level}`"
       :content-inset-level="0.2"
-      :header-class="
-        menu.children.findIndex((item) => route.path === item.path) > -1
-          ? 'text-primary'
-          : undefined
-      "
+      :header-class="currentRoute.path.startsWith(menu.path!) ? 'text-primary' : undefined"
     >
       <sidebar-menu-item v-for="subMenu in menu.children" :key="subMenu.label" :menu="subMenu" />
     </q-expansion-item>
@@ -45,41 +42,28 @@
 <script setup lang="ts">
 import { type Menu, MenuType } from 'src/router/routes/menu.data'
 import { useTabStore } from 'stores/tab'
+import type { QExpansionItem } from 'quasar'
+import { useSidebarStore } from 'stores/sidebar'
 
-const route = useRoute()
+const currentRoute = useRoute()
 
 defineOptions({ name: 'SidebarMenuItem' })
 
-const props = defineProps<{ menu: Menu }>()
+defineProps<{ menu: Menu }>()
 
 const tabStore = useTabStore()
+const sidebarStore = useSidebarStore()
 
-const expanded = ref(false)
-
-function findRouteByPath(menus: Menu[], routePath: string): boolean {
-  // 递归查找 path === routePath 的菜单
-  for (const menu of menus) {
-    if (menu.children) {
-      return findRouteByPath(menu.children, routePath)
-    }
-
-    if (menu.path === routePath) {
-      return true
-    }
-  }
-
-  return false
+function handleShowMenu(routePath: string) {
+  sidebarStore.getCatalogRef(routePath).forEach((ref) => ref?.show())
 }
 
-function handleOpen(routePath: string) {
-  if (!props.menu.children) {
-    return
-  }
-
-  expanded.value = findRouteByPath(props.menu.children, routePath)
-}
-
-defineExpose({ handleOpen })
+watch(
+  () => currentRoute.path,
+  (newValue) => {
+    handleShowMenu(newValue)
+  },
+)
 </script>
 
 <style scoped></style>

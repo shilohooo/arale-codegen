@@ -60,3 +60,9 @@
 - [ ] snake_case to kebab-case
 - [ ] snake_case to PascalCase
 - [ ] PascalCase to snake_case
+
+## Deploy
+
+- [ ] GitHub workflows
+  - [ ] frontend
+  - [ ] backend
