@@ -41,9 +41,9 @@
 
 - [x] JSON to java class
 - [x] JSON to c# class
-- [ ] JSON to java record
-- [ ] JSON to c# record
-- [ ] JSON to c# struct
+- [x] JSON to java record
+- [x] JSON to c# record
+- [x] JSON to c# struct
 - [x] JSON to ts type
 - [x] JSON to ts interface
 - [x] JSON to js object literal
