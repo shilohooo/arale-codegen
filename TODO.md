@@ -50,16 +50,13 @@
 
 ## JSON naming style
 
-- [ ] camelCase to PascalCase
-- [ ] PascalCase to camelCase
-- [ ] snake_case to camelCase
-- [ ] camelCase to snake_case
-- [ ] kebab-case to camelCase
-- [ ] camelCase to kebab-case
-- [ ] kebab-case to snake_case
-- [ ] snake_case to kebab-case
-- [ ] snake_case to PascalCase
-- [ ] PascalCase to snake_case
+- [ ] camelCase
+- [ ] PascalCase
+- [ ] snake_case
+- [ ] kebab-case
+- [ ] KEBAB-CASE (kebab-case upper)
+- [ ] SNAKE_CASE (snake_case upper)
+
 
 ## Deploy
 
