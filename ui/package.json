@@ -18,6 +18,7 @@
     "@wdns/vue-code-block": "^2.3.5",
     "axios": "^1.2.1",
     "javascript-stringify": "^2.1.0",
+    "json-case-convertor": "^1.4.4",
     "json-to-ts": "^2.1.0",
     "monaco-editor": "^0.52.2",
     "pinia": "^2.0.11",

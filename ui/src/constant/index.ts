@@ -4,7 +4,7 @@
  * @date 2025/2/5 11:18
  */
 import type { QSelectOption } from 'quasar'
-import { DbType, TargetType } from 'src/enums'
+import { DbType, JsonPropertyCaseType, TargetType } from 'src/enums'
 import type { EditorLanguage } from 'src/types/code-editor'
 
 // supported database type options
@@ -54,3 +54,39 @@ export const EDITOR_TAB_SIZE: Record<EditorLanguage, number> = {
   typescript: 2,
   javascript: 2,
 }
+
+// JSON property case type options
+export const JSON_PROPERTY_CASE_TYPE_OPTIONS: QSelectOption<JsonPropertyCaseType>[] = [
+  {
+    label: JsonPropertyCaseType[JsonPropertyCaseType.LowerCase],
+    value: JsonPropertyCaseType.LowerCase,
+  },
+  {
+    label: JsonPropertyCaseType[JsonPropertyCaseType.UpperCase],
+    value: JsonPropertyCaseType.UpperCase,
+  },
+  {
+    label: JsonPropertyCaseType[JsonPropertyCaseType.CamelCase],
+    value: JsonPropertyCaseType.CamelCase,
+  },
+  {
+    label: JsonPropertyCaseType[JsonPropertyCaseType.PascalCase],
+    value: JsonPropertyCaseType.PascalCase,
+  },
+  {
+    label: JsonPropertyCaseType[JsonPropertyCaseType.SnakeCase],
+    value: JsonPropertyCaseType.SnakeCase,
+  },
+  {
+    label: JsonPropertyCaseType[JsonPropertyCaseType.KebabCase],
+    value: JsonPropertyCaseType.KebabCase,
+  },
+  {
+    label: JsonPropertyCaseType[JsonPropertyCaseType.SnakeCaseUpper],
+    value: JsonPropertyCaseType.SnakeCaseUpper,
+  },
+  {
+    label: JsonPropertyCaseType[JsonPropertyCaseType.KebabCaseUpper],
+    value: JsonPropertyCaseType.KebabCaseUpper,
+  },
+]

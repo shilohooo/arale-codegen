@@ -24,3 +24,15 @@ export enum TargetType {
   MyBatisPlusEntity = 8,
   HibernateEntity = 9,
 }
+
+// JSON property case type
+export enum JsonPropertyCaseType {
+  LowerCase = 1,
+  UpperCase = 2,
+  CamelCase = 3,
+  PascalCase = 4,
+  SnakeCase = 5,
+  KebabCase = 6,
+  SnakeCaseUpper = 7,
+  KebabCaseUpper = 8,
+}

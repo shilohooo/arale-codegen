@@ -7,7 +7,8 @@
 > [!IMPORTANT]
 > 🚧 The project is currently under active development and features are subject to change at any time.
 
-[Arale CodeGen](https://shiloh595.top/arale-codegen-ui/) is a code generation tool that can read SQL DDL or JSON Object/Array to generate the specified code.
+[Arale CodeGen](https://shiloh595.top/arale-codegen-ui/) is a code generation tool that can read SQL DDL or JSON
+Object/Array to generate the specified code.
 
 The goal of this project is to reduce duplication of work in CRUD, such as writing entity code based on the table
 structure, or write the corresponding DTO code based on the structure of the JSON object.
@@ -24,7 +25,8 @@ structure, or write the corresponding DTO code based on the structure of the JSO
   for [Java](https://openjdk.org/), [C#](https://learn.microsoft.com/en-us/dotnet/csharp/).
 - [Read the JSON](https://shiloh595.top/arale-codegen-ui/#/json-convert/json-to-ts) to generate type /
   interface for [TypeScript](https://www.typescriptlang.org/).
-- [Read the JSON](https://shiloh595.top/arale-codegen-ui/#/json-convert/json-to-js) to generate object for [JavaScript](https://developer.mozilla.org/en-US/docs/Web/JavaScript).
+- [Read the JSON](https://shiloh595.top/arale-codegen-ui/#/json-convert/json-to-js) to generate object
+  for [JavaScript](https://developer.mozilla.org/en-US/docs/Web/JavaScript).
 - JSON object property naming style conversion (camelCase, snake_case, PascalCase, kebab-case).
 
 > [!NOTE]
@@ -56,19 +58,20 @@ The logo has been designed by [Free Logo Design](https://www.freelogodesign.org/
 
 ### Frontend
 
-| Name                 | Version | Documentation                                         | Remark                    |
-|----------------------|---------|-------------------------------------------------------|---------------------------|
-| NodeJS               | 20.11.1 | <https://nodejs.org>                                  |                           |
-| PNPM                 | 8.5.13  | <https://pnpm.io/>                                    | Package Manager           |
-| TypeScript           | 5.4     | <https://www.typescriptlang.org/docs/>                |                           |
-| Vue                  | 3.4.27  | <https://vuejs.org/>                                  |                           |
-| Quasar               | 2.16.0  | <https://quasar.dev/docs>                             | UI Framework              |
-| JsonToTs             | 2.1.0   | <https://github.com/MariusAlch/json-to-ts>            | JSON to TypeScript        |
-| UnpluginAutoImport   | 0.18.2  | <https://github.com/unplugin/unplugin-auto-import>    |                           |
-| Monaco Editor        | 0.52.2  | <https://github.com/microsoft/monaco-editor>          | Code Editor               |
-| SQL Formatter        | 15.4.10 | <https://github.com/sql-formatter-org/sql-formatter>  | Code Format               |
-| debounce             | 2.2.0   | <https://github.com/sindresorhus/debounce>            | Delay function            |
-| javascript-stringify | 2.1.0   | <https://github.com/blakeembrey/javascript-stringify> | JSON to JS object literal |
+| Name                 | Version | Documentation                                         | Remark                       |
+|----------------------|---------|-------------------------------------------------------|------------------------------|
+| NodeJS               | 20.11.1 | <https://nodejs.org>                                  |                              |
+| PNPM                 | 8.5.13  | <https://pnpm.io/>                                    | Package Manager              |
+| TypeScript           | 5.4     | <https://www.typescriptlang.org/docs/>                |                              |
+| Vue                  | 3.4.27  | <https://vuejs.org/>                                  |                              |
+| Quasar               | 2.16.0  | <https://quasar.dev/docs>                             | UI Framework                 |
+| JsonToTs             | 2.1.0   | <https://github.com/MariusAlch/json-to-ts>            | JSON to TypeScript           |
+| UnpluginAutoImport   | 0.18.2  | <https://github.com/unplugin/unplugin-auto-import>    |                              |
+| Monaco Editor        | 0.52.2  | <https://github.com/microsoft/monaco-editor>          | Code Editor                  |
+| SQL Formatter        | 15.4.10 | <https://github.com/sql-formatter-org/sql-formatter>  | Code Format                  |
+| debounce             | 2.2.0   | <https://github.com/sindresorhus/debounce>            | Delay function               |
+| javascript-stringify | 2.1.0   | <https://github.com/blakeembrey/javascript-stringify> | JSON to JS object literal    |
+| json-case-converter  | 1.4.4   | <https://github.com/MIRTAHAALI/json-case-convertor>   | JSON property case converter |
 
 ### Deployment
 

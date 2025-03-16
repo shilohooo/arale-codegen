@@ -17,6 +17,9 @@ dependencies:
   javascript-stringify:
     specifier: ^2.1.0
     version: 2.1.0
+  json-case-convertor:
+    specifier: ^1.4.4
+    version: 1.4.4
   json-to-ts:
     specifier: ^2.1.0
     version: 2.1.0
@@ -3136,6 +3139,12 @@ packages:
     resolution: {integrity: sha512-4bV5BfR2mqfQTJm+V5tPPdf+ZpuhiIvTuAB5g8kcrXOZpTT/QwwVRWBywX1ozr6lEuPdbHxwaJlm9G6mI2sfSQ==}
     dev: true
 
+  /json-case-convertor@1.4.4:
+    resolution: {integrity: sha512-SL4P3A8okj7sQcFWoaJ8nkVE5Ai67PcnvUsrLNdDrUWh6cz7jH7r+qYY2tx2nxELuN32N3saqM4sS42054VF6Q==}
+    dependencies:
+      lodash: 4.17.21
+    dev: false
+
   /json-schema-traverse@0.4.1:
     resolution: {integrity: sha512-xbbCH5dCYU5T8LcEhhuh7HJ88HXuW3qsI3Y0zOZFKfZEHcpWiHU/Jxzk629Brsab/mMiHQti9wMP+845RPe3Vg==}
     dev: true
@@ -3211,7 +3220,6 @@ packages:
 
   /lodash@4.17.21:
     resolution: {integrity: sha512-v2kDEe57lecTulaDIuNTPy3Ry4gLGJ6Z1O3vE1krgXZNrsQ+LFTGHVxVjcXPs17LhbZVGedAJv8XZ1tvj5FvSg==}
-    dev: true
 
   /log-symbols@4.1.0:
     resolution: {integrity: sha512-8XPvpAA8uyhfteu8pIvQxpJZ7SYYdpUivZpGy6sFsBuKRY/7rQGavedeB8aK+Zkyq6upMFVL/9AW6vOYzfRyLg==}
