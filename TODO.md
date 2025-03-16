@@ -48,7 +48,7 @@
 - [x] JSON to ts interface
 - [x] JSON to js object literal
 
-## JSON naming style
+## JSON property naming style
 
 - [x] camelCase
 - [x] PascalCase
@@ -56,7 +56,6 @@
 - [x] kebab-case
 - [x] KEBAB-CASE (kebab-case upper)
 - [x] SNAKE_CASE (snake_case upper)
-
 
 ## Deploy
 
