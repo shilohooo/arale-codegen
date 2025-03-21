@@ -4,12 +4,20 @@
   * @date 2025/1/23 17:29
 -->
 <template>
-  <div ref="codeEditBox" class="code-edit-box" />
+  <div class="code-edit-box">
+    <vue-monaco-editor
+      v-model:value="code"
+      :options="editorOptions"
+      @mount="initEditor"
+      :language="language"
+      theme="vs"
+      @change="handleCodeChange"
+    />
+  </div>
 </template>
 
 <script setup lang="ts">
-import * as monaco from 'monaco-editor'
-import { format as sqlFormat } from 'sql-formatter'
+import { VueMonacoEditor } from '@guolao/vue-monaco-editor'
 import type { EditorLanguage } from 'src/types/code-editor'
 import { EDITOR_TAB_SIZE } from 'src/constant'
 
@@ -30,68 +38,30 @@ const props = withDefaults(
   },
 )
 
-/**
- * Call format document action
- * @author shiloh
- * @date 2025/2/4 21:38
- */
-function formatCode() {
-  if (!editor.getValue()) {
-    return
-  }
-  editor.getAction('editor.action.formatDocument')?.run()
-}
-
 // region init
-
-let editor: monaco.editor.IStandaloneCodeEditor
-const codeEditBox = ref<HTMLDivElement | null>()
+const code = ref()
+const editor = shallowRef()
+const editorOptions = ref({})
 
 /**
  * init editor
  * @author shiloh
  * @date 2025/1/23 17:33
  */
-async function initEditor() {
-  monaco.languages.typescript.javascriptDefaults.setDiagnosticsOptions({
-    noSemanticValidation: true,
-    noSyntaxValidation: true,
-  })
-  monaco.languages.typescript.javascriptDefaults.setCompilerOptions({
-    target: monaco.languages.typescript.ScriptTarget.ESNext,
-    allowNonTsExtensions: true,
-  })
-  // register sql formatter
-  monaco.languages.registerDocumentFormattingEditProvider('sql', {
-    provideDocumentFormattingEdits(model) {
-      const formattedSqlCode = sqlFormat(model.getValue())
-      return [
-        {
-          range: model.getFullModelRange(),
-          text: formattedSqlCode,
-        },
-      ]
-    },
-  })
-
+async function initEditor(editorInstance: object) {
   // create editor
-  editor = monaco.editor.create(codeEditBox.value!, {
-    value: props.modelValue,
-    language: props.language,
-    theme: 'vs',
-    minimap: { enabled: false },
-    automaticLayout: true,
-    readOnly: false,
-    fontSize: 16,
-    tabSize: EDITOR_TAB_SIZE[props.language] ?? 4,
-  })
+  editor.value = editorInstance
+}
 
-  // model content change callback
-  editor.onDidChangeModelContent(() => {
-    const code = editor.getValue()
-    emits('update:modelValue', code)
-    emits('change', code)
-  })
+/**
+ * code change callback
+ * @param code new code
+ * @author shiloh
+ * @date 2025/3/21 16:05
+ */
+function handleCodeChange(code: string | undefined) {
+  emits('update:modelValue', code)
+  emits('change', code)
 }
 
 // endregion
@@ -101,27 +71,11 @@ async function initEditor() {
 watch(
   () => props.modelValue,
   (newValue) => {
-    if (!editor) {
+    if (newValue === code.value) {
       return
     }
 
-    const oldValue = editor.getValue()
-    if (newValue === oldValue) {
-      return
-    }
-
-    editor.setValue(newValue)
-  },
-)
-
-watch(
-  () => props.language,
-  (newValue) => {
-    if (!editor) {
-      return
-    }
-
-    monaco.editor.setModelLanguage(editor.getModel()!, newValue)
+    code.value = newValue
   },
 )
 
@@ -130,8 +84,15 @@ watch(
 // region mounted
 
 onMounted(async () => {
-  await initEditor()
-  formatCode()
+  editorOptions.value = {
+    minimap: { enabled: false },
+    automaticLayout: true,
+    readOnly: false,
+    fontSize: 16,
+    tabSize: EDITOR_TAB_SIZE[props.language] ?? 4,
+  }
+  code.value = props.modelValue
+  handleCodeChange(code.value)
 })
 
 // endregion
@@ -139,7 +100,7 @@ onMounted(async () => {
 // region before unmount
 
 onBeforeUnmount(() => {
-  editor?.dispose()
+  // editor?.dispose()
 })
 
 // endregion

@@ -67,8 +67,7 @@ The logo has been designed by [Free Logo Design](https://www.freelogodesign.org/
 | Quasar               | 2.16.0  | <https://quasar.dev/docs>                             | UI Framework                 |
 | JsonToTs             | 2.1.0   | <https://github.com/MariusAlch/json-to-ts>            | JSON to TypeScript           |
 | UnpluginAutoImport   | 0.18.2  | <https://github.com/unplugin/unplugin-auto-import>    |                              |
-| Monaco Editor        | 0.52.2  | <https://github.com/microsoft/monaco-editor>          | Code Editor                  |
-| SQL Formatter        | 15.4.10 | <https://github.com/sql-formatter-org/sql-formatter>  | Code Format                  |
+| Monaco Vue           | v1.5.4  | <https://github.com/imguolao/monaco-vue>              | Code Editor                  |
 | debounce             | 2.2.0   | <https://github.com/sindresorhus/debounce>            | Delay function               |
 | javascript-stringify | 2.1.0   | <https://github.com/blakeembrey/javascript-stringify> | JSON to JS object literal    |
 | json-case-converter  | 1.4.4   | <https://github.com/MIRTAHAALI/json-case-convertor>   | JSON property case converter |
