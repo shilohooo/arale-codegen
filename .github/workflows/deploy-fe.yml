@@ -67,7 +67,7 @@ jobs:
           # content of ssh private key. ex raw content of ~/.ssh/id_rsa
           key: ${{ secrets.SSH_PRIVATE_KEY }}
           # remove target folder before upload data
-          rm: /home/${{ secrets.USER }}/projects/arale-codegen/pc/dist/*
+          rm: true
           # scp file list
           source: ./ui/dist/*
           # target path on the server, must be a directory path
