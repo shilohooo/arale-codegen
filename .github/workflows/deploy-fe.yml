@@ -53,7 +53,7 @@ jobs:
         run: pwd && cd ./ui && pnpm i
       # build
       - name: Build App
-        run: pwd && pnpm run build && ls -l ./dist/spa/
+        run: pwd && cd ./ui && pnpm run build && ls -l ./dist/spa/
       # upload dist to server
       - name: Copy artifact to Server
         uses: cross-the-world/ssh-scp-ssh-pipelines@v1.1.4
@@ -69,6 +69,6 @@ jobs:
           # execute pre-commands before scp
           first_ssh: rm -rf /home/${{ secrets.USER }}/projects/arale-codegen/pc/dist
           # scp from local to remote
-          scp: ./dist/* => /home/${{ secrets.USER }}/projects/arale-codegen/pc/dist/
+          scp: ./ui/dist/* => /home/${{ secrets.USER }}/projects/arale-codegen/pc/dist/
           # execute post-commands after scp
           last_ssh: ls -lh /home/${{ secrets.USER }}/projects/arale-codegen/pc/dist/
