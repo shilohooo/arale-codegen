@@ -69,8 +69,8 @@ jobs:
           # remove target folder before upload data
           rm: true
           # scp file list
-          source: ./ui/dist/*
+          source: ./ui/dist/spa/*
           # remove the specified number of leading path elements
-          strip_components: 2
+          strip_components: 3
           # target path on the server, must be a directory path
           target: /home/${{ secrets.USER }}/projects/arale-codegen/ui/dist/spa/
