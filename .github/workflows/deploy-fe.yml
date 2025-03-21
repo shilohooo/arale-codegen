@@ -71,6 +71,17 @@ jobs:
           # scp file list
           source: ./ui/dist/spa/*
           # remove the specified number of leading path elements
+          # if set to 0, this action will run mkdir -p ./ui/dist/spa/ in target path
+          # ls -l target path will output:
+          # -drwxr-xr-x user group size time ui
+          # the actual dist path will be /home/user/projects/arale-codegen/ui/dist/spa/ui/dist/spa/
+
+          # if set to 3, ls -l target path will output:
+          # -drwxr-xr-x user group size time assets
+          # -rw-r--r-- user group size time favicon.ico
+          # -drwxr-xr-x user group size time icons
+          # -rw-r--r-- user group size time index.html
+          # that's what we want!
           strip_components: 3
           # target path on the server, must be a directory path
           target: /home/${{ secrets.USER }}/projects/arale-codegen/ui/dist/spa/
