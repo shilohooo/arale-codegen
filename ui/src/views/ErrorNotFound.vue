@@ -10,7 +10,7 @@
         color="white"
         text-color="blue"
         unelevated
-        label="TAKE ME BACK:)"
+        label="Take me back:)"
         no-caps
         @click="router.go(-1)"
       />
