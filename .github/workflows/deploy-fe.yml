@@ -22,6 +22,7 @@ on:
       # ignore
       - '!.github/workflows/**'
       - '!*.md'
+  workflow_dispatch:
 
 jobs:
   build:
