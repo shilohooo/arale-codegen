@@ -8,20 +8,10 @@ name: Deploy UI
 on:
   push:
     branches: [ "main" ]
-    paths: 
-      # include
-      - './ui/**'
-      # ignore
-      - '!.github/workflows/**'
-      - '!*.md'
+    paths-ignore: [ './Arale.CodeGen/**', '*.md', './github/workflows/**' ]
   pull_request:
     branches: [ "main" ]
-    paths: 
-      # include
-      - './ui/**'
-      # ignore
-      - '!.github/workflows/**'
-      - '!*.md'
+    paths-ignore: [ './Arale.CodeGen/**', '*.md', './github/workflows/**' ]
   workflow_dispatch:
 
 jobs:
