@@ -71,4 +71,4 @@ jobs:
           # scp file list
           source: ./ui/dist/*
           # target path on the server, must be a directory path
-          target: /home/${{ secrets.USER }}/projects/arale-codegen/pc/dist/
+          target: /home/${{ secrets.USER }}/projects/arale-codegen/
