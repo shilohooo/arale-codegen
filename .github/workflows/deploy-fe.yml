@@ -3,7 +3,7 @@
 
 # build ui to production
 
-name: Deploy Arale Codegen UI to Huawei Cloud Server
+name: Deploy UI
 
 on:
   push:
