@@ -45,7 +45,9 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: ${{ matrix.node-version }}
+          registry-url: 'https://registry.npmmirror.com/'
           cache: 'pnpm'
+          cache-dependency-path: ./ui/pnpm-lock.yaml
       - name: Install dependencies
         run: pwd && cd ./ui && pnpm i
       # build
