@@ -56,19 +56,19 @@ jobs:
         run: pwd && cd ./ui && pnpm run build && ls -l ./dist/spa/
       # upload dist to server
       - name: Copy artifact to Server
-        uses: appleboy/scp-action@v0.1.7
+        uses: cross-the-world/ssh-scp-ssh-pipelines@v1.1.4
         with:
-          # scp remote host
+          # ssh remote host
           host: ${{ secrets.IP }}
-          # scp remote port
+          # ssh remote port
           port: ${{ secrets.PORT }}
-          # scp username
-          username: ${{ secrets.USER }}
+          # ssh remote user
+          user: ${{ secrets.USER }}
           # content of ssh private key. ex raw content of ~/.ssh/id_rsa
           key: ${{ secrets.SSH_PRIVATE_KEY }}
-          # remove target folder before upload data
-          rm: false
-          # scp file list
-          source: ./ui/dist/*
-          # target path on the server, must be a directory path
-          target: /home/${{ secrets.USER }}/projects/arale-codegen/ui/dist/
+          # execute pre-commands before scp
+          first_ssh: rm -rf /home/${{ secrets.USER }}/projects/arale-codegen/ui/dist/spa
+          # scp from local to remote
+          scp: ./ui/dist/* => /home/${{ secrets.USER }}/projects/arale-codegen/ui/dist/
+          # execute post-commands after scp
+          last_ssh: ls -lh /home/${{ secrets.USER }}/projects/arale-codegen/ui/dist/
