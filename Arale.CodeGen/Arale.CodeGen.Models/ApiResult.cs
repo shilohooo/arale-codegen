@@ -10,7 +10,7 @@ public class ApiResult<T>
     private const int SuccessCode = 0;
     private const string SuccessMsg = "success";
     private const int DefaultFailCode = (int)HttpStatusCode.InternalServerError;
-    private const string DefaultFailMsg = "Unknow Server Error:(";
+    private const string DefaultFailMsg = "Unknow Server Error, please try again later:(";
 
     /// <summary>
     ///     Status code, 0 = success, other = fail
