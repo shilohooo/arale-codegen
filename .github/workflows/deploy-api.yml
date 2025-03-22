@@ -37,6 +37,7 @@ jobs:
   deploy:
     needs: build-and-push
     runs-on: ubuntu-latest
+    environment: HuaweiCloud
     steps:
       - name: Deploy to Server
         uses: appleboy/ssh-action@master
