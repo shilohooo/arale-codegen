@@ -74,10 +74,11 @@ The logo has been designed by [Free Logo Design](https://www.freelogodesign.org/
 
 ### Deployment
 
-| Name   | Version | Documentation                      | Remark |
-|--------|---------|------------------------------------|--------|
-| Nginx  | 1.26.0  | <https://nginx.org/en/docs/>       |        |
-| Docker | 27.1    | <https://docs.docker.com/manuals/> |        |
+| Name           | Version | Documentation                         | Remark |
+|----------------|---------|---------------------------------------|--------|
+| GitHub Actions |         | <https://github.com/features/actions> | CI/CD  |
+| Nginx          | 1.26.0  | <https://nginx.org/en/docs/>          |        |
+| Docker         | 27.1    | <https://docs.docker.com/manuals/>    |        |
 
 ## 📖 References
 
@@ -89,6 +90,10 @@ The logo has been designed by [Free Logo Design](https://www.freelogodesign.org/
 - [Java & MySQL Data Type Mapping](https://dev.mysql.com/doc/connector-j/en/connector-j-reference-type-conversions.html)
 - [Java & PostgreSQL Data Type Mapping](https://zontroy.com/postgresql-to-java-type-mapping)
 - [A polyglot web converter](https://github.com/ritz078/transform)
+
+## 📝 Changelog
+
+[CHANGELOG.md](./CHANGELOG.md)
 
 ## 💪 Contributors
 
