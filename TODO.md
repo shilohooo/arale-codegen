@@ -59,6 +59,6 @@
 
 ## Deploy
 
-- [ ] GitHub workflows
-  - [ ] frontend
-  - [ ] backend
+- [x] GitHub workflows
+  - [x] frontend
+  - [x] backend
