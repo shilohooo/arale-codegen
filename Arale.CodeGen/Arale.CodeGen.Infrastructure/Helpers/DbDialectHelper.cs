@@ -4,7 +4,7 @@ using SqlParser.Dialects;
 namespace Arale.CodeGen.Infrastructure.Helpers;
 
 /// <summary>
-///     Utility  methods for db type
+///     Utility methods for db type
 /// </summary>
 public static class DbDialectHelper
 {
