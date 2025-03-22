@@ -34,11 +34,6 @@ jobs:
           push: true
           tags: ${{ secrets.DOCKER_HUB_USERNAME }}/arale.codegen.api:latest
 
-  deploy:
-    needs: build-and-push
-    runs-on: ubuntu-latest
-    environment: HuaweiCloud
-    steps:
       - name: Deploy to Server
         uses: appleboy/ssh-action@master
         with:
@@ -47,7 +42,8 @@ jobs:
           username: ${{ secrets.USER }}
           key: ${{ secrets.SSH_PRIVATE_KEY }}
           script: |
+            docker image rm ${{ secrets.DOCKER_HUB_USERNAME }}/arale.codegen.api:latest
             docker pull ${{ secrets.DOCKER_HUB_USERNAME }}/arale.codegen.api:latest
             docker stop arale.codegen.api || true
             docker rm arale.codegen.api || true
-            docker run -d --name arale.codegen.api -p 80:80 ${{ secrets.DOCKER_HUB_USERNAME }}/arale.codegen.api:latest
+            docker run -d --name arale.codegen.api -p 18080:8080 ${{ secrets.DOCKER_HUB_USERNAME }}/arale.codegen.api:latest
