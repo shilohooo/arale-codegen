@@ -27,7 +27,12 @@ structure, or write the corresponding DTO code based on the structure of the JSO
   interface for [TypeScript](https://www.typescriptlang.org/).
 - [Read the JSON](https://shiloh595.top/arale-codegen-ui/#/json-convert/json-to-js) to generate object
   for [JavaScript](https://developer.mozilla.org/en-US/docs/Web/JavaScript).
-- JSON object property naming style conversion (camelCase, snake_case, PascalCase, kebab-case).
+- [JSON object property naming style](https://shiloh595.top/arale-codegen-ui/#/json-convert/json-property-case)
+  conversion (camelCase, snake_case, PascalCase, kebab-case).
+- [Convert URL query string to TS](https://shiloh595.top/arale-codegen-ui/#/query-str-convert/query-str-to-ts) type
+  alias or interface
+- [Convert URL query string to JS](https://shiloh595.top/arale-codegen-ui/#/query-str-convert/query-str-to-js) object
+  literal
 
 > [!NOTE]
 > Only the following databases are supported
@@ -68,9 +73,11 @@ The logo has been designed by [Free Logo Design](https://www.freelogodesign.org/
 | JsonToTs             | 2.1.0   | <https://github.com/MariusAlch/json-to-ts>            | JSON to TypeScript           |
 | UnpluginAutoImport   | 0.18.2  | <https://github.com/unplugin/unplugin-auto-import>    |                              |
 | Monaco Vue           | v1.5.4  | <https://github.com/imguolao/monaco-vue>              | Code Editor                  |
+| sql-formatter        | 15.5.1  | <https://github.com/sql-formatter-org/sql-formatter>  |                              |
 | debounce             | 2.2.0   | <https://github.com/sindresorhus/debounce>            | Delay function               |
 | javascript-stringify | 2.1.0   | <https://github.com/blakeembrey/javascript-stringify> | JSON to JS object literal    |
 | json-case-converter  | 1.4.4   | <https://github.com/MIRTAHAALI/json-case-convertor>   | JSON property case converter |
+| qs                   | 6.14.0  | <https://github.com/ljharb/qs>                        | Query String Parser          |
 
 ### Deployment
 

@@ -4,6 +4,13 @@ All notable changes to the "relax-your-eyes-green" extension will be documented 
 
 Check [Keep a Changelog](http://keepachangelog.com/) for recommendations on how to structure this file.
 
+## 1.1.0 - 2025-03-25
+
+### Added
+
+- Support for convert URL query string to TS type alias or interface
+- Support for convert URL query string to JS object literal
+
 ## 1.0.0 - 2025-03-22
 
 First release [here](https://github.com/shilohooo/arale-codegen?tab=readme-ov-file#-features)~ 🎉

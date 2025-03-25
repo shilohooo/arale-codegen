@@ -102,6 +102,30 @@ export const menuList: Menu[] = [
       },
     ],
   },
+  {
+    icon: 'mdi-help',
+    label: 'Query String Convert',
+    type: MenuType.CATALOG,
+    path: '/query-str-convert',
+    children: [
+      {
+        icon: 'mdi-language-typescript',
+        label: 'Query String to TS',
+        path: '/query-str-convert/query-str-to-ts',
+        type: MenuType.PAGE,
+        level: 1,
+        component: 'modules/query-str-convert/QueryStringToTs',
+      },
+      {
+        icon: 'mdi-language-javascript',
+        label: 'Query String to JS',
+        path: '/query-str-convert/query-str-to-js',
+        type: MenuType.PAGE,
+        level: 1,
+        component: 'modules/query-str-convert/QueryStringToJs',
+      },
+    ],
+  },
 ]
 
 /**

@@ -20,6 +20,7 @@
 import { VueMonacoEditor } from '@guolao/vue-monaco-editor'
 import type { EditorLanguage } from 'src/types/code-editor'
 import { EDITOR_TAB_SIZE } from 'src/constant'
+import type * as monaco from 'monaco-editor'
 
 defineOptions({ name: 'CodeEditor' })
 const emits = defineEmits(['update:modelValue', 'change'])
@@ -40,15 +41,15 @@ const props = withDefaults(
 
 // region init
 const code = ref()
-const editor = shallowRef()
-const editorOptions = ref({})
+const editor = shallowRef<monaco.editor.IStandaloneCodeEditor>()
+const editorOptions = ref<monaco.editor.IStandaloneEditorConstructionOptions>({})
 
 /**
  * init editor
  * @author shiloh
  * @date 2025/1/23 17:33
  */
-async function initEditor(editorInstance: object) {
+async function initEditor(editorInstance: monaco.editor.IStandaloneCodeEditor) {
   // create editor
   editor.value = editorInstance
 }
@@ -100,7 +101,7 @@ onMounted(async () => {
 // region before unmount
 
 onBeforeUnmount(() => {
-  // editor?.dispose()
+  editor.value?.dispose()
 })
 
 // endregion

@@ -2,7 +2,8 @@
 
 ## Added at 2025-03-25
 
-- [ ] QueryString to TS type or interface
+- [x] QueryString to TS type or interface
+- [x] QueryString to JS object literal
 
 ----
 
