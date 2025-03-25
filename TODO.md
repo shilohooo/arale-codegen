@@ -1,5 +1,11 @@
 # TODO
 
+## Added at 2025-03-25
+
+- [ ] QueryString to TS type or interface
+
+----
+
 ## SQL Convert
 
 - [x] SQL DDL to c# class
