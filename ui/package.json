@@ -16,7 +16,7 @@
   "dependencies": {
     "@guolao/vue-monaco-editor": "^1.5.5",
     "@quasar/extras": "^1.16.4",
-    "axios": "^1.2.1",
+    "axios": "^1.8.4",
     "javascript-stringify": "^2.1.0",
     "json-case-convertor": "^1.4.4",
     "json-to-jsdoc-converter": "^1.0.5",
