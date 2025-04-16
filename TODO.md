@@ -58,6 +58,7 @@
 - [x] JSON to ts type
 - [x] JSON to ts interface
 - [x] JSON to js object literal
+- [ ] JSON to jsdoc
 
 ## JSON property naming style
 
