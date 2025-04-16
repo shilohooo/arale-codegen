@@ -23,6 +23,9 @@ importers:
       json-case-convertor:
         specifier: ^1.4.4
         version: 1.4.4
+      json-to-jsdoc-converter:
+        specifier: ^1.0.5
+        version: 1.0.5
       json-to-ts:
         specifier: ^2.1.0
         version: 2.1.0
@@ -1750,6 +1753,9 @@ packages:
 
   json-stable-stringify-without-jsonify@1.0.1:
     resolution: {integrity: sha512-Bdboy+l7tA3OGW6FjyFHWkP5LuByj1Tk33Ljyq0axyzdk9//JSi2u3fP1QSmd1KNwq6VOKYGlAu87CisVir6Pw==}
+
+  json-to-jsdoc-converter@1.0.5:
+    resolution: {integrity: sha512-znzpwmbKpGBsi/FXfR6quZhaMXJ7yoQqiJB3ASZUsuzgHV7mPMoXMePwTy8bXsWvnykbqtbLrthbswGyhi9ZPQ==}
 
   json-to-ts@2.1.0:
     resolution: {integrity: sha512-JeScjtIGYAxQVxEYgQUKROU0329eS+rsTSviGtuKiwKuXpcIU7DxhDYm2tey0vcBetwc9kD0+YHDI5KvEexMew==}
@@ -4732,6 +4738,10 @@ snapshots:
   json-schema-traverse@0.4.1: {}
 
   json-stable-stringify-without-jsonify@1.0.1: {}
+
+  json-to-jsdoc-converter@1.0.5:
+    dependencies:
+      flat: 5.0.2
 
   json-to-ts@2.1.0:
     dependencies:
