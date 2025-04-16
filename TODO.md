@@ -1,5 +1,9 @@
 # TODO
 
+## Added at 2025-04-16
+
+- [ ] JSON to jsdoc
+
 ## Added at 2025-03-31
 
 - [ ] Use multiple tabs in monaco editor to display the generated codes
@@ -58,7 +62,6 @@
 - [x] JSON to ts type
 - [x] JSON to ts interface
 - [x] JSON to js object literal
-- [ ] JSON to jsdoc
 
 ## JSON property naming style
 
