@@ -30,7 +30,7 @@
     <!--region target-->
     <div class="col">
       <div class="row items-center justify-between q-mb-md q-gutter-x-md">
-        <div class="col">Jsdoc</div>
+        <div class="col">JsDoc</div>
         <div class="col">
           <q-input
             v-model="rootTypeName"

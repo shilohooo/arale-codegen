@@ -94,7 +94,7 @@ export const menuList: Menu[] = [
       },
       {
         icon: 'mdi-language-javascript',
-        label: 'JSON to Jsdoc',
+        label: 'JSON to JsDoc',
         path: '/json-convert/json-to-jsdoc',
         type: MenuType.PAGE,
         level: 1,
