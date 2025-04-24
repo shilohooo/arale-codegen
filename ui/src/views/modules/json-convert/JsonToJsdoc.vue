@@ -33,6 +33,14 @@
         <div class="col">Jsdoc</div>
         <div class="col">
           <q-input
+            v-model="rootTypeName"
+            label="Root type name"
+            placeholder="Input the name of root type..."
+            @update:model-value="handleSrcCodeChange"
+          />
+        </div>
+        <div class="col">
+          <q-input
             v-model="typesPrefix"
             label="Types prefix"
             placeholder="Input the types prefix..."
@@ -70,7 +78,7 @@ import CodeEditor from 'components/CodeEditor.vue'
 import { debounce, useQuasar } from 'quasar'
 import { useClipboard } from 'src/hooks/useClipboard'
 import { JSON_OBJECT_TEST_STR } from 'src/constant/data/json-examples'
-import { JsonToJsdocConverter } from 'json-to-jsdoc-converter'
+import { jsonToJSDoc } from 'json-to-jsdoc'
 
 const srcCode = ref<string>('')
 const targetCode = ref<string>('')
@@ -95,9 +103,9 @@ const handleSrcCodeChange = debounce(async () => {
 }, 500)
 
 const $q = useQuasar()
-const typesPrefix = ref('Root')
-const typesSuffix = ref('Type')
-const converter = new JsonToJsdocConverter()
+const rootTypeName = ref('Root')
+const typesPrefix = ref('')
+const typesSuffix = ref('')
 
 /**
  * Generate target code
@@ -110,9 +118,10 @@ async function handleGenerateTargetCode() {
   }
 
   try {
-    targetCode.value = converter.convert(srcCode.value, {
-      typesPrefix: typesPrefix.value,
-      typesSuffix: typesSuffix.value,
+    targetCode.value = jsonToJSDoc(srcCode.value, {
+      rootTypeName: rootTypeName.value,
+      typePrefix: typesPrefix.value,
+      typeSuffix: typesSuffix.value,
     })
   } catch (e) {
     $q.notify({

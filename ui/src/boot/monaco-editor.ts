@@ -15,6 +15,7 @@ loader.init().then((monaco) => {
   monaco.languages.typescript.javascriptDefaults.setDiagnosticsOptions({
     noSemanticValidation: true,
     noSyntaxValidation: true,
+    noSuggestionDiagnostics: true,
   })
   monaco.languages.typescript.javascriptDefaults.setCompilerOptions({
     target: monaco.languages.typescript.ScriptTarget.ESNext,
