@@ -24,8 +24,8 @@ importers:
         specifier: ^1.4.4
         version: 1.4.4
       json-to-jsdoc:
-        specifier: ^1.0.2
-        version: 1.0.2
+        specifier: ^1.0.3
+        version: 1.0.3
       json-to-ts:
         specifier: ^2.1.0
         version: 2.1.0
@@ -1747,8 +1747,8 @@ packages:
   json-stable-stringify-without-jsonify@1.0.1:
     resolution: {integrity: sha512-Bdboy+l7tA3OGW6FjyFHWkP5LuByj1Tk33Ljyq0axyzdk9//JSi2u3fP1QSmd1KNwq6VOKYGlAu87CisVir6Pw==}
 
-  json-to-jsdoc@1.0.2:
-    resolution: {integrity: sha512-0ZRkj7KLRHyXr/fjzrIdHHObCLeoHoFdjsv1TkolfZRMci9dKCJ3ZmaZSdeekQSjHcKgtdp8VdQhIR5fXUmltA==}
+  json-to-jsdoc@1.0.3:
+    resolution: {integrity: sha512-UBjdgyHHrYusvRMizJm/QSq7rWeoVONsfmXao05iDTiA2G1ZWZm4DrK41/+L3+jVkQ+mpY6InEFfa/dDjswfow==}
 
   json-to-ts@2.1.0:
     resolution: {integrity: sha512-JeScjtIGYAxQVxEYgQUKROU0329eS+rsTSviGtuKiwKuXpcIU7DxhDYm2tey0vcBetwc9kD0+YHDI5KvEexMew==}
@@ -4738,7 +4738,7 @@ snapshots:
 
   json-stable-stringify-without-jsonify@1.0.1: {}
 
-  json-to-jsdoc@1.0.2:
+  json-to-jsdoc@1.0.3:
     dependencies:
       change-case: 5.4.4
       pluralize-esm: 9.0.5
