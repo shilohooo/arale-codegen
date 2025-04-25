@@ -79,6 +79,7 @@ The logo has been designed by [Free Logo Design](https://www.freelogodesign.org/
 | javascript-stringify | 2.1.0   | <https://github.com/blakeembrey/javascript-stringify> | JSON to JS object literal    |
 | json-case-converter  | 1.4.4   | <https://github.com/MIRTAHAALI/json-case-convertor>   | JSON property case converter |
 | qs                   | 6.14.0  | <https://github.com/ljharb/qs>                        | Query String Parser          |
+| json-to-jsdoc        | 1.0.3   | <https://github.com/shilohooo/json-to-jsdoc>          |                              |
 
 ### Deployment
 
