@@ -4,9 +4,6 @@ on:
   push:
     branches: [ "main" ]
     paths-ignore: [ 'ui/**', '*.md', '.github/workflows/**' ]
-  pull_request:
-    branches: [ "main" ]
-    paths-ignore: [ 'ui/**', '*.md', '.github/workflows/**' ]
 
 jobs:
   build-and-push:

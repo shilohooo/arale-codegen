@@ -2,7 +2,7 @@
 
 ## Added at 2025-04-16
 
-- [ ] JSON to jsdoc
+- [x] JSON to jsdoc
 
 ## Added at 2025-03-31
 

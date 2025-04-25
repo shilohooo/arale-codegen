@@ -4,6 +4,12 @@ All notable changes to the "relax-your-eyes-green" extension will be documented 
 
 Check [Keep a Changelog](http://keepachangelog.com/) for recommendations on how to structure this file.
 
+## 1.2.0 - 2025-04-25
+
+### Added
+
+- Support for converting JSON object or array to JSDoc comment
+
 ## 1.1.0 - 2025-03-25
 
 ### Added
