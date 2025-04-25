@@ -58,6 +58,8 @@ export default defineConfig((/* ctx */) => {
           'vite-plugin-checker',
           {
             vueTsc: true,
+            // DO NOT show overlay on UI view, just check the errors and warnings in terminal
+            overlay: false,
             eslint: {
               lintCommand: 'eslint -c ./eslint.config.js "./src*/**/*.{ts,js,mjs,cjs,vue}"',
               useFlatConfig: true,
