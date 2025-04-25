@@ -93,6 +93,14 @@ export const menuList: Menu[] = [
         component: 'modules/json-convert/JsonToJs',
       },
       {
+        icon: 'mdi-language-javascript',
+        label: 'JSON to JsDoc',
+        path: '/json-convert/json-to-jsdoc',
+        type: MenuType.PAGE,
+        level: 1,
+        component: 'modules/json-convert/JsonToJsdoc',
+      },
+      {
         icon: 'mdi-code-json',
         label: 'JSON property case',
         path: '/json-convert/json-property-case',
