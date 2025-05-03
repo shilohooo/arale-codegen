@@ -2,8 +2,8 @@
 
 ## Added at 2025-05-03
 
-- JSON to Spring Data MongoDB entity
-- JSON to EF Core MongoDB entity
+- [ ] JSON to Spring Data MongoDB entity
+- [ ] JSON to EF Core MongoDB entity
 
 ## Added at 2025-04-16
 
