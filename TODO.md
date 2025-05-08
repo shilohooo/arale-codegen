@@ -1,5 +1,9 @@
 # TODO
 
+## Added at 2025-05-08
+
+- [ ] SQL DDL to TS type or interface
+
 ## Added at 2025-05-03
 
 - [ ] JSON to Spring Data MongoDB entity
