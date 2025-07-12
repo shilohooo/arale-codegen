@@ -4,9 +4,6 @@
   <img src="./project-logo.png" alt="project-logo" />
 </div>
 
-> [!IMPORTANT]
-> 🚧 The project is currently under active development and features are subject to change at any time.
-
 [Arale CodeGen](https://shiloh595.top/arale-codegen-ui/) is a code generation tool that can read SQL DDL or JSON
 Object/Array to generate the specified code.
 
