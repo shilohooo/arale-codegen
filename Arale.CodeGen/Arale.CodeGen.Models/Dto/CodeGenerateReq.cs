@@ -13,7 +13,7 @@ public class CodeGenerateReq
     ///     SQL / JSON code to convert
     /// </summary>
     [Required(ErrorMessage = "SQL / JSON code is required")]
-    [MinLength(1, ErrorMessage = "SQL / JSON code can't be empty")]
+    [MinLength(1, ErrorMessage = "SQL / JSON code can't not be empty")]
     public required string Code { get; set; }
 
     /// <summary>

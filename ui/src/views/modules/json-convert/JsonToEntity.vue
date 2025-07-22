@@ -1,7 +1,7 @@
 <!--
-  * Convert JSON to Class
+  * Convert JSON to Entity
   * @author shiloh
-  * @date 2025/2/24 22:57
+  * @date 2025-07-22 16:34
 -->
 <template>
   <div class="row q-gutter-x-md">
@@ -33,7 +33,7 @@
         <div class="col-lg-10 col-md-8 col-sm-6">
           <q-select
             v-model="reqData.targetType"
-            :options="CLASS_CODE_TARGET_TYPE_OPTIONS"
+            :options="JSON_TO_ENTITY_CODE_TARGET_TYPE_OPTIONS"
             @update:model-value="handleGenerateTargetCode"
             label="Convert target type"
             map-options
@@ -63,22 +63,24 @@ import CodeEditor from 'components/CodeEditor.vue'
 import { debounce, useQuasar } from 'quasar'
 import { useClipboard } from 'src/hooks/useClipboard'
 import { JSON_OBJECT_TEST_STR } from 'src/constant/data/json-examples'
-import { TargetType } from 'src/enums'
+import { DbType, TargetType } from 'src/enums'
 import type { CodeGenerateReq } from 'src/api/models/code-generate-models'
-import { CLASS_CODE_TARGET_TYPE_OPTIONS, TARGET_TYPE_LANGUAGE_MAPPING } from 'src/constant'
+import { JSON_TO_ENTITY_CODE_TARGET_TYPE_OPTIONS, TARGET_TYPE_LANGUAGE_MAPPING } from 'src/constant'
 import { generateCodeByJson } from 'src/api/code-generate-api'
 
 const targetCode = ref<string>('')
 const reqData = ref<CodeGenerateReq>({
   code: '',
-  targetType: TargetType.CSharpClass,
+  dbType: DbType.SQLServer,
+  targetType: TargetType.SpringDataMongoDBEntity,
+  tableNamePrefix: 'T_',
 })
 const targetLanguage = computed(() => TARGET_TYPE_LANGUAGE_MAPPING[reqData.value.targetType])
 
 /**
  * Clear source code
  * @author shiloh
- * @date 2025/2/24 23:00
+ * @date 2025-07-22 16:34
  */
 function handleClearSrcCode() {
   reqData.value.code = ''
@@ -88,7 +90,7 @@ function handleClearSrcCode() {
 /**
  * Source code changed callback - regenerate target code after 1s
  * @author shiloh
- * @date 2025/2/24 23:00
+ * @date 2025-07-22 16:34
  */
 const handleSrcCodeChange = debounce(async () => {
   await handleGenerateTargetCode()
@@ -99,7 +101,7 @@ const $q = useQuasar()
 /**
  * Generate target code
  * @author shiloh
- * @date 2025/2/24 23:00
+ * @date 2025-07-22 16:34
  */
 async function handleGenerateTargetCode() {
   if (!reqData.value.code) {

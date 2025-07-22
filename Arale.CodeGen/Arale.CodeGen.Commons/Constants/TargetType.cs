@@ -17,5 +17,8 @@ public enum TargetType
     [Description("MyBatisPlus Entity")] MyBatisPlusEntity = 8,
 
     [Description("Hibernate (JPA) Entity")]
-    HibernateEntity = 9
+    HibernateEntity = 9,
+
+    [Description("Spring Data MongoDB Entity")]
+    SpringDataMongoDbEntity = 10
 }

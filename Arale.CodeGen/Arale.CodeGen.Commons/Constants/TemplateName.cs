@@ -51,5 +51,11 @@ public enum TemplateName
     /// <summary>
     ///     Hibernate (JPA) entity template
     /// </summary>
-    [Description("Java/HibernateEntity")] HibernateEntity
+    [Description("Java/HibernateEntity")] HibernateEntity,
+
+    /// <summary>
+    ///     Spring Data MongoDB entity template
+    /// </summary>
+    [Description("Java/SpringDataMongoDBEntity")]
+    SpringDataMongoDbEntity
 }

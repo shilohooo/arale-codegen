@@ -77,10 +77,11 @@ export default defineConfig((/* ctx */) => {
     // Full list of options: https://v2.quasar.dev/quasar-cli-vite/quasar-config-file#devserver
     devServer: {
       // https: true,
+      port: 8081,
       open: false, // opens browser window automatically
       proxy: {
         '^/api': {
-          target: 'https://shiloh595.top/arale-codegen-api',
+          target: 'http://localhost:8082',
           changeOrigin: true,
           ws: false,
           rewrite: (path) => path.replace(/^\/api/, ''),

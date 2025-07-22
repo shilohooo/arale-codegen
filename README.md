@@ -78,6 +78,8 @@ The logo has been designed by [Free Logo Design](https://www.freelogodesign.org/
 | qs                   | 6.14.0  | <https://github.com/ljharb/qs>                        | Query String Parser          |
 | json-to-jsdoc        | 1.0.3   | <https://github.com/shilohooo/json-to-jsdoc>          |                              |
 
+All the menu icons are from https://pictogrammers.com/library/mdi/
+
 ### Deployment
 
 | Name           | Version | Documentation                         | Remark |
