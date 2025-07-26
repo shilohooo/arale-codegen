@@ -31,6 +31,8 @@ structure, or write the corresponding DTO code based on the structure of the JSO
 - [Convert URL query string to JS](https://shiloh595.top/arale-codegen-ui/#/query-str-convert/query-str-to-js) object
   literal
 - [Convert JSON object or array to JSDoc comment](https://shiloh595.top/arale-codegen-ui/#/json-convert/json-to-jsdoc)
+- [Convert JSON object or array to entity](https://shiloh595.top/arale-codegen-ui/#/json-convert/json-to-entity) of
+  ORM / persistence framework, such as [Spring Data MongoDB](https://spring.io/projects/spring-data-mongodb), [MongoDB C# Driver](https://www.mongodb.com/docs/drivers/csharp/current/)
 
 > [!NOTE]
 > Only the following databases are supported
