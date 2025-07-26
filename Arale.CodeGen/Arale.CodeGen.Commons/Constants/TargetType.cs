@@ -20,5 +20,8 @@ public enum TargetType
     HibernateEntity = 9,
 
     [Description("Spring Data MongoDB Entity")]
-    SpringDataMongoDbEntity = 10
+    SpringDataMongoDbEntity = 10,
+
+    [Description("CSharp MongoDB.Driver Entity")]
+    CSharpMongoDbDriverEntity = 11
 }

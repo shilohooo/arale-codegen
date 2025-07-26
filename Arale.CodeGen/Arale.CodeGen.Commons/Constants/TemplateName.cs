@@ -57,5 +57,11 @@ public enum TemplateName
     ///     Spring Data MongoDB entity template
     /// </summary>
     [Description("Java/SpringDataMongoDBEntity")]
-    SpringDataMongoDbEntity
+    SpringDataMongoDbEntity,
+
+    /// <summary>
+    ///     CSharp MongoDB.Driver entity template
+    /// </summary>
+    [Description("CSharp/CSharpMongoDBDriverEntity")]
+    CSharpMongoDbDriverEntity
 }

@@ -45,6 +45,9 @@
         <None Update="Templates\Java\SpringDataMongoDBEntity.txt">
             <CopyToOutputDirectory>Always</CopyToOutputDirectory>
         </None>
+        <None Update="Templates\CSharp\CSharpMongoDBDriverEntity.txt">
+            <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+        </None>
     </ItemGroup>
 
     <ItemGroup>

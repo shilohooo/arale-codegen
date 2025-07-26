@@ -24,7 +24,7 @@ public static class FieldHelper
         {
             // c# property naming convention is PascalCase
             TargetType.CSharpClass or TargetType.CSharpRecord or TargetType.CSharpStruct or TargetType.SqlSugarEntity
-                or TargetType.EFCoreEntity => columnName.Pascalize(),
+                or TargetType.EFCoreEntity or TargetType.CSharpMongoDbDriverEntity => columnName.Pascalize(),
             // java field naming convention is camelCase
             TargetType.JavaClass or TargetType.JavaRecord or TargetType.MyBatisPlusEntity or TargetType.HibernateEntity
                 or TargetType.SpringDataMongoDbEntity
@@ -45,7 +45,8 @@ public static class FieldHelper
         return targetType switch
         {
             TargetType.CSharpClass or TargetType.CSharpRecord or TargetType.CSharpStruct or TargetType.SqlSugarEntity
-                or TargetType.EFCoreEntity => FieldTypeHelper.GetCSharpPropertyType(dataType),
+                or TargetType.EFCoreEntity
+                or TargetType.CSharpMongoDbDriverEntity => FieldTypeHelper.GetCSharpPropertyType(dataType),
             TargetType.JavaClass or TargetType.JavaRecord or TargetType.MyBatisPlusEntity or TargetType.HibernateEntity
                 or TargetType.SpringDataMongoDbEntity
                 => FieldTypeHelper.GetJavaFieldType(dataType),
@@ -65,7 +66,8 @@ public static class FieldHelper
         return targetType switch
         {
             TargetType.CSharpClass or TargetType.CSharpRecord or TargetType.CSharpStruct or TargetType.SqlSugarEntity
-                or TargetType.EFCoreEntity => FieldTypeHelper.GetCSharpPropertyType(jsonKv),
+                or TargetType.EFCoreEntity
+                or TargetType.CSharpMongoDbDriverEntity => FieldTypeHelper.GetCSharpPropertyType(jsonKv),
             TargetType.JavaClass or TargetType.JavaRecord or TargetType.MyBatisPlusEntity or TargetType.HibernateEntity
                 or TargetType.SpringDataMongoDbEntity
                 => FieldTypeHelper.GetJavaFieldType(jsonKv),
