@@ -6,8 +6,8 @@
 
 ## Added at 2025-05-03
 
-- [ ] JSON to Spring Data MongoDB entity
-- [ ] JSON to C# MongoDB.Driver entity
+- [x] JSON to Spring Data MongoDB entity
+- [x] JSON to C# MongoDB.Driver entity
 
 ## Added at 2025-04-16
 
