@@ -26,6 +26,8 @@ public static class CodeGeneratorFactory
             TargetType.JavaRecord => new JavaRecordCodeGenerator(),
             TargetType.MyBatisPlusEntity => new MyBatisPlusEntityCodeGenerator(),
             TargetType.HibernateEntity => new HibernateEntityCodeGenerator(),
+            TargetType.SpringDataMongoDbEntity => new SpringDataMongoDbEntityCodeGenerator(),
+            TargetType.CSharpMongoDbDriverEntity => new CSharpMongoDbDriverEntityCodeGenerator(),
             _ => throw new ArgumentException($"Unsupported target type: {targetType}", nameof(targetType))
         };
     }

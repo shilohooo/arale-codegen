@@ -32,6 +32,18 @@ export const ENTITY_CODE_TARGET_TYPE_OPTIONS: QSelectOption<TargetType>[] = [
   { label: TargetType[TargetType.HibernateEntity], value: TargetType.HibernateEntity },
 ]
 
+// supported target type options for generate ORM entity by json code
+export const JSON_TO_ENTITY_CODE_TARGET_TYPE_OPTIONS: QSelectOption<TargetType>[] = [
+  {
+    label: TargetType[TargetType.SpringDataMongoDBEntity],
+    value: TargetType.SpringDataMongoDBEntity,
+  },
+  {
+    label: TargetType[TargetType.CSharpMongoDBDriverEntity],
+    value: TargetType.CSharpMongoDBDriverEntity,
+  },
+]
+
 // target type & editor language mapping
 export const TARGET_TYPE_LANGUAGE_MAPPING: Record<TargetType, EditorLanguage> = {
   [TargetType.CSharpClass]: 'csharp',
@@ -39,10 +51,12 @@ export const TARGET_TYPE_LANGUAGE_MAPPING: Record<TargetType, EditorLanguage> = 
   [TargetType.CSharpStruct]: 'csharp',
   [TargetType.SqlSugarEntity]: 'csharp',
   [TargetType.EFCoreEntity]: 'csharp',
+  [TargetType.CSharpMongoDBDriverEntity]: 'csharp',
   [TargetType.JavaClass]: 'java',
   [TargetType.JavaRecord]: 'java',
   [TargetType.MyBatisPlusEntity]: 'java',
   [TargetType.HibernateEntity]: 'java',
+  [TargetType.SpringDataMongoDBEntity]: 'java',
 }
 
 // editor tab size

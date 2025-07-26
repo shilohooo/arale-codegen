@@ -4,6 +4,13 @@ All notable changes to the "relax-your-eyes-green" extension will be documented 
 
 Check [Keep a Changelog](http://keepachangelog.com/) for recommendations on how to structure this file.
 
+## 1.3.0 - 2025-07-26
+
+### Added
+
+- Support for converting JSON object or array to Spring Data MongoDB entities
+- Support for converting JSON object or array to CSharp MongoDB.Driver entities
+
 ## 1.2.0 - 2025-04-25
 
 ### Added

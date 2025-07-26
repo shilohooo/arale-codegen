@@ -9,7 +9,7 @@ import { type DbType } from 'src/enums'
 // code generate request params
 export interface CodeGenerateReq {
   code: string
-  dbType: DbType
+  dbType?: DbType
   targetType: TargetType
-  tableNamePrefix: string
+  tableNamePrefix?: string
 }

@@ -1,0 +1,46 @@
+﻿package io.arale.codegen;
+
+{{~ for import_statement in model.import_statements ~}}
+{{ import_statement }}
+{{~ end ~}}
+import lombok.*;
+import org.springframework.data.mongodb.core.mapping.Document;
+import org.springframework.data.mongodb.core.mapping.Field;
+
+/**
+ * {{ model.comment }} Class
+ */
+@Setter
+@Getter
+@ToString
+@Document(collection = "{{ model.class_name }}")
+public class {{ model.class_name }} {
+{{~ for property in model.properties ~}}
+    /**
+     * {{ property.comment }}
+     */
+    @Field("{{ property.field_name }}")
+    private {{ property.field_type.type_name }} {{ property.field_name }};
+
+{{~ end ~}}
+{{~ for nested_model in model.nested_models ~}}
+    /**
+     * {{ nested_model.comment }} Class
+     */
+    @Setter
+    @Getter
+    @ToString
+    @Document(collection = "{{ nested_model.class_name }}")
+    public static class {{ nested_model.class_name }} {
+{{~ for property in nested_model.properties ~}}
+        /**
+         * {{ property.comment }}
+         */
+        @Field("{{ property.field_name }}")
+        private {{ property.field_type.type_name }} {{ property.field_name }};
+
+{{~ end ~}}
+    }
+
+{{~ end ~}}
+}

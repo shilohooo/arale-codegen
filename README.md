@@ -31,6 +31,8 @@ structure, or write the corresponding DTO code based on the structure of the JSO
 - [Convert URL query string to JS](https://shiloh595.top/arale-codegen-ui/#/query-str-convert/query-str-to-js) object
   literal
 - [Convert JSON object or array to JSDoc comment](https://shiloh595.top/arale-codegen-ui/#/json-convert/json-to-jsdoc)
+- [Convert JSON object or array to entity](https://shiloh595.top/arale-codegen-ui/#/json-convert/json-to-entity) of
+  ORM / persistence framework, such as [Spring Data MongoDB](https://spring.io/projects/spring-data-mongodb), [MongoDB C# Driver](https://www.mongodb.com/docs/drivers/csharp/current/)
 
 > [!NOTE]
 > Only the following databases are supported
@@ -77,6 +79,8 @@ The logo has been designed by [Free Logo Design](https://www.freelogodesign.org/
 | json-case-converter  | 1.4.4   | <https://github.com/MIRTAHAALI/json-case-convertor>   | JSON property case converter |
 | qs                   | 6.14.0  | <https://github.com/ljharb/qs>                        | Query String Parser          |
 | json-to-jsdoc        | 1.0.3   | <https://github.com/shilohooo/json-to-jsdoc>          |                              |
+
+All the menu icons are from https://pictogrammers.com/library/mdi/
 
 ### Deployment
 

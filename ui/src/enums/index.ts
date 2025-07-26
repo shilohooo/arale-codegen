@@ -23,6 +23,8 @@ export enum TargetType {
   JavaRecord = 7,
   MyBatisPlusEntity = 8,
   HibernateEntity = 9,
+  SpringDataMongoDBEntity = 10,
+  CSharpMongoDBDriverEntity,
 }
 
 // JSON property case type
