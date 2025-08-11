@@ -5,14 +5,19 @@
  */
 
 import {
-  lowerCaseKeys,
-  upperCaseKeys,
   camelCaseKeys,
+  kebabCaseKeys,
+  lowerCaseKeys,
   pascalCaseKeys,
   snakeCaseKeys,
-  kebabCaseKeys,
+  upperCaseKeys
 } from 'json-case-convertor'
 import { JsonPropertyCaseType } from 'src/enums'
+import type { CodeGenerateResp } from 'src/api/models/code-generate-models'
+import { LANGUAGE_FILE_ICON_COLOR_MAPPING, LANGUAGE_FILE_ICON_NAME_MAPPING } from 'src/constant'
+import type { EditorModel } from 'src/types/code-editor'
+import { Uri } from 'monaco-editor'
+import { nanoid } from 'nanoid'
 
 /**
  * convert json property case
@@ -39,5 +44,55 @@ export function convertJsonPropertyCase(jsonStr: string, jsonPropertyCase: JsonP
       return JSON.stringify(upperCaseKeys(kebabCaseKeys(JSON.parse(jsonStr))), null, 2)
     default:
       return jsonStr
+  }
+}
+
+/**
+ * Get fileName without extension
+ * @param fileName
+ * @author shiloh
+ * @date 2025/8/11 22:18
+ */
+export function getFileNameWithoutExtension(fileName?: string) {
+  if (!fileName) {
+    return ''
+  }
+
+  return fileName.substring(0, fileName.lastIndexOf('.'))
+}
+
+/**
+ * Get file extension from fileName
+ * @param fileName
+ * @author shiloh
+ * @date 2025/8/11 22:20
+ */
+export function getFileExtension(fileName?: string) {
+  if (!fileName) {
+    return ''
+  }
+
+  return fileName.substring(fileName.lastIndexOf('.') + 1)
+}
+
+/**
+ * Create editor model
+ * @param codeGenerateResp Code generate response
+ * @author shiloh
+ * @date 2025/8/2 22:07
+ */
+export function createEditorModel(codeGenerateResp: CodeGenerateResp): EditorModel {
+  const fileName = getFileNameWithoutExtension(codeGenerateResp.fileName)
+  const fileExtension = getFileExtension(codeGenerateResp.fileName)
+  // make uri unique to avoid model already exists error
+  const uri = Uri.file(`${fileName}_${nanoid()}.${fileExtension}`)
+  console.log('uri', uri.toString())
+  return {
+    uri,
+    fileName: codeGenerateResp.fileName,
+    languageType: codeGenerateResp.language,
+    value: codeGenerateResp.code,
+    iconName: LANGUAGE_FILE_ICON_NAME_MAPPING[codeGenerateResp.language],
+    iconColor: LANGUAGE_FILE_ICON_COLOR_MAPPING[codeGenerateResp.language],
   }
 }

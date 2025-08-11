@@ -11,7 +11,7 @@
         <div class="col">JSON</div>
         <div class="col text-right">
           <q-btn
-            :disable="!srcCode"
+            :disable="!srcModel.value"
             icon="delete"
             size="sm"
             color="negative"
@@ -21,7 +21,7 @@
           />
         </div>
       </div>
-      <code-editor v-model="srcCode" language="json" @change="handleSrcCodeChange" />
+      <code-editor ref="srcModelEditor" :editor-models="[srcModel]" @change="handleSrcCodeChange" />
     </div>
     <!--endregion-->
 
@@ -35,6 +35,7 @@
           <q-toggle
             v-model="useTypeAlias"
             label="Use type alias"
+            name="useTypeAlias"
             :true-value="true"
             :false-value="false"
             @update:model-value="handleGenerateTargetCode"
@@ -42,17 +43,21 @@
         </div>
         <div class="col text-right">
           <q-btn
-            :disable="!targetCode"
+            :disable="!targetModel.value"
             icon="content_copy"
             size="sm"
             color="primary"
             label="Copy"
             no-caps
-            @click="copy(targetCode)"
+            @click="copy(targetModel.value)"
           />
         </div>
       </div>
-      <code-editor v-model="targetCode" language="typescript" />
+      <code-editor
+        ref="targetModelEditor"
+        :editor-models="[targetModel]"
+        @change="handleTargetCodeChange"
+      />
     </div>
     <!--endregion-->
   </div>
@@ -64,10 +69,29 @@ import { debounce, useQuasar } from 'quasar'
 import { useClipboard } from 'src/hooks/useClipboard'
 import JsonToTS from 'json-to-ts'
 import { JSON_OBJECT_TEST_STR } from 'src/constant/data/json-examples'
+import type { EditorModel } from 'src/types/code-editor'
+import { createEditorModel } from 'src/utils'
+import { LanguageType } from 'src/enums'
+import type { Uri } from 'monaco-editor'
 
-const srcCode = ref<string>('')
+const srcModel = ref<EditorModel>(
+  createEditorModel({
+    language: LanguageType.JSON,
+    code: JSON_OBJECT_TEST_STR,
+    fileName: 'Source.json',
+  }),
+)
 const useTypeAlias = ref<boolean>(false)
-const targetCode = ref<string>('')
+const targetModel = ref<EditorModel>(
+  createEditorModel({
+    language: LanguageType.TypeScript,
+    code: '',
+    fileName: 'Target.ts',
+  }),
+)
+
+const srcModelEditor = ref<InstanceType<typeof CodeEditor> | null>(null)
+const targetModelEditor = ref<InstanceType<typeof CodeEditor> | null>(null)
 
 /**
  * Clear source code
@@ -75,18 +99,24 @@ const targetCode = ref<string>('')
  * @date 2025/2/16 10:31
  */
 function handleClearSrcCode() {
-  srcCode.value = ''
-  targetCode.value = ''
+  srcModel.value.value = ''
+  srcModelEditor.value?.changeModelCode(srcModel.value.uri, srcModel.value.value)
+
+  targetModel.value.value = ''
+  targetModelEditor.value?.changeModelCode(targetModel.value.uri, targetModel.value.value)
 }
 
 /**
- * Source code changed callback - regenerate target code after 1s
+ * Source code change callback - regenerate target code after 300ms
+ * @param _uri model uri
+ * @param code model code
  * @author shiloh
  * @date 2025/2/16 10:31
  */
-const handleSrcCodeChange = debounce(async () => {
+const handleSrcCodeChange = debounce(async (_uri: Uri, code: string | undefined) => {
+  srcModel.value.value = code ?? ''
   await handleGenerateTargetCode()
-}, 500)
+}, 300)
 
 const $q = useQuasar()
 
@@ -96,23 +126,27 @@ const $q = useQuasar()
  * @date 2025/2/16 10:31
  */
 async function handleGenerateTargetCode() {
-  if (!srcCode.value) {
+  if (!srcModel.value.value) {
+    targetModel.value.value = ''
+    targetModelEditor.value?.changeModelCode(targetModel.value.uri, targetModel.value.value)
     return
   }
 
   try {
-    targetCode.value = ''
-    const typeInterfaces = JsonToTS(JSON.parse(srcCode.value), {
+    const typeInterfaces = JsonToTS(JSON.parse(srcModel.value.value), {
       rootName: 'Root',
       useTypeAlias: useTypeAlias.value,
     })
+    let code = ''
     typeInterfaces.forEach((typeInterface, index) => {
       if (index < typeInterfaces.length - 1) {
-        targetCode.value += `${typeInterface}\n\n`
+        code += `${typeInterface}\n\n`
       } else {
-        targetCode.value += `${typeInterface}\n`
+        code += `${typeInterface}\n`
       }
     })
+    targetModel.value.value = code
+    targetModelEditor.value?.changeModelCode(targetModel.value.uri, code)
   } catch (e) {
     $q.notify({
       color: 'negative',
@@ -124,6 +158,21 @@ async function handleGenerateTargetCode() {
   }
 }
 
+/**
+ * Target code change callback
+ * @param _uri model uri
+ * @param code model code
+ * @author shiloh
+ * @date 2025/2/16 10:31
+ */
+const handleTargetCodeChange = debounce(async (_uri: Uri, code: string | undefined) => {
+  if (!code) {
+    return
+  }
+
+  targetModel.value.value = code
+}, 300)
+
 // region copy
 
 const { copy } = useClipboard()
@@ -133,7 +182,7 @@ const { copy } = useClipboard()
 // region mounted
 
 onMounted(() => {
-  srcCode.value = JSON_OBJECT_TEST_STR
+  srcModel.value.value = JSON_OBJECT_TEST_STR
 })
 
 // endregion

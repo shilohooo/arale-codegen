@@ -7,8 +7,8 @@ namespace Arale.CodeGen.Commons.Constants;
 /// </summary>
 public enum LanguageType
 {
-    [Description("C#")] CSharp = 1,
-    [Description("Java")] Java = 2,
-    [Description("JS")] JavaScript = 3,
-    [Description("TS")] TypeScript = 4
+    [Description("cs")] CSharp = 1,
+    [Description("java")] Java = 2,
+    [Description("js")] JavaScript = 3,
+    [Description("ts")] TypeScript = 4
 }

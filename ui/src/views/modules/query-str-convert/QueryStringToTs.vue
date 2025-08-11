@@ -23,6 +23,7 @@
       </div>
       <q-input
         v-model="srcCode"
+        name="srcCode"
         filled
         type="textarea"
         placeholder="Paste your query string here, or enter something like a=1&b=2..."
@@ -40,6 +41,7 @@
         <div class="col">
           <q-toggle
             v-model="useTypeAlias"
+            name="useTypeAlias"
             label="Use type alias"
             :true-value="true"
             :false-value="false"
@@ -48,17 +50,21 @@
         </div>
         <div class="col text-right">
           <q-btn
-            :disable="!targetCode"
+            :disable="!targetModel.value"
             icon="content_copy"
             size="sm"
             color="primary"
             label="Copy"
             no-caps
-            @click="copy(targetCode)"
+            @click="copy(targetModel.value)"
           />
         </div>
       </div>
-      <code-editor v-model="targetCode" language="typescript" />
+      <code-editor
+        ref="targetCodeEditor"
+        :editor-models="[targetModel]"
+        @change="handleTargetCodeChange"
+      />
     </div>
     <!--endregion-->
   </div>
@@ -71,10 +77,22 @@ import { useClipboard } from 'src/hooks/useClipboard'
 import JsonToTS from 'json-to-ts'
 import { TEST_QUERY_STR } from 'src/constant/data/query-str-example'
 import qs from 'qs'
+import type { EditorModel } from 'src/types/code-editor'
+import { createEditorModel } from 'src/utils'
+import { LanguageType } from 'src/enums'
+import type { Uri } from 'monaco-editor'
 
-const srcCode = ref<string>('')
+const srcCode = ref<string>(TEST_QUERY_STR)
 const useTypeAlias = ref<boolean>(false)
-const targetCode = ref<string>('')
+const targetModel = ref<EditorModel>(
+  createEditorModel({
+    language: LanguageType.TypeScript,
+    code: '',
+    fileName: 'Target.ts',
+  }),
+)
+
+const targetCodeEditor = ref<InstanceType<typeof CodeEditor> | null>(null)
 
 /**
  * Clear source code
@@ -83,17 +101,18 @@ const targetCode = ref<string>('')
  */
 function handleClearSrcCode() {
   srcCode.value = ''
-  targetCode.value = ''
+  targetModel.value.value = ''
+  targetCodeEditor.value?.changeModelCode(targetModel.value.uri, targetModel.value.value)
 }
 
 /**
- * Source code changed callback - regenerate target code after 1s
+ * Source code changed callback - regenerate target code after 300ms
  * @author shiloh
  * @date 2025/3/25 22:12
  */
 const handleSrcCodeChange = debounce(async () => {
   await handleGenerateTargetCode()
-}, 500)
+}, 300)
 
 const $q = useQuasar()
 
@@ -104,23 +123,27 @@ const $q = useQuasar()
  */
 async function handleGenerateTargetCode() {
   if (!srcCode.value) {
+    targetModel.value.value = ''
+    targetCodeEditor.value?.changeModelCode(targetModel.value.uri, targetModel.value.value)
     return
   }
 
   const jsonObj = JSON.parse(JSON.stringify(qs.parse(srcCode.value)))
   try {
-    targetCode.value = ''
     const typeInterfaces = JsonToTS(jsonObj, {
       rootName: 'Root',
       useTypeAlias: useTypeAlias.value,
     })
+    let targetCode = ''
     typeInterfaces.forEach((typeInterface, index) => {
       if (index < typeInterfaces.length - 1) {
-        targetCode.value += `${typeInterface}\n\n`
+        targetCode += `${typeInterface}\n\n`
       } else {
-        targetCode.value += `${typeInterface}\n`
+        targetCode += `${typeInterface}\n`
       }
     })
+    targetModel.value.value = targetCode
+    targetCodeEditor.value?.changeModelCode(targetModel.value.uri, targetModel.value.value)
   } catch (e) {
     $q.notify({
       color: 'negative',
@@ -132,6 +155,21 @@ async function handleGenerateTargetCode() {
   }
 }
 
+/**
+ * Target code change callback
+ * @param _uri model uri
+ * @param code model code
+ * @author shiloh
+ * @date 2025/2/16 10:31
+ */
+const handleTargetCodeChange = debounce(async (_uri: Uri, code: string | undefined) => {
+  if (!code) {
+    return
+  }
+
+  targetModel.value.value = code
+}, 300)
+
 // region copy
 
 const { copy } = useClipboard()
@@ -141,7 +179,6 @@ const { copy } = useClipboard()
 // region mounted
 
 onMounted(() => {
-  srcCode.value = TEST_QUERY_STR
   handleGenerateTargetCode()
 })
 

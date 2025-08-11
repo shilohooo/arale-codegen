@@ -8,6 +8,9 @@ namespace Arale.CodeGen.Infrastructure.Generators;
 public class CSharpStructCodeGenerator : BaseCodeGenerator
 {
     /// <inheritdoc />
+    public override TargetType SupportedTargetType => TargetType.CSharpStruct;
+
+    /// <inheritdoc />
     protected override TemplateName GetTemplateName()
     {
         return TemplateName.CSharpStruct;

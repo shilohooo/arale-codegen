@@ -8,6 +8,8 @@ namespace Arale.CodeGen.Infrastructure.Generators;
 public class JavaRecordCodeGenerator : BaseCodeGenerator
 {
     /// <inheritdoc />
+    public override TargetType SupportedTargetType => TargetType.JavaRecord;
+ /// <inheritdoc />
     protected override TemplateName GetTemplateName()
     {
         return TemplateName.JavaRecord;

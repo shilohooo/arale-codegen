@@ -8,6 +8,9 @@ namespace Arale.CodeGen.Infrastructure.Generators;
 public class JavaClassCodeGenerator : BaseCodeGenerator
 {
     /// <inheritdoc />
+    public override TargetType SupportedTargetType => TargetType.JavaClass;
+
+    /// <inheritdoc />
     protected override TemplateName GetTemplateName()
     {
         return TemplateName.JavaClass;

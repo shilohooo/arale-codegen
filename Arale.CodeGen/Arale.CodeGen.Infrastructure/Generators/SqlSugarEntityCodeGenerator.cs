@@ -8,6 +8,8 @@ namespace Arale.CodeGen.Infrastructure.Generators;
 public class SqlSugarEntityCodeGenerator : BaseCodeGenerator
 {
     /// <inheritdoc />
+    public override TargetType SupportedTargetType => TargetType.SqlSugarEntity;
+ /// <inheritdoc />
     protected override TemplateName GetTemplateName()
     {
         return TemplateName.SqlSugarEntity;

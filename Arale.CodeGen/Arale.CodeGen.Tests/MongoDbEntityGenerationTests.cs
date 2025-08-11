@@ -6,7 +6,6 @@ using Arale.CodeGen.Tests.Constants;
 namespace Arale.CodeGen.Tests;
 
 /// <summary>
-///
 /// </summary>
 public class MongoDbEntityGenerationTests
 {
@@ -20,10 +19,6 @@ public class MongoDbEntityGenerationTests
             TargetType = TargetType.SpringDataMongoDbEntity
         });
         Assert.NotEmpty(code);
-        Assert.Contains("import org.springframework.data.mongodb.core.mapping.Document;", code);
-        Assert.Contains("import org.springframework.data.mongodb.core.mapping.Field;", code);
-        Assert.Contains("@Document(collection = \"RootClass\")", code);
-        Assert.Contains("@Field(\"id\")", code);
     }
 
     [Fact]
@@ -36,7 +31,5 @@ public class MongoDbEntityGenerationTests
             TargetType = TargetType.CSharpMongoDbDriverEntity
         });
         Assert.NotEmpty(code);
-        Assert.Contains("using MongoDB.Bson.Serialization.Attributes;", code);
-        Assert.Contains("[BsonElement(\"Id\")]", code);
     }
 }

@@ -19,22 +19,4 @@ public class {{ model.class_name }} {
     private {{ property.field_type.type_name }} {{ property.field_name }};
 
 {{~ end ~}}
-{{~ for nested_model in model.nested_models ~}}
-    /**
-     * {{ nested_model.comment }} Class
-     */
-    @Setter
-    @Getter
-    @ToString
-    public static class {{ nested_model.class_name }} {
-{{~ for property in nested_model.properties ~}}
-        /**
-         * {{ property.comment }}
-         */
-        private {{ property.field_type.type_name }} {{ property.field_name }};
-
-{{~ end ~}}
-    }
-
-{{~ end ~}}
 }

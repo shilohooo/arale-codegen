@@ -2,6 +2,7 @@ using System.Reflection;
 using Arale.CodeGen.Api.Filters;
 using Arale.CodeGen.Api.Handlers;
 using Arale.CodeGen.Extensions;
+using Arale.CodeGen.Infrastructure.Generators;
 using Microsoft.AspNetCore.HttpLogging;
 using Microsoft.AspNetCore.Mvc;
 
@@ -14,6 +15,8 @@ builder.Logging.AddConsole();
 builder.Logging.AddDebug();
 
 builder.Services.AddServicesFromAssembly(Assembly.Load("Arale.CodeGen.Services"));
+builder.Services.AddCodeGenerators<ICodeGenerator>();
+builder.Services.AddSingleton<CodeGeneratorFactory>();
 
 builder.Services.AddExceptionHandler<GlobalExceptionHandler>();
 // disable default model state validation

@@ -3,7 +3,7 @@
  * @author shiloh
  * @date 2025/2/5 10:30
  */
-import type { CodeGenerateReq } from 'src/api/models/code-generate-models'
+import type { CodeGenerateReq, CodeGenerateResp } from 'src/api/models/code-generate-models'
 import httpClient from 'src/utils/http'
 
 // api base path
@@ -24,7 +24,7 @@ export const CODE_GENERATE_API = {
  * @date 2025/2/5 10:33
  */
 export const generateCodeBySql = (data: CodeGenerateReq) => {
-  return httpClient.post<string>({ data, url: CODE_GENERATE_API.generateBySql })
+  return httpClient.post<CodeGenerateResp[]>({ data, url: CODE_GENERATE_API.generateBySql })
 }
 
 /**
@@ -34,5 +34,5 @@ export const generateCodeBySql = (data: CodeGenerateReq) => {
  * @date 2025/2/24 22:46
  */
 export const generateCodeByJson = (data: CodeGenerateReq) => {
-  return httpClient.post<string>({ data, url: CODE_GENERATE_API.generateByJson })
+  return httpClient.post<CodeGenerateResp[]>({ data, url: CODE_GENERATE_API.generateByJson })
 }

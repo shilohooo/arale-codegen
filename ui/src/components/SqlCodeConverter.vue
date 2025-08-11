@@ -11,6 +11,7 @@
         <div class="col">
           <q-select
             v-model="reqData.dbType"
+            name="dbType"
             :options="DB_TYPE_OPTIONS"
             @update:model-value="handleGenerateTargetCode"
             label="Database type"
@@ -21,9 +22,10 @@
         <div class="col">
           <q-input
             v-model.trim="reqData.tableNamePrefix"
+            name="tableNamePrefix"
             placeholder="Input the table name prefix..."
             label="Table name prefix"
-            @update:model-value="handleSrcCodeChange"
+            @update:model-value="handleTableNamePrefixChange"
           />
         </div>
         <div class="col text-right">
@@ -38,7 +40,7 @@
           />
         </div>
       </div>
-      <code-editor v-model="reqData.code" language="sql" @change="handleSrcCodeChange" />
+      <code-editor ref="srcModelEditor" :editor-models="[srcModel]" @change="handleSrcCodeChange" />
     </div>
     <!--endregion-->
 
@@ -51,6 +53,7 @@
           <q-select
             v-model="reqData.targetType"
             :options="targetTypeOptions"
+            name="targetType"
             @update:model-value="handleGenerateTargetCode"
             label="Convert target type"
             map-options
@@ -59,17 +62,21 @@
         </div>
         <div class="col text-right">
           <q-btn
-            :disable="!targetCode"
+            :disable="!targetModel.value"
             icon="content_copy"
             size="sm"
             color="primary"
             label="Copy"
             no-caps
-            @click="copy(targetCode)"
+            @click="copy(targetModel.value)"
           />
         </div>
       </div>
-      <code-editor v-model="targetCode" :language="targetLanguage" />
+      <code-editor
+        ref="targetModelEditor"
+        :editor-models="[targetModel]"
+        @change="handleTargetCodeChange"
+      />
     </div>
     <!--endregion-->
   </div>
@@ -80,11 +87,13 @@ import CodeEditor from 'components/CodeEditor.vue'
 import type { QSelectOption } from 'quasar'
 import { debounce } from 'quasar'
 import { generateCodeBySql } from 'src/api/code-generate-api'
-import { DB_TYPE_OPTIONS, TARGET_TYPE_LANGUAGE_MAPPING } from 'src/constant'
-import type { TargetType } from 'src/enums'
-import { DbType } from 'src/enums'
+import { DB_TYPE_OPTIONS } from 'src/constant'
+import { DbType, LanguageType, type TargetType } from 'src/enums'
 import type { CodeGenerateReq } from 'src/api/models/code-generate-models'
 import { useClipboard } from 'src/hooks/useClipboard'
+import { createEditorModel } from 'src/utils'
+import type { EditorModel } from 'src/types/code-editor'
+import type { Uri } from 'monaco-editor'
 
 const props = withDefaults(
   defineProps<{
@@ -98,14 +107,29 @@ const props = withDefaults(
   },
 )
 
-const targetCode = ref<string>('')
 const reqData = ref<CodeGenerateReq>({
   code: props.sourceCode,
   dbType: DbType.SQLServer,
   targetType: props.defaultSelectedTargetType,
   tableNamePrefix: 'T_',
 })
-const targetLanguage = computed(() => TARGET_TYPE_LANGUAGE_MAPPING[reqData.value.targetType])
+const srcModel = ref<EditorModel>(
+  createEditorModel({
+    language: LanguageType.SQL,
+    code: props.sourceCode,
+    fileName: 'Source.sql',
+  }),
+)
+const targetModel = ref<EditorModel>(
+  createEditorModel({
+    language: LanguageType.CSharp,
+    code: '',
+    fileName: 'Target.cs',
+  }),
+)
+
+const srcModelEditor = ref<InstanceType<typeof CodeEditor> | null>(null)
+const targetModelEditor = ref<InstanceType<typeof CodeEditor> | null>(null)
 
 /**
  * Clear source code
@@ -114,17 +138,34 @@ const targetLanguage = computed(() => TARGET_TYPE_LANGUAGE_MAPPING[reqData.value
  */
 function handleClearSrcCode() {
   reqData.value.code = ''
-  targetCode.value = ''
+  srcModel.value.value = ''
+  srcModelEditor.value?.changeModelCode(srcModel.value.uri, srcModel.value.value)
+
+  targetModel.value.value = ''
+  targetModelEditor.value?.changeModelCode(targetModel.value.uri, targetModel.value.value)
 }
 
 /**
- * Source code changed callback - regenerate target code after 1s
+ * Source code changed callback - regenerate target code after 300s
+ * @param _uri model uri
+ * @param code model code
  * @author shiloh
  * @date 2025/2/5 10:37
  */
-const handleSrcCodeChange = debounce(async () => {
+const handleSrcCodeChange = debounce(async (_uri: Uri, code: string | undefined) => {
+  srcModel.value.value = code ?? ''
+  reqData.value.code = code ?? ''
   await handleGenerateTargetCode()
-}, 500)
+}, 300)
+
+/**
+ * Table name prefix changed callback - regenerate target code after 300ms
+ * @author shiloh
+ * @date 2025/8/2 22:01
+ */
+const handleTableNamePrefixChange = debounce(async () => {
+  await handleGenerateTargetCode()
+}, 300)
 
 /**
  * Generate target code
@@ -133,12 +174,32 @@ const handleSrcCodeChange = debounce(async () => {
  */
 async function handleGenerateTargetCode() {
   if (!reqData.value.code) {
+    targetModel.value.value = ''
+    targetModelEditor.value?.changeModelCode(targetModel.value.uri, targetModel.value.value)
     return
   }
 
   const res = await generateCodeBySql(reqData.value)
-  targetCode.value = res.replace(/\\n/g, '\n').trim()
+  if (!res.length) {
+    targetModel.value.value = ''
+    return
+  }
+  targetModel.value = createEditorModel(res[0]!)
+  targetModelEditor.value?.changeModelCode(targetModel.value.uri, targetModel.value.value)
 }
+
+/**
+ * Target code change callback
+ * @author shiloh
+ * @date 2025/2/16 10:31
+ */
+const handleTargetCodeChange = debounce(async (_uri: Uri, code: string | undefined) => {
+  if (!code) {
+    return
+  }
+
+  targetModel.value.value = code
+}, 300)
 
 // region copy
 

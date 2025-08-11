@@ -4,8 +4,7 @@
  * @date 2025/2/5 11:18
  */
 import type { QSelectOption } from 'quasar'
-import { DbType, JsonPropertyCaseType, TargetType } from 'src/enums'
-import type { EditorLanguage } from 'src/types/code-editor'
+import { DbType, JsonPropertyCaseType, LanguageType, TargetType } from 'src/enums'
 
 // supported database type options
 export const DB_TYPE_OPTIONS: QSelectOption<DbType>[] = [
@@ -44,29 +43,14 @@ export const JSON_TO_ENTITY_CODE_TARGET_TYPE_OPTIONS: QSelectOption<TargetType>[
   },
 ]
 
-// target type & editor language mapping
-export const TARGET_TYPE_LANGUAGE_MAPPING: Record<TargetType, EditorLanguage> = {
-  [TargetType.CSharpClass]: 'csharp',
-  [TargetType.CSharpRecord]: 'csharp',
-  [TargetType.CSharpStruct]: 'csharp',
-  [TargetType.SqlSugarEntity]: 'csharp',
-  [TargetType.EFCoreEntity]: 'csharp',
-  [TargetType.CSharpMongoDBDriverEntity]: 'csharp',
-  [TargetType.JavaClass]: 'java',
-  [TargetType.JavaRecord]: 'java',
-  [TargetType.MyBatisPlusEntity]: 'java',
-  [TargetType.HibernateEntity]: 'java',
-  [TargetType.SpringDataMongoDBEntity]: 'java',
-}
-
 // editor tab size
-export const EDITOR_TAB_SIZE: Record<EditorLanguage, number> = {
-  csharp: 4,
-  java: 4,
-  json: 2,
-  sql: 2,
-  typescript: 2,
-  javascript: 2,
+export const EDITOR_TAB_SIZE: Record<LanguageType, number> = {
+  [LanguageType.CSharp]: 4,
+  [LanguageType.Java]: 4,
+  [LanguageType.JSON]: 2,
+  [LanguageType.SQL]: 2,
+  [LanguageType.TypeScript]: 2,
+  [LanguageType.JavaScript]: 2,
 }
 
 // JSON property case type options
@@ -104,3 +88,33 @@ export const JSON_PROPERTY_CASE_TYPE_OPTIONS: QSelectOption<JsonPropertyCaseType
     value: JsonPropertyCaseType.KebabCaseUpper,
   },
 ]
+
+// language file extension mapping
+export const LANGUAGE_FILE_EXTENSION_MAPPING: Record<LanguageType, string> = {
+  [LanguageType.CSharp]: 'cs',
+  [LanguageType.Java]: 'java',
+  [LanguageType.JavaScript]: 'js',
+  [LanguageType.TypeScript]: 'ts',
+  [LanguageType.SQL]: 'sql',
+  [LanguageType.JSON]: 'json',
+}
+
+// language file icon name of https://pictogrammers.com/library/mdi/ in kebab-case
+export const LANGUAGE_FILE_ICON_NAME_MAPPING: Record<LanguageType, string> = {
+  [LanguageType.CSharp]: 'mdi-language-csharp',
+  [LanguageType.Java]: 'mdi-language-java',
+  [LanguageType.JavaScript]: 'mdi-language-javascript',
+  [LanguageType.TypeScript]: 'mdi-language-typescript',
+  [LanguageType.SQL]: 'mdi-database-search',
+  [LanguageType.JSON]: 'mdi-code-json',
+}
+
+// language file icon color
+export const LANGUAGE_FILE_ICON_COLOR_MAPPING: Record<LanguageType, string> = {
+  [LanguageType.CSharp]: '#68217A',
+  [LanguageType.Java]: '#6699FF',
+  [LanguageType.JavaScript]: '#F5DD1E',
+  [LanguageType.TypeScript]: '#0288D1',
+  [LanguageType.SQL]: '#1989fa',
+  [LanguageType.JSON]: '#00A000',
+}

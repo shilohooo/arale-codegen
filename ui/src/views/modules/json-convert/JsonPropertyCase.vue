@@ -11,7 +11,7 @@
         <div class="col">JSON</div>
         <div class="col text-right">
           <q-btn
-            :disable="!srcCode"
+            :disable="!srcModel.value"
             icon="delete"
             size="sm"
             color="negative"
@@ -21,7 +21,7 @@
           />
         </div>
       </div>
-      <code-editor v-model="srcCode" language="json" @change="handleSrcCodeChange" />
+      <code-editor ref="srcModelEditor" :editor-models="[srcModel]" @change="handleSrcCodeChange" />
     </div>
     <!--endregion-->
 
@@ -29,11 +29,12 @@
 
     <!--region target-->
     <div class="col">
-      <div class="row items-center justify-between q-mb-md">
+      <div class="row items-center justify-between q-mb-md q-gutter-x-md">
         <div class="col">JSON</div>
-        <div class="col-lg-10 col-md-8 col-sm-6">
+        <div class="col">
           <q-select
             v-model="caseType"
+            name="caseType"
             :options="JSON_PROPERTY_CASE_TYPE_OPTIONS"
             @update:model-value="handleGenerateTargetCode"
             label="Case type"
@@ -43,17 +44,17 @@
         </div>
         <div class="col text-right">
           <q-btn
-            :disable="!targetCode"
+            :disable="!targetModel.value"
             icon="content_copy"
             size="sm"
             color="primary"
             label="Copy"
             no-caps
-            @click="copy(targetCode)"
+            @click="copy(targetModel.value)"
           />
         </div>
       </div>
-      <code-editor v-model="targetCode" language="json" />
+      <code-editor ref="targetModelEditor" :editor-models="[targetModel]" />
     </div>
     <!--endregion-->
   </div>
@@ -65,12 +66,29 @@ import { debounce, useQuasar } from 'quasar'
 import { useClipboard } from 'src/hooks/useClipboard'
 import { JSON_OBJECT_TEST_STR } from 'src/constant/data/json-examples'
 import { JSON_PROPERTY_CASE_TYPE_OPTIONS } from 'src/constant'
-import { convertJsonPropertyCase } from 'src/utils'
-import { JsonPropertyCaseType } from 'src/enums'
+import { convertJsonPropertyCase, createEditorModel } from 'src/utils'
+import { JsonPropertyCaseType, LanguageType } from 'src/enums'
+import type { EditorModel } from 'src/types/code-editor'
+import type { Uri } from 'monaco-editor'
 
-const srcCode = ref('')
-const targetCode = ref<string>('')
+const srcModel = ref<EditorModel>(
+  createEditorModel({
+    language: LanguageType.JSON,
+    code: JSON_OBJECT_TEST_STR,
+    fileName: 'Source.json',
+  }),
+)
+const targetModel = ref<EditorModel>(
+  createEditorModel({
+    language: LanguageType.JSON,
+    code: '',
+    fileName: 'Target.json',
+  }),
+)
 const caseType = ref(JsonPropertyCaseType.PascalCase)
+
+const srcModelEditor = ref<InstanceType<typeof CodeEditor> | null>(null)
+const targetModelEditor = ref<InstanceType<typeof CodeEditor> | null>(null)
 
 /**
  * Clear source code
@@ -78,18 +96,23 @@ const caseType = ref(JsonPropertyCaseType.PascalCase)
  * @date 2025/2/24 23:00
  */
 function handleClearSrcCode() {
-  srcCode.value = ''
-  targetCode.value = ''
+  srcModel.value.value = ''
+  srcModelEditor.value?.changeModelCode(srcModel.value.uri, srcModel.value.value)
+  targetModel.value.value = ''
+  targetModelEditor.value?.changeModelCode(targetModel.value.uri, targetModel.value.value)
 }
 
 /**
- * Source code changed callback - regenerate target code after 1s
+ * Source code change callback - regenerate target code after 300ms
+ * @param _uri model uri
+ * @param code model code
  * @author shiloh
- * @date 2025/2/24 23:00
+ * @date 2025/2/16 10:31
  */
-const handleSrcCodeChange = debounce(async () => {
+const handleSrcCodeChange = debounce(async (_uri: Uri, code: string | undefined) => {
+  srcModel.value.value = code ?? ''
   await handleGenerateTargetCode()
-}, 500)
+}, 300)
 
 const $q = useQuasar()
 
@@ -99,12 +122,15 @@ const $q = useQuasar()
  * @date 2025/2/24 23:00
  */
 async function handleGenerateTargetCode() {
-  if (!srcCode.value) {
+  if (!srcModel.value.value) {
+    targetModel.value.value = ''
+    targetModelEditor.value?.changeModelCode(targetModel.value.uri, targetModel.value.value)
     return
   }
 
   try {
-    targetCode.value = convertJsonPropertyCase(srcCode.value, caseType.value)
+    targetModel.value.value = convertJsonPropertyCase(srcModel.value.value, caseType.value)
+    targetModelEditor.value?.changeModelCode(targetModel.value.uri, targetModel.value.value)
   } catch (e) {
     $q.notify({
       color: 'negative',
@@ -119,14 +145,6 @@ async function handleGenerateTargetCode() {
 // region copy
 
 const { copy } = useClipboard()
-
-// endregion
-
-// region mounted
-
-onMounted(() => {
-  srcCode.value = JSON_OBJECT_TEST_STR
-})
 
 // endregion
 </script>
