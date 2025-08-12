@@ -19,7 +19,7 @@
     "axios": "^1.8.4",
     "javascript-stringify": "^2.1.0",
     "json-case-convertor": "^1.4.4",
-    "json-to-jsdoc": "^1.0.3",
+    "json-to-jsdoc": "^1.0.4",
     "json-to-ts": "^2.1.0",
     "nanoid": "^5.1.5",
     "pinia": "^2.0.11",
