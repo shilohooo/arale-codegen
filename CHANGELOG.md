@@ -4,6 +4,17 @@ All notable changes to the "relax-your-eyes-green" extension will be documented 
 
 Check [Keep a Changelog](http://keepachangelog.com/) for recommendations on how to structure this file.
 
+## [1.4.0](https://github.com/shilohooo/arale-codegen/releases/tag/v1.4.0) - 2025-08-12
+
+### Added
+- Support for multiple tabs to display generated code lists.
+    - Each generated result is displayed in its own tab, making it easier to compare and switch between results.
+
+### Changed
+- Refactored internal API response structures to support the multi-tab feature (no impact on external users).
+- Improved Monaco Editor state management to preserve cursor and scroll position when switching tabs.
+
+
 ## 1.3.0 - 2025-07-26
 
 ### Added
