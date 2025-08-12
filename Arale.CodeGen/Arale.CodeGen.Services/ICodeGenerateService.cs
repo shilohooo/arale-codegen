@@ -11,13 +11,13 @@ public interface ICodeGenerateService
     ///     Generate code by SQL DDL
     /// </summary>
     /// <param name="codeGenerateReq">request params</param>
-    /// <returns>target code</returns>
-    Task<string> GenerateBySql(CodeGenerateReq codeGenerateReq);
+    /// <returns>target codes</returns>
+    Task<List<CodeGenerateResp>> GenerateBySql(CodeGenerateReq codeGenerateReq);
 
     /// <summary>
     ///     Generate code by JSON object or array
     /// </summary>
     /// <param name="generateReq">request params</param>
-    /// <returns>target code</returns>
-    Task<string> GenerateByJson(CodeGenerateReq generateReq);
+    /// <returns>target codes</returns>
+    Task<List<CodeGenerateResp>> GenerateByJson(CodeGenerateReq generateReq);
 }

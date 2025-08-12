@@ -8,6 +8,9 @@ namespace Arale.CodeGen.Infrastructure.Generators;
 public class EFCoreEntityCodeGenerator : BaseCodeGenerator
 {
     /// <inheritdoc />
+    public override TargetType SupportedTargetType => TargetType.EFCoreEntity;
+
+    /// <inheritdoc />
     protected override TemplateName GetTemplateName()
     {
         return TemplateName.EFCoreEntity;

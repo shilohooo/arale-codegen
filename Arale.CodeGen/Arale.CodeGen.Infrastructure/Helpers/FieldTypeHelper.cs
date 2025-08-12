@@ -32,7 +32,7 @@ public static class FieldTypeHelper
             return fieldType;
 
         Console.WriteLine($"Not Custom column type or not mapped column type: {columnType} - {columnType.ToSql()}");
-        return FieldType.Of("object");
+        return FieldType.Of(CSharPropertyTypeMapping.CSharpObjectClassName);
     }
 
     /// <summary>
@@ -45,18 +45,26 @@ public static class FieldTypeHelper
         var isNotObjectArr = false;
         while (true)
         {
-            if (jsonNodeKv.Value is null) return FieldType.Of("object");
+            if (jsonNodeKv.Value is null) return FieldType.Of(CSharPropertyTypeMapping.CSharpObjectClassName);
 
             switch (jsonNodeKv.Value.GetValueKind())
             {
                 case JsonValueKind.Object:
-                    return FieldType.Of(PluralizerHelper.Singularize(jsonNodeKv.Key.Pascalize()));
+                {
+                    var typeName = jsonNodeKv.Key.Pascalize();
+                    return FieldType.Of(PluralizerHelper.Singularize(typeName),
+                        GetCSharpObjectImportStatement(typeName));
+                }
 
                 case JsonValueKind.Array:
                 {
                     var firstElement = jsonNodeKv.Value[0]!;
                     if (firstElement.GetValueKind() is JsonValueKind.Object)
-                        return FieldType.Of($"List<{PluralizerHelper.Singularize(jsonNodeKv.Key.Pascalize())}>");
+                    {
+                        var typeName = jsonNodeKv.Key.Pascalize();
+                        return FieldType.Of($"List<{PluralizerHelper.Singularize(typeName)}>",
+                            GetCSharpObjectImportStatement(typeName.Singularize()));
+                    }
 
                     isNotObjectArr = true;
                     jsonNodeKv = KeyValuePair.Create<string, JsonNode?>(jsonNodeKv.Key, firstElement);
@@ -65,7 +73,7 @@ public static class FieldTypeHelper
 
                 case JsonValueKind.Number:
                 {
-                    // handle number typ
+                    // handle number type
                     var typeName = jsonNodeKv.Value.ToString().Contains('.') ? "double" : "int";
                     return FieldType.Of(isNotObjectArr ? $"List<{typeName}>" : typeName);
                 }
@@ -93,7 +101,10 @@ public static class FieldTypeHelper
                 case JsonValueKind.Null:
                 case JsonValueKind.Undefined:
                 default:
-                    return FieldType.Of(isNotObjectArr ? "List<object>" : "object");
+                    return FieldType.Of(
+                        isNotObjectArr
+                            ? $"List<{CSharPropertyTypeMapping.CSharpObjectClassName}>"
+                            : CSharPropertyTypeMapping.CSharpObjectClassName);
             }
         }
     }
@@ -114,7 +125,7 @@ public static class FieldTypeHelper
                 out var fieldType)) return fieldType;
 
         Console.WriteLine($"Not Custom column type or not mapped column type: {columnType} - {columnType.ToSql()}");
-        return FieldType.Of("Object");
+        return FieldType.Of(JavaFieldTypeMapping.JavaObjectClassName);
     }
 
     /// <summary>
@@ -127,18 +138,25 @@ public static class FieldTypeHelper
         var isNotObjectArr = false;
         while (true)
         {
-            if (jsonNodeKv.Value is null) return FieldType.Of(JavaFieldTypeMapping.JavObjectClassName);
+            if (jsonNodeKv.Value is null) return FieldType.Of(JavaFieldTypeMapping.JavaObjectClassName);
 
             switch (jsonNodeKv.Value.GetValueKind())
             {
                 case JsonValueKind.Object:
-                    return FieldType.Of(PluralizerHelper.Singularize(jsonNodeKv.Key.Pascalize()));
+                {
+                    var typeName = jsonNodeKv.Key.Pascalize();
+                    return FieldType.Of(PluralizerHelper.Singularize(typeName), GetJavaObjectImportStatement(typeName));
+                }
 
                 case JsonValueKind.Array:
                 {
                     var firstElement = jsonNodeKv.Value[0]!;
                     if (firstElement.GetValueKind() is JsonValueKind.Object)
-                        return FieldType.Of($"List<{PluralizerHelper.Singularize(jsonNodeKv.Key.Pascalize())}>");
+                    {
+                        var typeName = jsonNodeKv.Key.Pascalize();
+                        return FieldType.Of($"List<{PluralizerHelper.Singularize(typeName)}>",
+                            GetJavaObjectImportStatement(typeName.Singularize()));
+                    }
 
                     isNotObjectArr = true;
                     jsonNodeKv = KeyValuePair.Create<string, JsonNode?>(jsonNodeKv.Key, firstElement);
@@ -181,10 +199,28 @@ public static class FieldTypeHelper
                 case JsonValueKind.Undefined:
                 default:
                     return isNotObjectArr
-                        ? FieldType.Of($"List<{JavaFieldTypeMapping.JavObjectClassName}>",
+                        ? FieldType.Of($"List<{JavaFieldTypeMapping.JavaObjectClassName}>",
                             JavaFieldTypeMapping.JavaListClassImportStatement)
-                        : FieldType.Of(JavaFieldTypeMapping.JavObjectClassName);
+                        : FieldType.Of(JavaFieldTypeMapping.JavaObjectClassName);
             }
         }
+    }
+
+    private static bool IsObjectType(string typeName)
+    {
+        return CSharPropertyTypeMapping.CSharpObjectClassName.Equals(typeName,
+            StringComparison.InvariantCultureIgnoreCase);
+    }
+
+    private static string GetCSharpObjectImportStatement(string typeName)
+    {
+        return IsObjectType(typeName)
+            ? string.Empty
+            : $"using {CSharPropertyTypeMapping.CSharpBaseNamespace}.{typeName};";
+    }
+
+    private static string GetJavaObjectImportStatement(string typeName)
+    {
+        return IsObjectType(typeName) ? string.Empty : $"import {JavaFieldTypeMapping.JavaBasePackage}.{typeName};";
     }
 }

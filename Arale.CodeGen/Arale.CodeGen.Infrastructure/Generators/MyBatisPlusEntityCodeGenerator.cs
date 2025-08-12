@@ -8,6 +8,9 @@ namespace Arale.CodeGen.Infrastructure.Generators;
 public class MyBatisPlusEntityCodeGenerator : BaseCodeGenerator
 {
     /// <inheritdoc />
+    public override TargetType SupportedTargetType => TargetType.MyBatisPlusEntity;
+
+    /// <inheritdoc />
     protected override TemplateName GetTemplateName()
     {
         return TemplateName.MyBatisPlusEntity;

@@ -24,7 +24,7 @@ export enum TargetType {
   MyBatisPlusEntity = 8,
   HibernateEntity = 9,
   SpringDataMongoDBEntity = 10,
-  CSharpMongoDBDriverEntity,
+  CSharpMongoDBDriverEntity = 11,
 }
 
 // JSON property case type
@@ -37,4 +37,14 @@ export enum JsonPropertyCaseType {
   KebabCase = 6,
   SnakeCaseUpper = 7,
   KebabCaseUpper = 8,
+}
+
+// supported languages
+export enum LanguageType {
+  CSharp = 1,
+  Java = 2,
+  JavaScript = 3,
+  TypeScript = 4,
+  SQL = 5,
+  JSON = 6,
 }

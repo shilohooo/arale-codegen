@@ -12,6 +12,9 @@ namespace Arale.CodeGen.Infrastructure.Constants;
 /// </summary>
 public static class CSharPropertyTypeMapping
 {
+    public const string CSharpBaseNamespace = "Arale.CodeGen";
+    public const string CSharpObjectClassName = "object";
+
     private const string CSharpBooleanPrimitiveName = "bool";
     private const string CSharpShortPrimitiveName = "short";
     private const string CSharpIntPrimitiveName = "int";
@@ -62,6 +65,7 @@ public static class CSharPropertyTypeMapping
     /// </summary>
     public static readonly ImmutableDictionary<string, FieldType> CustomColumnPropertyTypeMapping = ImmutableDictionary
         .Create<string, FieldType>()
+        .Add("bit", FieldType.Of(CSharpBooleanPrimitiveName))
         .Add("bit(1)", FieldType.Of(CSharpBooleanPrimitiveName))
         .Add("bit(8)", FieldType.Of("byte"))
 
@@ -118,7 +122,9 @@ public static class CSharPropertyTypeMapping
 /// </summary>
 public static class JavaFieldTypeMapping
 {
-    public const string JavObjectClassName = "Object";
+    public const string JavaBasePackage = "io.arale.codegen";
+
+    public const string JavaObjectClassName = "Object";
     public const string JavaBooleanClassName = "Boolean";
     public const string JavaIntegerClassName = "Integer";
     public const string JavaDoubleClassName = "Double";
@@ -168,6 +174,7 @@ public static class JavaFieldTypeMapping
     /// </summary>
     public static readonly ImmutableDictionary<string, FieldType> CustomColumnPropertyTypeMapping = ImmutableDictionary
         .Create<string, FieldType>()
+        .Add("bit", FieldType.Of(JavaBooleanClassName))
         .Add("bit(1)", FieldType.Of(JavaBooleanClassName))
         .Add("bit(8)", FieldType.Of("Byte"))
 

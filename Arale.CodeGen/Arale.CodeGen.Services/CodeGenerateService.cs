@@ -6,19 +6,19 @@ namespace Arale.CodeGen.Services;
 /// <summary>
 ///     Code generate service impl
 /// </summary>
-public class CodeGenerateService : ICodeGenerateService
+public class CodeGenerateService(CodeGeneratorFactory codeGeneratorFactory) : ICodeGenerateService
 {
     /// <inheritdoc />
-    public async Task<string> GenerateBySql(CodeGenerateReq codeGenerateReq)
+    public async Task<List<CodeGenerateResp>> GenerateBySql(CodeGenerateReq codeGenerateReq)
     {
-        return await CodeGeneratorFactory.Create(codeGenerateReq.TargetType)
+        return await codeGeneratorFactory.Create(codeGenerateReq.TargetType)
             .GenerateBySql(codeGenerateReq);
     }
 
     /// <inheritdoc />
-    public async Task<string> GenerateByJson(CodeGenerateReq generateReq)
+    public async Task<List<CodeGenerateResp>> GenerateByJson(CodeGenerateReq generateReq)
     {
-        return await CodeGeneratorFactory.Create(generateReq.TargetType)
+        return await codeGeneratorFactory.Create(generateReq.TargetType)
             .GenerateByJson(generateReq);
     }
 }

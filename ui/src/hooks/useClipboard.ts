@@ -12,7 +12,11 @@ export function useClipboard() {
    * @author shiloh
    * @date 2025/2/16 10:33
    */
-  async function copy(text: string) {
+  async function copy(text?: string) {
+    if (!text) {
+      return
+    }
+
     await navigator.clipboard.writeText(text)
     Notify.create({
       message: 'Copied!',

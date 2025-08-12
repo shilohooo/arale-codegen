@@ -32,7 +32,8 @@ structure, or write the corresponding DTO code based on the structure of the JSO
   literal
 - [Convert JSON object or array to JSDoc comment](https://shiloh595.top/arale-codegen-ui/#/json-convert/json-to-jsdoc)
 - [Convert JSON object or array to entity](https://shiloh595.top/arale-codegen-ui/#/json-convert/json-to-entity) of
-  ORM / persistence framework, such as [Spring Data MongoDB](https://spring.io/projects/spring-data-mongodb), [MongoDB C# Driver](https://www.mongodb.com/docs/drivers/csharp/current/)
+  ORM / persistence framework, such
+  as [Spring Data MongoDB](https://spring.io/projects/spring-data-mongodb), [MongoDB C# Driver](https://www.mongodb.com/docs/drivers/csharp/current/)
 
 > [!NOTE]
 > Only the following databases are supported
@@ -63,22 +64,23 @@ The logo has been designed by [Free Logo Design](https://www.freelogodesign.org/
 
 ### Frontend
 
-| Name                 | Version | Documentation                                         | Remark                       |
-|----------------------|---------|-------------------------------------------------------|------------------------------|
-| NodeJS               | 20.11.1 | <https://nodejs.org>                                  |                              |
-| PNPM                 | 8.5.13  | <https://pnpm.io/>                                    | Package Manager              |
-| TypeScript           | 5.4     | <https://www.typescriptlang.org/docs/>                |                              |
-| Vue                  | 3.4.27  | <https://vuejs.org/>                                  |                              |
-| Quasar               | 2.16.0  | <https://quasar.dev/docs>                             | UI Framework                 |
-| JsonToTs             | 2.1.0   | <https://github.com/MariusAlch/json-to-ts>            | JSON to TypeScript           |
-| UnpluginAutoImport   | 0.18.2  | <https://github.com/unplugin/unplugin-auto-import>    |                              |
-| Monaco Vue           | v1.5.4  | <https://github.com/imguolao/monaco-vue>              | Code Editor                  |
-| sql-formatter        | 15.5.1  | <https://github.com/sql-formatter-org/sql-formatter>  |                              |
-| debounce             | 2.2.0   | <https://github.com/sindresorhus/debounce>            | Delay function               |
-| javascript-stringify | 2.1.0   | <https://github.com/blakeembrey/javascript-stringify> | JSON to JS object literal    |
-| json-case-converter  | 1.4.4   | <https://github.com/MIRTAHAALI/json-case-convertor>   | JSON property case converter |
-| qs                   | 6.14.0  | <https://github.com/ljharb/qs>                        | Query String Parser          |
-| json-to-jsdoc        | 1.0.3   | <https://github.com/shilohooo/json-to-jsdoc>          |                              |
+| Name                 | Version | Documentation                                         | Remark                                                                                |
+|----------------------|---------|-------------------------------------------------------|---------------------------------------------------------------------------------------|
+| NodeJS               | 20.11.1 | <https://nodejs.org>                                  |                                                                                       |
+| PNPM                 | 8.5.13  | <https://pnpm.io/>                                    | Package Manager                                                                       |
+| TypeScript           | 5.4     | <https://www.typescriptlang.org/docs/>                |                                                                                       |
+| Vue                  | 3.4.27  | <https://vuejs.org/>                                  |                                                                                       |
+| Quasar               | 2.16.0  | <https://quasar.dev/docs>                             | UI Framework                                                                          |
+| JsonToTs             | 2.1.0   | <https://github.com/MariusAlch/json-to-ts>            | JSON to TypeScript                                                                    |
+| UnpluginAutoImport   | 0.18.2  | <https://github.com/unplugin/unplugin-auto-import>    |                                                                                       |
+| Monaco Vue           | v1.5.4  | <https://github.com/imguolao/monaco-vue>              | Code Editor                                                                           |
+| sql-formatter        | 15.5.1  | <https://github.com/sql-formatter-org/sql-formatter>  |                                                                                       |
+| debounce             | 2.2.0   | <https://github.com/sindresorhus/debounce>            | Delay function                                                                        |
+| javascript-stringify | 2.1.0   | <https://github.com/blakeembrey/javascript-stringify> | JSON to JS object literal                                                             |
+| json-case-converter  | 1.4.4   | <https://github.com/MIRTAHAALI/json-case-convertor>   | JSON property case converter                                                          |
+| qs                   | 6.14.0  | <https://github.com/ljharb/qs>                        | Query String Parser                                                                   |
+| json-to-jsdoc        | 1.0.3   | <https://github.com/shilohooo/json-to-jsdoc>          |                                                                                       |
+| nanoid               | ^5.1.5  | <https://github.com/ai/nanoid>                        | Unique ID generator, used to ensure that the model uri of the monaco editor is unique |
 
 All the menu icons are from https://pictogrammers.com/library/mdi/
 

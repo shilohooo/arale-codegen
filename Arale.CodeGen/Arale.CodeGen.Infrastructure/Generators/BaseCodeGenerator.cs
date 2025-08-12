@@ -1,6 +1,7 @@
 ﻿using System.Text.Json;
 using System.Text.Json.Nodes;
 using Arale.CodeGen.Commons.Constants;
+using Arale.CodeGen.Extensions;
 using Arale.CodeGen.Infrastructure.Helpers;
 using Arale.CodeGen.Infrastructure.Parsers;
 using Arale.CodeGen.Models;
@@ -14,14 +15,28 @@ namespace Arale.CodeGen.Infrastructure.Generators;
 public abstract class BaseCodeGenerator : ICodeGenerator
 {
     /// <inheritdoc />
-    public async Task<string> GenerateBySql(CodeGenerateReq codeGenerateReq)
+    public abstract TargetType SupportedTargetType { get; }
+
+    /// <inheritdoc />
+    public async Task<List<CodeGenerateResp>> GenerateBySql(CodeGenerateReq codeGenerateReq)
     {
         var tableInfo = SqlParseHelper.Parse(codeGenerateReq);
-        return await TemplateHelper.RenderAsync(GetTemplateName(), tableInfo);
+        var generatedCode = await TemplateHelper.RenderAsync(GetTemplateName(), tableInfo);
+        var languageType = LanguageTypeHelper.GetByTargetType(codeGenerateReq.TargetType);
+        return
+        [
+            new CodeGenerateResp
+            {
+                TargetType = codeGenerateReq.TargetType,
+                FileName = $"{tableInfo.ClassName}.{languageType.GetDescription()}",
+                Code = generatedCode,
+                Language = languageType
+            }
+        ];
     }
 
     /// <inheritdoc />
-    public async Task<string> GenerateByJson(CodeGenerateReq codeGenerateReq)
+    public async Task<List<CodeGenerateResp>> GenerateByJson(CodeGenerateReq codeGenerateReq)
     {
         var jsonNode = JsonNode.Parse(codeGenerateReq.Code);
         var jsonParser = new JsonParser(codeGenerateReq)
@@ -38,7 +53,27 @@ public abstract class BaseCodeGenerator : ICodeGenerator
             jsonParser.RootModel
         );
         jsonParser.RootModel.CreateImportStatements();
-        return await TemplateHelper.RenderAsync(GetTemplateName(), jsonParser.RootModel);
+
+        var languageType = LanguageTypeHelper.GetByTargetType(codeGenerateReq.TargetType);
+        List<CodeGenerateResp> results =
+        [
+            new()
+            {
+                TargetType = codeGenerateReq.TargetType,
+                FileName = $"{jsonParser.RootModel.ClassName}.{languageType.GetDescription()}",
+                Code = await TemplateHelper.RenderAsync(GetTemplateName(), jsonParser.RootModel),
+                Language = languageType
+            }
+        ];
+        foreach (var model in jsonParser.RootModel.NestedModels)
+            results.Add(new CodeGenerateResp
+            {
+                TargetType = codeGenerateReq.TargetType,
+                FileName = $"{model.ClassName}.{languageType.GetDescription()}",
+                Code = await TemplateHelper.RenderAsync(GetTemplateName(), model),
+                Language = languageType
+            });
+        return results;
     }
 
     /// <summary>

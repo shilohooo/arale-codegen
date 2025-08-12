@@ -11,7 +11,7 @@
         <div class="col">JSON</div>
         <div class="col text-right">
           <q-btn
-            :disable="!srcCode"
+            :disable="!srcModel"
             icon="delete"
             size="sm"
             color="negative"
@@ -21,7 +21,7 @@
           />
         </div>
       </div>
-      <code-editor v-model="srcCode" language="json" @change="handleSrcCodeChange" />
+      <code-editor ref="srcModelEditor" :editor-models="[srcModel]" @change="handleSrcCodeChange" />
     </div>
     <!--endregion-->
 
@@ -34,40 +34,47 @@
         <div class="col">
           <q-input
             v-model="rootTypeName"
+            name="rootTypeName"
             label="Root type name"
             placeholder="Input the name of root type..."
-            @update:model-value="handleSrcCodeChange"
+            @update:model-value="handleSrcCodeChange(srcModel.uri, srcModel.value)"
           />
         </div>
         <div class="col">
           <q-input
             v-model="typesPrefix"
+            name="typesPrefix"
             label="Types prefix"
             placeholder="Input the types prefix..."
-            @update:model-value="handleSrcCodeChange"
+            @update:model-value="handleSrcCodeChange(srcModel.uri, srcModel.value)"
           />
         </div>
         <div class="col">
           <q-input
             v-model="typesSuffix"
+            name="typesSuffix"
             label="Types suffix"
             placeholder="Input the types suffix..."
-            @update:model-value="handleSrcCodeChange"
+            @update:model-value="handleSrcCodeChange(srcModel.uri, srcModel.value)"
           />
         </div>
         <div class="col text-right">
           <q-btn
-            :disable="!targetCode"
+            :disable="!targetModel.value"
             icon="content_copy"
             size="sm"
             color="primary"
             label="Copy"
             no-caps
-            @click="copy(targetCode)"
+            @click="copy(targetModel.value)"
           />
         </div>
       </div>
-      <code-editor v-model="targetCode" language="javascript" />
+      <code-editor
+        ref="targetModelEditor"
+        :editor-models="[targetModel]"
+        @change="handleTargetCodeChange"
+      />
     </div>
     <!--endregion-->
   </div>
@@ -79,9 +86,28 @@ import { debounce, useQuasar } from 'quasar'
 import { useClipboard } from 'src/hooks/useClipboard'
 import { JSON_OBJECT_TEST_STR } from 'src/constant/data/json-examples'
 import { jsonToJSDoc } from 'json-to-jsdoc'
+import type { EditorModel } from 'src/types/code-editor'
+import { createEditorModel } from 'src/utils'
+import { LanguageType } from 'src/enums'
+import type { Uri } from 'monaco-editor'
 
-const srcCode = ref<string>('')
-const targetCode = ref<string>('')
+const srcModel = ref<EditorModel>(
+  createEditorModel({
+    language: LanguageType.JSON,
+    code: JSON_OBJECT_TEST_STR,
+    fileName: 'Source.json',
+  }),
+)
+const targetModel = ref<EditorModel>(
+  createEditorModel({
+    language: LanguageType.JavaScript,
+    code: '',
+    fileName: 'Target.js',
+  }),
+)
+
+const srcModelEditor = ref<InstanceType<typeof CodeEditor> | null>(null)
+const targetModelEditor = ref<InstanceType<typeof CodeEditor> | null>(null)
 
 /**
  * Clear source code
@@ -89,18 +115,24 @@ const targetCode = ref<string>('')
  * @date 2025/3/6 11:02
  */
 function handleClearSrcCode() {
-  srcCode.value = ''
-  targetCode.value = ''
+  srcModel.value.value = ''
+  srcModelEditor.value?.changeModelCode(srcModel.value.uri, srcModel.value.value)
+
+  targetModel.value.value = ''
+  targetModelEditor.value?.changeModelCode(targetModel.value.uri, targetModel.value.value)
 }
 
 /**
- * Source code changed callback - regenerate target code after 1s
+ * Source code change callback - regenerate target code after 300ms
+ * @param _uri model uri
+ * @param code model code
  * @author shiloh
- * @date 2025/3/6 11:02
+ * @date 2025/2/16 10:31
  */
-const handleSrcCodeChange = debounce(async () => {
+const handleSrcCodeChange = debounce(async (_uri: Uri, code: string | undefined) => {
+  srcModel.value.value = code ?? ''
   await handleGenerateTargetCode()
-}, 500)
+}, 300)
 
 const $q = useQuasar()
 const rootTypeName = ref('Root')
@@ -113,16 +145,19 @@ const typesSuffix = ref('')
  * @date 2025/3/6 11:02
  */
 async function handleGenerateTargetCode() {
-  if (!srcCode.value) {
+  if (!srcModel.value.value) {
+    targetModel.value.value = ''
+    targetModelEditor.value?.changeModelCode(targetModel.value.uri, targetModel.value.value)
     return
   }
 
   try {
-    targetCode.value = jsonToJSDoc(srcCode.value, {
+    targetModel.value.value = jsonToJSDoc(srcModel.value.value, {
       rootTypeName: rootTypeName.value,
       typePrefix: typesPrefix.value,
       typeSuffix: typesSuffix.value,
     })
+    targetModelEditor.value?.changeModelCode(targetModel.value.uri, targetModel.value.value)
   } catch (e) {
     $q.notify({
       color: 'negative',
@@ -134,17 +169,24 @@ async function handleGenerateTargetCode() {
   }
 }
 
+/**
+ * Target code change callback
+ * @param _uri model uri
+ * @param code model code
+ * @author shiloh
+ * @date 2025/2/16 10:31
+ */
+const handleTargetCodeChange = debounce(async (_uri: Uri, code: string | undefined) => {
+  if (!code) {
+    return
+  }
+
+  targetModel.value.value = code
+}, 300)
+
 // region copy
 
 const { copy } = useClipboard()
-
-// endregion
-
-// region mounted
-
-onMounted(() => {
-  srcCode.value = JSON_OBJECT_TEST_STR
-})
 
 // endregion
 </script>

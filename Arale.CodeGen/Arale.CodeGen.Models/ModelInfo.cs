@@ -66,6 +66,7 @@ public class ModelInfo
         ImportStatements = Properties.Where(c =>
                 c.FieldType is not null && !string.IsNullOrWhiteSpace(c.FieldType?.ImportStatement))
             .Select(c => c.FieldType!.ImportStatement!)
+            .Order()
             .ToHashSet();
 
         NestedModels.ForEach(nestedModel =>
@@ -73,6 +74,7 @@ public class ModelInfo
             nestedModel.ImportStatements = nestedModel.Properties.Where(c =>
                     c.FieldType is not null && !string.IsNullOrWhiteSpace(c.FieldType?.ImportStatement))
                 .Select(c => c.FieldType!.ImportStatement!)
+                .Order()
                 .ToHashSet();
         });
     }
