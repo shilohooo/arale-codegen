@@ -144,19 +144,19 @@ function handleSwitchTab(currentTabIdx: number, prevTabIdx?: number) {
   }
 
   if (prevTabIdx !== null && prevTabIdx !== undefined && props.editorModels[prevTabIdx]) {
-    viewStateMap?.set(
-      props.editorModels[prevTabIdx].uri.toString(),
-      editorInstance?.saveViewState(),
-    )
+    viewStateMap?.set(props.editorModels[prevTabIdx].uri.toString(), editorInstance?.saveViewState())
   }
 
   const editorModel = props.editorModels[currentTabIdx]!
-  if (textModelMap.has(editorModel.uri.toString())) {
-    editorInstance?.setModel(textModelMap.get(editorModel.uri.toString())!)
+
+  // if nested object name changed, we need to use index to get textModel
+  const textModel = textModelMap.get(editorModel.uri.toString()) ?? Array.from(textModelMap.values())[currentTabIdx]
+  if (textModel) {
+    editorInstance?.setModel(textModel)
     updateEditorTabSize(editorModel.languageType)
   }
 
-  const viewState = viewStateMap?.get(editorModel.uri.toString())
+  const viewState = viewStateMap?.get(editorModel.uri.toString()) ?? Array.from(viewStateMap.values())[currentTabIdx]
   if (viewState) {
     editorInstance?.restoreViewState(viewState)
     editorInstance?.focus()
@@ -189,14 +189,17 @@ watch(
  * change model code by code tab id
  * @param uri model uri
  * @param value model code
+ * @param modelIndex model index
  * @author shiloh
  * @date 2025/8/3 22:59
  */
-function changeModelCode(uri: monaco.Uri, value: string) {
-  let textModel = textModelMap.get(uri.toString())
+function changeModelCode(uri: monaco.Uri, value: string, modelIndex: number = 0) {
+  let textModel = textModelMap.get(uri.toString()) ?? Array.from(textModelMap.values())[modelIndex]
   if (textModel) {
     if (textModel.getValue() !== value) {
       textModel?.setValue(value)
+      activeTab.value = modelIndex
+      editorInstance?.setModel(textModel)
     }
     return
   }
