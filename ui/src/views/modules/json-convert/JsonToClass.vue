@@ -53,11 +53,7 @@
           />
         </div>
       </div>
-      <code-editor
-        ref="targetModelEditor"
-        :editor-models="targetModels"
-        @change="handleTargetCodeChange"
-      />
+      <code-editor ref="targetModelEditor" :editor-models="targetModels" @change="handleTargetCodeChange" />
     </div>
     <!--endregion-->
   </div>
@@ -144,8 +140,8 @@ async function handleGenerateTargetCode() {
       return
     }
 
-    targetModels.value.forEach((targetModel) =>
-      targetModelEditor.value?.changeModelCode(targetModel.uri, targetModel.value),
+    targetModels.value.forEach((targetModel, index) =>
+      targetModelEditor.value?.changeModelCode(targetModel.uri, targetModel.value, index),
     )
   } catch (e) {
     $q.notify({
