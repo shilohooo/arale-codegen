@@ -80,7 +80,7 @@ public static class FieldTypeHelper
 
                 case JsonValueKind.String:
                 {
-                    var typeName = isNotObjectArr ? $"List<{nameof(String)}>" : nameof(String);
+                    var typeName = isNotObjectArr ? $"List<{nameof(String).ToLower()}>" : nameof(String).ToLower();
                     // handle DateOnly and DateTime type
                     if (DateOnly.TryParse(jsonNodeKv.Value.ToString(), CultureInfo.CurrentCulture, out _))
                     {
