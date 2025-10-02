@@ -4,6 +4,14 @@ All notable changes to the "relax-your-eyes-green" extension will be documented 
 
 Check [Keep a Changelog](http://keepachangelog.com/) for recommendations on how to structure this file.
 
+## [1.4.2](https://github.com/shilohooo/arale-codegen/releases/tag/v1.4.2) - 2025-10-02
+
+## Fixed
+
+- Fixes incorrect String type name in json to csharp class/entity
+- Fixes target code copy bug in json to class/entity
+
+
 ## [1.4.1](https://github.com/shilohooo/arale-codegen/releases/tag/v1.4.1) - 2025-09-20
 
 ## Fixed
