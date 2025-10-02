@@ -140,9 +140,10 @@ async function handleGenerateTargetCode() {
       return
     }
 
-    targetModels.value.forEach((targetModel, index) =>
-      targetModelEditor.value?.changeModelCode(targetModel.uri, targetModel.value, index),
-    )
+    targetModels.value.forEach((targetModel, index) => {
+      targetModelEditor.value?.changeModelCode(targetModel.uri, targetModel.value, index)
+      currentTargetCode.value = targetModel.value
+    })
   } catch (e) {
     $q.notify({
       color: 'negative',

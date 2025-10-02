@@ -135,15 +135,15 @@ async function handleGenerateTargetCode() {
     res.forEach((item) => {
       item.code = item.code?.replace(/\\n/g, '\n').trim()
     })
-    const isFirstTime = !targetModels.value?.length
     targetModels.value = res.map(createEditorModel)
-    if (isFirstTime) {
+    if (res.length !== targetModels.value.length) {
       return
     }
 
-    targetModels.value.forEach((targetModel, index) =>
-      targetCodeEditor.value?.changeModelCode(targetModel.uri, targetModel.value, index),
-    )
+    targetModels.value.forEach((targetModel, index) => {
+      targetCodeEditor.value?.changeModelCode(targetModel.uri, targetModel.value, index)
+      currentTargetCode.value = targetModel.value
+    })
   } catch (e) {
     $q.notify({
       color: 'negative',
