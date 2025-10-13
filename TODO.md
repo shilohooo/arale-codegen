@@ -2,6 +2,12 @@
 
 ## Added at 2025-05-08
 
+- [ ] Support Downloading source code files
+  - [ ] Single file
+  - [ ] Multiple files as zip
+
+## Added at 2025-05-08
+
 - [ ] SQL DDL to TS type or interface
 
 ## Added at 2025-05-03
