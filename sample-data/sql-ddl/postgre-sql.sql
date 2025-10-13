@@ -1,7 +1,7 @@
 CREATE TABLE t_pgsql_generate_test (
     id_col SERIAL PRIMARY KEY NOT NULL,
     small_int_col SMALLINT NOT NULL,
-    small_serial_col SMALLSERIAL NOT NULL ,
+    small_serial_col SMALLSERIAL NOT NULL,
     integer_type_col INTEGER NOT NULL,
     big_int_col BIGINT NOT NULL,
     real_num_col REAL NOT NULL,
@@ -17,7 +17,7 @@ CREATE TABLE t_pgsql_generate_test (
     timestamp_type_col TIMESTAMP,
     timestamptz_type_col TIMESTAMP WITH TIME ZONE,
     interval_type_col INTERVAL,
-    bytea_type_col BYTEA ,
+    bytea_type_col BYTEA,
     inet_type_col INET,
     cidr_type_col CIDR,
     macaddr_type_col MACADDR,

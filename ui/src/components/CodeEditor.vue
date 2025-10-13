@@ -13,7 +13,7 @@
 <script setup lang="ts">
 import * as monaco from 'monaco-editor'
 import CodeEditorTabs from 'components/CodeEditorTabs.vue'
-import type { LanguageType } from 'src/enums'
+import { LanguageType } from 'src/enums'
 import { EDITOR_TAB_SIZE } from 'src/constant'
 import { debounce } from 'quasar'
 import type { EditorModel } from 'src/types/code-editor'
@@ -201,6 +201,13 @@ function changeModelCode(uri: monaco.Uri, value: string, modelIndex: number = 0)
       activeTab.value = modelIndex
       editorInstance?.setModel(textModel)
     }
+
+    nextTick(() => {
+      monaco.editor.setModelLanguage(
+        textModel!,
+        LanguageType[props.editorModels[modelIndex]!.languageType].toLowerCase(),
+      )
+    })
     return
   }
 
