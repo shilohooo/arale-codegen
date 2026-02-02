@@ -1,5 +1,10 @@
 # TODO
 
+## Added at 2026-02-02
+
+- [ ] Java Class to Record via Antlr4
+- [ ] Java Record to Class via Antlr4
+
 ## Added at 2025-10-13
 
 - [ ] Support Downloading source code files
