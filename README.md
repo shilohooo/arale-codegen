@@ -4,6 +4,10 @@
   <img src="./project-logo.png" alt="project-logo" />
 </div>
 
+> [!WARNING]
+> I'm currently applying to transfer my domain name to Alibaba Cloud. Please use the [IP address](http://110.41.189.65/arale-codegen-ui/) to access it for the time being, sorry:)
+
+
 [Arale CodeGen](https://shiloh595.top/arale-codegen-ui/) is a code generation tool that can read SQL DDL or JSON
 Object/Array to generate the specified code.
 
